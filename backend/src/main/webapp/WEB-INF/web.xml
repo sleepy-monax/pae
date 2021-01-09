@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	<display-name>Mon premier projet WEB</display-name>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+        <display-name>Admin Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Admin Area</web-resource-name>
+            <description></description>
+            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/liste.xhtml</url-pattern>
+            <url-pattern>/listeUtilisateurs.xhtml</url-pattern>
+ 
+        </web-resource-collection>
+        <auth-constraint>
+            <description />
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+        <!-- <user-data-constraint> -->
+ 
+            <!-- <transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+        <!-- </user-data-constraint> -->
+    </security-constraint>
+ 
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>utilisateursRealmB</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/loginerror.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+	
+</web-app>
