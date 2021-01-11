@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class UE implements Serializable {
@@ -15,6 +18,7 @@ public class UE implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Activite> activites;
 	private int identification;
 	private int nombreCredits;
@@ -22,7 +26,7 @@ public class UE implements Serializable {
 	private String anneeAcademique;
 	private Section section;
 	
-	private UE() {
+	public UE() {
 		
 	}
 	
