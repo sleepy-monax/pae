@@ -9,22 +9,18 @@ const containerStyle = {
 
 export default function Login() {
     return <div style={backgroundStyle} className="flex-grow flex flex-row justify-center">
-        <div style={containerStyle} className="my-0 p-8 bg-helha_grey bg-opacity-75 flex flex-col gap-4 flex-grow max-w-2xl">
+        <div style={containerStyle} className="my-0 p-8 bg-helha_grey bg-opacity-75 flex flex-col flex-grow items-center gap-4 max-w-2xl">
+            <img src="assets/logo.png" className="m-8" alt=""></img>
 
+            <h1>Authentification</h1>
 
-            <form className="flex flex-col gap-4">
-                <img src="assets/logo.png" className="m-8" alt=""></img>
+            <input type="text" placeholder="Nom d'utilisateur">
+            </input>
 
-                <h1>Authentification</h1>
+            <input type="password" placeholder="Mot de passe">
+            </input>
 
-                <input type="text" placeholder="Nom d'utilisateur">
-                </input>
-
-                <input type="password" placeholder="Mot de passe">
-                </input>
-
-                <button>Connection</button>
-            </form>
+            <button>Connection</button>
         </div>
     </div>;
 }

@@ -1,3 +1,6 @@
+import Header from "../components/Hearder";
+
 export default function Error() {
-    return <p>Error Works</p>;
+    return <Header icon="" title="Error" description="Veuillez choisir le fichier d’étudiants à importer">
+    </Header>;
 }
