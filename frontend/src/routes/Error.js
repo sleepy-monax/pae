@@ -9,6 +9,6 @@ export default function Error() {
                 <Link to="/">Revenire a l'accueil</Link>
             </Header>
 
-            <img src="assets/lost.svg" className="p-16 flex-grow mx-auto max-w-md"></img>
+            <img src="assets/lost.svg" className="p-16 flex-grow mx-auto max-w-md" alt=""></img>
         </div>);
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
+import PrivateRoute from "./components/PrivateRoute";
 import Blocs from "./routes/Blocs";
 import EditPae from "./routes/EditPae";
 import Error from "./routes/Error";
@@ -17,27 +18,15 @@ export default function App() {
         <NavBar />
 
         <Switch>
-          <Route path="/blocs">
-            <Blocs />
-          </Route>
-
-          <Route path="/edit/:studentId" children={<EditPae />} />
-
-          <Route path="/import">
-            <Importation />
-          </Route>
-
           <Route path="/login">
             <Login />
           </Route>
 
-          <Route path="/students">
-            <Students />
-          </Route>
-
-          <Route exact path="/" >
-            <Home />
-          </Route>
+          <PrivateRoute path="/blocs" component={Blocs} />
+          <PrivateRoute path="/edit/:studentId" component={EditPae} />
+          <PrivateRoute path="/import" component={Importation} />
+          <PrivateRoute path="/students" component={Students} />
+          <PrivateRoute path="/" exact component={Home} />
 
           <Route>
             <Error />

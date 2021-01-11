@@ -1,4 +1,8 @@
+import React from "react";
 import Button from "../components/Button";
+import { connect } from "../services/AuthenticationService";
+import { Redirect } from 'react-router-dom'
+
 
 const backgroundStyle = {
     backgroundSize: 'cover',
@@ -9,24 +13,53 @@ const containerStyle = {
     backdropFilter: 'blur(4px)',
 }
 
-export default function Login() {
-    function sayHello() {
-        console.log("Hello!");
+export default class Login extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { username: '', password: '', redirectToReferrer: false };
+
+        this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    return <div style={backgroundStyle} className="flex-grow flex flex-row justify-center">
-        <div style={containerStyle} className="my-0 p-8 bg-helha_grey bg-opacity-50 flex flex-col flex-grow items-center gap-4 max-w-2xl">
-            <img src="assets/logo.png" className="m-8" alt=""></img>
+    handleUsernameChange(e) {
+        this.setState({ username: e.target.value });
+    }
 
-            <h1>Authentification</h1>
+    handlePasswordChange(e) {
+        this.setState({ password: e.target.value });
+    }
 
-            <input type="text" placeholder="Nom d'utilisateur">
-            </input>
+    handleSubmit(e) {
+        e.preventDefault();
 
-            <input type="password" placeholder="Mot de passe">
-            </input>
+        connect(this.state.username, this.state.password, function (result) {
+            console.log(result);
+            this.setState({ redirectToReferrer: true });
+        }.bind(this));
+    }
 
-            <Button text="Connection" onClick={sayHello} />
-        </div>
-    </div>;
+    render() {
+        if (this.state.redirectToReferrer) {
+            return <Redirect to='/' />
+        }
+
+        return <div style={backgroundStyle} className="flex-grow flex flex-row justify-center">
+            <form onSubmit={this.handleSubmit} style={containerStyle} className="my-0 p-8 bg-helha_grey bg-opacity-50 flex flex-col flex-grow items-center gap-4 max-w-2xl">
+                <img src="assets/logo.png" className="m-8" alt=""></img>
+
+                <h1>Authentification</h1>
+
+                <input type="text" placeholder="Nom d'utilisateur">
+                </input>
+
+                <input type="password" placeholder="Mot de passe">
+                </input>
+
+                <Button text="Connection" />
+            </form>
+        </div>;
+    }
 }

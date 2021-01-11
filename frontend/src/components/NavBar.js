@@ -1,4 +1,3 @@
-import Icon from '@mdi/react'
 import { mdiLogout } from '@mdi/js'
 import Button from './Button'
 
