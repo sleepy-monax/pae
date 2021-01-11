@@ -8,7 +8,6 @@ export default function EditPae() {
 
     let student = FindById(studentId);
 
-    console.log(studentId);
     return <div>
         <Header icon={mdiFormatListChecks} title={student.firstname + " " + student.lastname} description="Bachelier en informatique de gestion" />
     </div>;

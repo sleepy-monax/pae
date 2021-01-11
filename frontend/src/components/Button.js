@@ -13,8 +13,6 @@ export default function Button(props) {
 
     let variante = Filled;
 
-    console.log(props);
-
     if (props.variante) {
         variante = props.variante;
     }
