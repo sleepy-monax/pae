@@ -11,6 +11,8 @@ export function connect(usename, password, callback) {
 
 export function disconnect() {
     authenticationToken = undefined;
+    Cookies.remove("authenticationToken");
+    document.location.reload();
 }
 
 export function isConnected() {

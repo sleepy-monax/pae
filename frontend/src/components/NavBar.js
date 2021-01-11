@@ -1,4 +1,5 @@
 import { mdiLogout } from '@mdi/js'
+import { disconnect } from '../services/AuthenticationService';
 import Button from './Button'
 
 export default function NavBar() {
@@ -7,6 +8,6 @@ export default function NavBar() {
             PAE Étudiants
         </div>
 
-        <Button icon={mdiLogout} text="Se déconnecter" />
+        <Button icon={mdiLogout} text="Se déconnecter" onClick={disconnect} />
     </div>;
 }
