@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+
+    ports:
+      - "4200:4200"
+
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    env_file:
+      - docker/database.env
+      - docker/backend.env
+
+    depends_on:
+      - database
+
+  database:
+    build:
+      context: .
+      dockerfile: docker/database.Dockerfile
+
+    ports:
+      - "3306:3306"
+
+    env_file:
+      - docker/database.env
