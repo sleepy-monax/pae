@@ -28,10 +28,7 @@ export default function App() {
           <PrivateRoute path="/students" component={Students} />
           <PrivateRoute path="/" exact component={Home} />
 
-          <Route>
-            <Error />
-          </Route>
-
+          <PrivateRoute component={Error} />
         </Switch>
       </div>
     </Router>

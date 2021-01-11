@@ -14,7 +14,7 @@ export default function Header(props) {
                 <div className="flex py-2">
                     <span>{props.description}</span>
                 </div>
-                <div className>
+                <div>
                     {props.children}
                 </div>
             </div>

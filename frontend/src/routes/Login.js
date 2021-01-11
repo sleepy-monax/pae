@@ -50,7 +50,7 @@ export default class Login extends React.Component {
             <form onSubmit={this.handleSubmit} style={containerStyle} className="my-0 p-8 bg-helha_grey bg-opacity-50 flex flex-col flex-grow items-center gap-4 max-w-2xl">
                 <img src="assets/logo.png" className="m-8" alt=""></img>
 
-                <h1>Authentification</h1>
+                <span className="text-white text-xl">Authentification</span>
 
                 <input type="text" placeholder="Nom d'utilisateur">
                 </input>
@@ -58,7 +58,7 @@ export default class Login extends React.Component {
                 <input type="password" placeholder="Mot de passe">
                 </input>
 
-                <Button text="Connection" />
+                <Button text="Connexion" />
             </form>
         </div>;
     }
