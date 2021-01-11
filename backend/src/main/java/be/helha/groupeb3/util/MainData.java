@@ -20,7 +20,7 @@ public class MainData {
 		em.close();
 		emf.close();
 
-		System.out.println("Tables correctement créées");
+		System.out.println("Tables correctement crÃ©Ã©es");
 	}
 
 }
