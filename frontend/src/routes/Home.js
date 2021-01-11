@@ -1,3 +1,13 @@
+const backgroundStyle = {
+    backgroundSize: 'cover',
+    backgroundImage: "url(assets/background.jpg)"
+}
+
 export default function Home() {
-    return <p>Home Works</p>;
+    return <div style={backgroundStyle} className="flex-grow">
+        sdfg
+        f
+        gs
+        df
+    </div>;
 }

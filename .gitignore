@@ -26,3 +26,4 @@ domain/
 .settings/
 .project
 .classpath
+.vscode/
