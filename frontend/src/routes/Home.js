@@ -1,14 +1,32 @@
-import { Link } from "react-router-dom";
-import Button from "../components/Button";
+import LinkButton from "../components/LinkButton";
+import { OutlineBlue } from "../components/Styles";
 
 export default function Home() {
-    return (
-        <div className="max-w-md mx-auto flex items-center flex-col">
-            <img className="p-8" src="assets/curriculum.svg" alt="" />
+  return (
+    <div className="max-w-xl mx-auto flex flex-col gap-2">
+      <img className="p-8" src="assets/curriculum.svg" alt="" />
 
-            <Link to="/import">
-                <Button text="Importer des données" />
-            </Link>
-        </div>
-    );
+      <div className="mt-4">Bachelier en informatique de gestion</div>
+
+      <LinkButton variante={OutlineBlue} text="Premier cycle" />
+      <LinkButton variante={OutlineBlue} text="Deuxième cycle" />
+      <LinkButton variante={OutlineBlue} text="Troisième cycle" />
+
+      <div className="mt-4">Comptabilité</div>
+
+      <LinkButton variante={OutlineBlue} text="Premier cycle" />
+      <LinkButton variante={OutlineBlue} text="Deuxième cycle" />
+      <LinkButton variante={OutlineBlue} text="Troisième cycle" />
+
+      <div className="mt-4">Assistant·e de direction</div>
+
+      <LinkButton variante={OutlineBlue} text="Premier cycle" />
+      <LinkButton variante={OutlineBlue} text="Deuxième cycle" />
+      <LinkButton variante={OutlineBlue} text="Troisième cycle" />
+
+      <div className="mt-4">Administration</div>
+
+      <LinkButton text="Importer des données" />
+    </div>
+  );
 }
