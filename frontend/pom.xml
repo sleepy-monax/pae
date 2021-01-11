@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <npm.output.directory>build</npm.output.directory>
         <maven.compiler.source>11</maven.compiler.source>
-   		<maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <build>
@@ -167,8 +167,8 @@
 
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>http://my-awesome-production-host/${project.artifactId}</PUBLIC_URL>
-                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>
+                                <PUBLIC_URL>http://54.246.66.228:8080/groupeB3</PUBLIC_URL>
+                                <REACT_APP_ROUTER_BASE>/groupeB3</REACT_APP_ROUTER_BASE>
                             </environmentVariables>
                         </configuration>
                     </plugin>
