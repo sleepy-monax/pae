@@ -21,9 +21,7 @@ export default function App() {
             <Blocs />
           </Route>
 
-          <Route path="/edit">
-            <EditPae />
-          </Route>
+          <Route path="/edit/:studentId" children={<EditPae />} />
 
           <Route path="/import">
             <Importation />
@@ -37,7 +35,7 @@ export default function App() {
             <Students />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path="/" >
             <Home />
           </Route>
 
