@@ -12,7 +12,7 @@ import Students from "./routes/Students";
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={process.env.REACT_APP_ROUTER_BASE || ''}>
       <div className="flex flex-col min-h-screen">
         <NavBar />
 

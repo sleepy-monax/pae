@@ -5,9 +5,5 @@ const backgroundStyle = {
 
 export default function Home() {
     return <div style={backgroundStyle} className="flex-grow">
-        sdfg
-        f
-        gs
-        df
     </div>;
 }
