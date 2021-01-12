@@ -37,12 +37,11 @@ public class EtudiantDAO {
 	
 	public Etudiant add(Etudiant etudiant) {
 		if (etudiant == null) return null;
-		if (findByMatricule(etudiant.getMatricule()) == null) return null;
+		if (findByMatricule(etudiant.getMatricule()) == null) {
+			em.persist(etudiant);
+		};
 		
-		em.persist(etudiant);
-		commit();
-		
-		return null;
+		return etudiant;
 	}	
 	
 	public void update(Etudiant eOld, Etudiant eNew) {

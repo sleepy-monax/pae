@@ -30,12 +30,11 @@ public class ActiviteDAO {
 	
 	public Activite add(Activite activite) {
 		if (activite == null) return null;
-		if (findById(activite.getId()) == null) return null;
+		if (findById(activite.getId()) == null) {
+			em.persist(activite);
+		};
 		
-		em.persist(activite);
-		commit();
-		
-		return null;
+		return activite;
 	}
 	
 	public void update(Activite aOld, Activite aNew) {

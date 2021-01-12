@@ -24,11 +24,11 @@ public class UEDAO {
 	
 	public UE add(UE ue) {
 		if (ue == null) return null;
-        if (findById(ue.getId()) == null) return null;
-		em.persist(ue);
-		commit();
-		return null;
+        if (findById(ue.getId()) == null) {
+        	em.persist(ue);
+        }
 		
+		return ue;
 	}
 	
 	public void remove(UE ue) {

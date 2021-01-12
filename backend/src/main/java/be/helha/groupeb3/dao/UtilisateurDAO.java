@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import be.helha.groupeb3.entities.Etudiant;
 import be.helha.groupeb3.entities.Utilisateur;
 
 @Stateless
@@ -25,14 +28,27 @@ public class UtilisateurDAO {
 	}
 	
 	public Utilisateur findById(int id) {
-		return em.find(Utilisateur.class, id);
+		Utilisateur u = em.find(Utilisateur.class, id);
+		return u == null ? null : u;
+		/*String requete = "SELECT utilisateur FROM Utilisateur utilisateur "
+				+ "WHERE utilisateur.id = ?1";
+				
+		TypedQuery<Utilisateur> query = em.createQuery(requete, Utilisateur.class);
+        query.setParameter(1, id);
+        List<Utilisateur> result = query.getResultList();
+        return result.isEmpty() ? null : result.get(0);*/
 	}
 	
 	public Utilisateur add(Utilisateur utilisateur) {
 		if (utilisateur == null) return null;
-		if (findById(utilisateur.getId()) == null) return null;
+		System.out.println(utilisateur);
+		if (findById(utilisateur.getId()) != null) {
+			return null;
+		};
+		System.out.println(utilisateur);
 		em.persist(utilisateur);
 		commit();
+		System.out.println(utilisateur);
         return null;
 	}
 	
