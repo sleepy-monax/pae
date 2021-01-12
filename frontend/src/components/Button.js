@@ -1,4 +1,5 @@
 import Icon from "@mdi/react";
+
 import { Filled } from "./Styles";
 
 export default function Button(props) {
@@ -26,7 +27,10 @@ export default function Button(props) {
   let basestyle = "rounded px-3 py-2 text-base flex items-center";
 
   return (
-    <button className={basestyle + " " + variante} onClick={handleClick}>
+    <button
+      className={basestyle + " " + variante + " " + props.className}
+      onClick={handleClick}
+    >
       {icon}
       {props.text}
     </button>

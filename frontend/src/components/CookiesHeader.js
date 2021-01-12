@@ -1,7 +1,8 @@
 import { useState } from "react";
+
 import { Allow, Enabled } from "../services/CookiesService";
-import Button from "./Button";
 import { OutlineBlue } from "./Styles";
+import Button from "./Button";
 
 export default function CookiesHeader() {
   const [visible, setVisible] = useState(!Enabled());

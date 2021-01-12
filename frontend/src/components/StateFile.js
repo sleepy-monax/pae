@@ -1,13 +1,14 @@
-import React from "react";
 import Check from "./Check";
 
-export default class StateFile extends React.Component {
+export default function StateFile(props) {
+  console.log("props:");
+  console.log(props);
 
-    render() {
-        return (<div className='flex'>
-            <Check checked={this.props.checks.formatOk} text='Format du fichier' />
-            <Check checked={this.props.checks.structureOk} text='Structure du fichier' />
-            <Check checked={this.props.checks.dataOk} text='Données valides' />
-        </div>);
-    }
+  return (
+    <div className="flex">
+      <Check checked={props.formatOk} text="Format du fichier" />
+      <Check checked={props.structureOk} text="Structure du fichier" />
+      <Check checked={props.dataOk} text="Données valides" />
+    </div>
+  );
 }
