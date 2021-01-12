@@ -9,7 +9,6 @@ import Error from "./routes/Error";
 import Home from "./routes/Home";
 import Importation from "./routes/Importation";
 import Login from "./routes/Login";
-import Students from "./routes/Students";
 import { update } from "./services/DarkModeService";
 
 export default function App() {
@@ -25,10 +24,9 @@ export default function App() {
             <Login />
           </Route>
 
-          <PrivateRoute path="/blocs" component={Blocs} />
+          <PrivateRoute path="/bloc/:blockId" component={Blocs} />
           <PrivateRoute path="/edit/:studentId" component={Edit} />
           <PrivateRoute path="/import" component={Importation} />
-          <PrivateRoute path="/students" component={Students} />
           <PrivateRoute path="/" exact component={Home} />
 
           <PrivateRoute component={Error} />
