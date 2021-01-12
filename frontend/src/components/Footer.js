@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             La <b>HELHa</b> (Haute École Louvain en Hainaut) propose des
             bacheliers, des masters et des spécialisations parmi 7 domaines sur
-            15.
+            15 implantations.
           </div>
           <Link to="/about" className="text-helha_blue underline font-bold">
             À propos de...
