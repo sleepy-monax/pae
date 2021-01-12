@@ -16,7 +16,7 @@ export default function Header(props) {
           </div>
         </div>
       </div>
-      <div className="flex flex-row-reverse max-w-4xl mx-auto">
+      <div className="flex flex-row-reverse max-w-4xl mx-auto gap-2">
         {props.children}
       </div>
     </div>

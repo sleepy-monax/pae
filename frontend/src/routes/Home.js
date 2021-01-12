@@ -14,21 +14,51 @@ export default function Home() {
       <div className="max-w-xl mx-auto flex flex-col gap-2 pb-8 px-4">
         <div className="mt-4">Bachelier en informatique de gestion</div>
 
-        <LinkButton variante={OutlineBlue} text="Premier bloc" />
-        <LinkButton variante={OutlineBlue} text="Deuxième bloc" />
-        <LinkButton variante={OutlineBlue} text="Troisième bloc" />
+        <LinkButton variante={OutlineBlue} text="Premier bloc" to="/bloc/IG1" />
+
+        <LinkButton
+          variante={OutlineBlue}
+          text="Deuxième bloc"
+          to="/bloc/IG1"
+        />
+
+        <LinkButton
+          variante={OutlineBlue}
+          text="Troisième bloc"
+          to="/bloc/IG1"
+        />
 
         <div className="mt-4">Comptabilité</div>
 
-        <LinkButton variante={OutlineBlue} text="Premier bloc" />
-        <LinkButton variante={OutlineBlue} text="Deuxième bloc" />
-        <LinkButton variante={OutlineBlue} text="Troisième bloc" />
+        <LinkButton variante={OutlineBlue} text="Premier bloc" to="/bloc/IG1" />
+
+        <LinkButton
+          variante={OutlineBlue}
+          text="Deuxième bloc"
+          to="/bloc/IG1"
+        />
+
+        <LinkButton
+          variante={OutlineBlue}
+          text="Troisième bloc"
+          to="/bloc/IG1"
+        />
 
         <div className="mt-4">Assistant·e de direction</div>
 
-        <LinkButton variante={OutlineBlue} text="Premier bloc" />
-        <LinkButton variante={OutlineBlue} text="Deuxième bloc" />
-        <LinkButton variante={OutlineBlue} text="Troisième bloc" />
+        <LinkButton variante={OutlineBlue} text="Premier bloc" to="/bloc/IG1" />
+
+        <LinkButton
+          variante={OutlineBlue}
+          text="Deuxième bloc"
+          to="/bloc/IG1"
+        />
+
+        <LinkButton
+          variante={OutlineBlue}
+          text="Troisième bloc"
+          to="/bloc/IG1"
+        />
 
         <div className="mt-4">Administration</div>
 

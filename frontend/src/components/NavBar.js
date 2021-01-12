@@ -7,7 +7,7 @@ import { toggle } from "../services/DarkModeService";
 import Button from "./Button";
 
 const blurEffect = {
-  backdropFilter: "blur(8px)",
+  backdropFilter: "blur(16px)",
 };
 
 export default function NavBar() {

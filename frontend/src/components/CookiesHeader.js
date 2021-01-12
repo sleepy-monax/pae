@@ -11,7 +11,7 @@ export default function CookiesHeader() {
     <div className="border-b-2 border-yellow-500  p-2 ">
       <div className="flex max-w-4xl mx-auto items-center gap-4">
         <img src="assets/blobcat-cookie.png" alt="" className="max-w-xxxxs" />
-        <div className="flex-1">Cette application utilises des cookies</div>
+        <div className="flex-1">Cette application utilise des cookies</div>
         <Button
           text="J'accepte"
           onClick={() => {
@@ -24,7 +24,7 @@ export default function CookiesHeader() {
           text="Je refuse"
           onClick={() => {
             window.location.href =
-              "https://www.google.com/search?q=cute+kitten&tbm=isch";
+              "https://www.google.com/search?q=cookies%20monster&tbm=isch";
           }}
         />
       </div>
