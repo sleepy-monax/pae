@@ -8,25 +8,25 @@ export default function Home() {
 
       <div className="mt-4">Bachelier en informatique de gestion</div>
 
-      <LinkButton variante={OutlineBlue} text="Premier cycle" />
-      <LinkButton variante={OutlineBlue} text="Deuxième cycle" />
-      <LinkButton variante={OutlineBlue} text="Troisième cycle" />
+      <LinkButton variante={OutlineBlue} text="Premier bloc" />
+      <LinkButton variante={OutlineBlue} text="Deuxième bloc" />
+      <LinkButton variante={OutlineBlue} text="Troisième bloc" />
 
       <div className="mt-4">Comptabilité</div>
 
-      <LinkButton variante={OutlineBlue} text="Premier cycle" />
-      <LinkButton variante={OutlineBlue} text="Deuxième cycle" />
-      <LinkButton variante={OutlineBlue} text="Troisième cycle" />
+      <LinkButton variante={OutlineBlue} text="Premier bloc" />
+      <LinkButton variante={OutlineBlue} text="Deuxième bloc" />
+      <LinkButton variante={OutlineBlue} text="Troisième bloc" />
 
       <div className="mt-4">Assistant·e de direction</div>
 
-      <LinkButton variante={OutlineBlue} text="Premier cycle" />
-      <LinkButton variante={OutlineBlue} text="Deuxième cycle" />
-      <LinkButton variante={OutlineBlue} text="Troisième cycle" />
+      <LinkButton variante={OutlineBlue} text="Premier bloc" />
+      <LinkButton variante={OutlineBlue} text="Deuxième bloc" />
+      <LinkButton variante={OutlineBlue} text="Troisième bloc" />
 
       <div className="mt-4">Administration</div>
 
-      <LinkButton text="Importer des données" />
+      <LinkButton to="/import" text="Importer des données" />
     </div>
   );
 }

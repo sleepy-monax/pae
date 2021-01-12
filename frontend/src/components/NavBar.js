@@ -20,7 +20,7 @@ export default function NavBar() {
   return (
     <div
       style={blurEffect}
-      className="z-50 sticky top-0 shadow-md p-4 items-center dark:bg-helha_dark_grey bg-white bg-opacity-50 flex "
+      className="z-50 sticky top-0 p-4 items-center dark:bg-helha_dark_grey bg-white bg-opacity-70 flex border-b-2 border-helha_blue"
     >
       <div className="flex-grow text-lg">
         <Link to="/">PAE Étudiants</Link>

@@ -25,7 +25,7 @@ export default class InputFile extends React.Component {
                             <i className="fa fa-cloud-upload fa-3x text-gray-200"/> <span
                             className="block text-gray-400 font-normal">Attach you files here</span>
                             <span className="block text-gray-400 font-normal">or</span> <span
-                            className="block text-blue-400 font-normal">Browse files</span></div>
+                            className="block text-blue-400 font-normal text-black">Browse files</span></div>
                     </div>
                     <input type="file" className="h-full w-full opacity-0" id='file' onChange={this.handleChange}/>
                 </div>

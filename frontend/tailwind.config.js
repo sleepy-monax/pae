@@ -4,7 +4,6 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: "class",
   theme: {
-    extend: {},
     colors: {
       helha_blue: {
         DEFAULT: "#009790",
@@ -20,6 +19,12 @@ module.exports = {
       gray: colors.trueGray,
       red: colors.red,
       yellow: colors.amber,
+    },
+    extend: {
+      maxWidth: {
+        xxxs: "5rem",
+        xxs: "10rem",
+      },
     },
   },
   variants: {

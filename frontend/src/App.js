@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import Blocs from "./routes/Blocs";
 import Edit from "./routes/Edit";
@@ -10,6 +11,7 @@ import Home from "./routes/Home";
 import Importation from "./routes/Importation";
 import Login from "./routes/Login";
 import { update } from "./services/DarkModeService";
+import About from "./routes/About";
 
 export default function App() {
   update();
@@ -23,6 +25,9 @@ export default function App() {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/about">
+            <About />
+          </Route>
 
           <PrivateRoute path="/bloc/:blockId" component={Blocs} />
           <PrivateRoute path="/edit/:studentId" component={Edit} />
@@ -32,6 +37,7 @@ export default function App() {
           <PrivateRoute component={Error} />
         </Switch>
       </div>
+      <Footer />
     </Router>
   );
 }
