@@ -1,4 +1,4 @@
-import { mdiInformation, mdiInformationOutline } from "@mdi/js";
+import { mdiInformationOutline } from "@mdi/js";
 import Header from "../components/Hearder";
 import Hero from "../components/Hero";
 import React from "react";
@@ -6,14 +6,14 @@ import React from "react";
 export default function About() {
   return (
     <div className="flex flex-col items-center">
+      <div className="flex w-full flex-col items-center p-16 bg-white">
+        <img src="assets/logo-full.png" className="pr-8" alt="" />
+      </div>
       <Header
         icon={mdiInformationOutline}
         title="À propos"
         description="v1.0.0 publiée le 18/01/2021 code-name 'pinpin'."
       />
-      <div className="flex w-full flex-col items-center p-8 bg-white">
-        <img src="assets/logo-full.png" className="pr-8" alt="" />
-      </div>
       <div className="max-w-4xl m-8">
         <div className="text-xl mb-4">Application réalisé avec ❤️ par</div>
 

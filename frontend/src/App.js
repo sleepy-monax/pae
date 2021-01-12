@@ -12,6 +12,7 @@ import Importation from "./routes/Importation";
 import Login from "./routes/Login";
 import { update } from "./services/DarkModeService";
 import About from "./routes/About";
+import CookiesHeader from "./components/CookiesHeader";
 
 export default function App() {
   update();
@@ -20,6 +21,7 @@ export default function App() {
     <Router basename={process.env.REACT_APP_ROUTER_BASE || ""}>
       <div className="flex flex-col min-h-screen">
         <NavBar />
+        <CookiesHeader />
 
         <Switch>
           <Route path="/login">

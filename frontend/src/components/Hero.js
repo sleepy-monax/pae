@@ -4,7 +4,7 @@ import Icon from "@mdi/react";
 export default function Hero(props) {
   return (
     <div className="flex flex-row items-center gap-2 rounded">
-      <img className="rounded-full max-w-xxxs" src={props.pic} />
+      <img className="rounded-full max-w-xxxs" src={props.pic} alt="" />
       <div className="flex flex-col">
         <div className="text-helha_dark_grey dark:text-white text-xl">
           {props.name}

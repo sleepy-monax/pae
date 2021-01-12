@@ -1,4 +1,3 @@
-import Icon from "@mdi/react";
 import { Filled } from "./Styles";
 
 export default function DetailButton(props) {

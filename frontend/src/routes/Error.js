@@ -1,7 +1,7 @@
 import Header from "../components/Hearder";
 import { mdiAlertCircleOutline } from "@mdi/js";
 import { Link } from "react-router-dom";
-import Button, { OutlineBlue } from "../components/Button";
+import Button from "../components/Button";
 
 export default function Error() {
   return (
