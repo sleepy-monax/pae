@@ -7,11 +7,11 @@ export default class InputFile extends React.Component {
     }
 
     handleChange(e) {
-        const file = e.target.files;
-        if (file.length === 1) {
+        const file = e.target.files[0];
+        console.log(file)
+        if (file !== undefined) {
             this.props.onFileChange(file);
-            const fileArr = Array.prototype.slice.call(file);
-            document.getElementById('fileName').innerText = fileArr[0].name;
+            document.getElementById('fileName').innerText = file.name;
         }
     }
 
@@ -27,7 +27,8 @@ export default class InputFile extends React.Component {
                             <span className="block text-gray-400 font-normal">or</span> <span
                             className="block text-blue-400 font-normal text-black">Browse files</span></div>
                     </div>
-                    <input type="file" className="h-full w-full opacity-0" id='file' onChange={this.handleChange}/>
+                    <input type="file" className="h-full w-full opacity-0" id='file' onChange={this.handleChange}
+                           accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'/>
                 </div>
                 <label id='fileName' className="flex flex-col items-center"/>
             </div>
