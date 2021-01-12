@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
-import Blocs from "./routes/Blocs";
+import Bloc from "./routes/Bloc";
 import Edit from "./routes/Edit";
 import Error from "./routes/Error";
 import Home from "./routes/Home";
@@ -31,7 +31,7 @@ export default function App() {
             <About />
           </Route>
 
-          <PrivateRoute path="/bloc/:blockId" component={Blocs} />
+          <PrivateRoute path="/bloc/:blockId" component={Bloc} />
           <PrivateRoute path="/edit/:studentId" component={Edit} />
           <PrivateRoute path="/import" component={Importation} />
           <PrivateRoute path="/" exact component={Home} />
