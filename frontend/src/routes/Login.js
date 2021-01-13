@@ -4,8 +4,6 @@ import { Redirect } from "react-router-dom";
 import Button from "../components/Button";
 import { connect } from "../services/AuthenticationService";
 
-import { Link } from "react-router-dom";
-
 const backgroundStyle = {
   backgroundSize: "cover",
   backgroundImage: "url(assets/background.jpg)",
@@ -77,7 +75,6 @@ export default class Login extends React.Component {
 
           <Button text="Connexion" />
         </form>
-       
       </div>
     );
   }

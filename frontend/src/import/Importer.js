@@ -1,7 +1,4 @@
-import AAView from "./AAView";
 import SectionView from "./SectionView";
-import StudentView from "./StudentView";
-import UEView from "./UEView";
 
 export function ImportResult(sheet, student) {
   console.log("Importing results...");

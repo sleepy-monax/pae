@@ -1,6 +1,5 @@
 import xlsx from "xlsx";
 import { ImportSection, ImportStudents } from "../import/Importer";
-import SectionView from "../import/SectionView";
 
 function ExtractAllStudents(workbook) {
   let students = [];

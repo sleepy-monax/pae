@@ -21,7 +21,7 @@ function Section(props) {
     <>
       <div className="mt-4">{section.name}</div>
       {section.blocs.map((bloc, index) => (
-        <Bloc bloc={bloc} />
+        <Bloc key={index} bloc={bloc} />
       ))}
     </>
   );
