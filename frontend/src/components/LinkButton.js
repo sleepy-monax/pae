@@ -1,3 +1,4 @@
+import { mdiChevronRight } from "@mdi/js";
 import Icon from "@mdi/react";
 import { Link } from "react-router-dom";
 import { Filled } from "./Styles";
@@ -25,7 +26,8 @@ export default function LinkButton(props) {
       className={basestyle + " " + variante + " " + props.className}
     >
       {icon}
-      {props.text}
+      <span className="flex-1">{props.text}</span>
+      <Icon path={mdiChevronRight} size={1} />
     </Link>
   );
 }

@@ -1,8 +1,6 @@
 import SectionView from "./SectionView";
 
 export function ImportResult(sheet, student) {
-  console.log("Importing results...");
-
   let sectionView = new SectionView(sheet);
 
   let ues = [];
@@ -32,8 +30,6 @@ export function ImportResult(sheet, student) {
 }
 
 export function ImportStudents(sheet, section) {
-  console.log("Importing students...");
-
   let sectionView = new SectionView(sheet);
 
   let students = [];
@@ -60,8 +56,6 @@ export function ImportUE(view, section) {}
 export function ImportBloc(view, sectionId) {}
 
 export function ImportSection(sheet, sectionId) {
-  console.log("Importing section...");
-
   let sectionView = new SectionView(sheet);
 
   let section = {

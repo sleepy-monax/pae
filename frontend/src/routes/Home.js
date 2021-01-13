@@ -30,8 +30,6 @@ function Section(props) {
 export default function Home() {
   let sections = FindAllSections();
 
-  console.log(sections);
-
   return (
     <div className="">
       <div className="bg-white">

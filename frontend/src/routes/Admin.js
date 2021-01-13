@@ -44,13 +44,13 @@ export default class Admin extends React.Component {
       <div className="flex-grow flex flex-col items-center">
         <Header
           icon={mdiAccountCircle}
-          title="Modification des utilisateurs"
-          description="Faites votre choix"
+          title="Administration"
+          description="Modification des utilisateurs"
         >
           <LinkButton
             icon={mdiAccountPlus}
             to="/register"
-            text="Créer un compte de type secrétaire"
+            text="Créer un compte"
             className="px-3"
           />
         </Header>
@@ -78,10 +78,6 @@ export default class Admin extends React.Component {
               </table>
             </div>
           </div>
-
-          <Link to="/" className="text-helha_blue underline font-bold">
-            Retourner à l'accueil
-          </Link>
         </div>
       </div>
     );

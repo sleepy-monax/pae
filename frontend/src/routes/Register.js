@@ -51,7 +51,6 @@ export default class Register extends React.Component {
                 this.state.username,
                 this.state.password,
                 function (result) {
-                  console.log(result);
                   this.setState({ redirectToReferrer: true });
                 }.bind(this)
             );

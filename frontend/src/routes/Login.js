@@ -39,11 +39,9 @@ export default class Login extends React.Component {
       this.state.username,
       this.state.password,
       function (result) {
-        console.log(result);
         if (result.success) {
           this.setState({ redirectToReferrer: true });
-        }
-        else {
+        } else {
           //A FAIRE
         }
       }.bind(this)
@@ -69,9 +67,17 @@ export default class Login extends React.Component {
 
           <span className="text-white text-xl">Authentification</span>
 
-          <input type="text" placeholder="Nom d'utilisateur" onChange={this.handleUsernameChange}/>
+          <input
+            type="text"
+            placeholder="Nom d'utilisateur"
+            onChange={this.handleUsernameChange}
+          />
 
-          <input type="password" placeholder="Mot de passe" onChange={this.handlePasswordChange}/>
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            onChange={this.handlePasswordChange}
+          />
 
           <Button text="Connexion" />
         </form>

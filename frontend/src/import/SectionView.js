@@ -12,7 +12,6 @@ export default class SectionView extends View {
       let student = new StudentView(this.sheet, i);
 
       if (!student.valid()) {
-        console.log("-> NOT VALID");
         break;
       }
 
