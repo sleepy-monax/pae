@@ -1,4 +1,3 @@
-import { mdiChevronRight } from "@mdi/js";
 import Icon from "@mdi/react";
 import { Link } from "react-router-dom";
 import { Filled } from "./Styles";

@@ -28,7 +28,7 @@ export default function NavBar() {
 
   if (isConnected()) {
     adminSettingsButton = (
-      <LinkButton to="/admin" icon={mdiAccount} text="Admin options" />
+      <LinkButton to="/admin" icon={mdiAccount} text="Options d'admin" />
     )
   }
   
@@ -39,8 +39,8 @@ export default function NavBar() {
           <Icon className="mr-1" path={mdiClose} size={1} /> Fermer
         </button>
         {darkmodeButton}
-        {disconnectButton}
         {adminSettingsButton}
+        {disconnectButton}
       </div>
     </div>
   );
