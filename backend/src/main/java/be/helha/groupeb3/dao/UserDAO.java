@@ -1,11 +1,13 @@
 package be.helha.groupeb3.dao;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import be.helha.groupeb3.entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Stateless
@@ -24,7 +26,9 @@ public class UserDAO {
 
     public User add(User user) {
         if (user == null) { return null;}
-        if (findById(user.getId()) != null) { return null; }
+        if (findByName(user.getLogin()) == null) { return null; }
+        String hash = BCrypt.withDefaults().hashToString(BCrypt.MAX_COST, user.getPassword().toCharArray());
+        user.setPassword(hash);
         manager.persist(user);
         return user;
     }
@@ -46,5 +50,16 @@ public class UserDAO {
         if (isIn == null) { return false; }
         manager.remove(isIn);
         return true;
+    }
+
+    public User findByName(String login) {
+        if (login == null) { return null; }
+        String request = "select user from User user where user.login=?1";
+
+        TypedQuery<User> query = manager.createQuery(request, User.class);
+        query.setParameter(1, login);
+
+        List<User> users = query.getResultList();
+        return users.isEmpty() ? null : users.get(0);
     }
 }

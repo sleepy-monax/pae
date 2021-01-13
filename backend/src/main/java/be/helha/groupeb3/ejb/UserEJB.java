@@ -32,4 +32,8 @@ public class UserEJB {
     public boolean update(User oldU, User newU) {
         return dao.update(oldU, newU);
     }
+
+    public User findByName(String login) {
+        return dao.findByName(login);
+    }
 }
