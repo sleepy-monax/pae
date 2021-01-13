@@ -1,61 +1,49 @@
 package be.helha.groupeb3.dao;
 
-import java.util.List;
+import be.helha.groupeb3.entities.UE;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
-import be.helha.groupeb3.entities.UE;
+import java.util.List;
 
 @Stateless
 public class UEDAO {
-	@PersistenceContext(unitName = "groupeB3JTA")
-	private EntityManager em;
-	
-	public List<UE> findAll() {
-		return em.createQuery("SELECT ue FROM UE ue").getResultList();
-	}
-	
-	public UE findById(int id) {
-		return em.find(UE.class, id);
-	}
-	
-	public UE add(UE ue) {
-		if (ue == null) return null;
-        if (findById(ue.getId()) == null) {
-        	em.persist(ue);
-        }
-		
-		return ue;
-	}
-	
-	public void remove(UE ue) {
-		if(findById(ue.getId()) == null) return;
-		String requete = "DELETE ue FROM UE ue WHERE ue.id = ?1";
-		TypedQuery<UE> query = em.createQuery(requete, UE.class);
-		query.setParameter(1,  ue.getId());
-		return;
-	}
-	
-	public void update(UE oldUE, UE newUE) {
-		if (oldUE == null || newUE == null || oldUE.getId()==null) {
-            return;
-        }
-        em.clear();
-        UE ue = findById(oldUE.getId());
-        if (ue == null) {   
-            return;
-        }        
-        ue = newUE;
-        ue.setId(oldUE.getId());  
-        em.merge(ue);
-        commit();
-	}
 
-	private void commit() {
-		em.getTransaction().begin();
-		em.getTransaction().commit();
-	}
+    @PersistenceContext(unitName = "groupeB3JTA")
+    private EntityManager manager;
+
+    public List<UE> findAll() {
+        return manager.createQuery("select ue from UE ue").getResultList();
+    }
+
+    public UE findById(int id) {
+        return manager.find(UE.class, id);
+    }
+
+    public UE add(UE ue) {
+        if (ue == null) { return null; }
+        //REFAIRE
+
+        return ue;
+    }
+
+    public boolean update(UE oldU, UE newU) {
+        if (oldU == null || oldU.getId() == null || newU == null) { return false; }
+        manager.clear();
+        UE ue = findById(oldU.getId());
+        if (ue == null) { return false; }
+
+        ue = newU;
+        ue.setId(oldU.getId());
+        manager.merge(ue);
+        return true;
+    }
+
+    public boolean remove(UE ue) {
+        UE isIn = findById(ue.getId());
+        if (isIn == null) { return false; }
+        manager.remove(isIn);
+        return true;
+    }
 }

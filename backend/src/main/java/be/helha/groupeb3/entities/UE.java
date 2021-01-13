@@ -1,133 +1,120 @@
 package be.helha.groupeb3.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import java.util.Objects;
 
 @Entity
 public class UE implements Serializable {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	private List<Activite> activites;
-	private int identification;
-	private int nombreCredits;
-	private String intitule;
-	private String anneeAcademique;
-	private Section section;
-	
-	public UE() {
-		
-	}
-	
-	public UE(int identification, int nombreCredits, String intitule,
-			String anneeAcademique, Section section) {
-		activites = new ArrayList<Activite>();
-		this.identification = identification;
-		this.nombreCredits = nombreCredits;
-		this.intitule = intitule;
-		this.anneeAcademique = anneeAcademique;
-		this.section = section;
-	}
 
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private int identification, nbCredits;
+    private String label;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "academic_year")
+    private String academicYear;
 
-	public List<Activite> getActivites() {
-		return activites;
-	}
+    @Enumerated(EnumType.STRING)
+    private Section section;
 
-	public void setActivites(List<Activite> activites) {
-		this.activites = activites;
-	}
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Activity> activities;
 
-	public int getIdentification() {
-		return identification;
-	}
+    public UE() {
+    }
 
-	public void setIdentification(int identification) {
-		this.identification = identification;
-	}
+    public UE(int identification, int nbCredits, String label, String academicYear, Section section) {
+        this.identification = identification;
+        this.nbCredits = nbCredits;
+        this.label = label;
+        this.academicYear = academicYear;
+        this.section = section;
+        this.activities = new ArrayList<>();
+    }
 
-	public int getNombreCredits() {
-		return nombreCredits;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setNombreCredits(int nombreCredits) {
-		this.nombreCredits = nombreCredits;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getIntitule() {
-		return intitule;
-	}
+    public int getIdentification() {
+        return identification;
+    }
 
-	public void setIntitule(String intitule) {
-		this.intitule = intitule;
-	}
+    public void setIdentification(int identification) {
+        this.identification = identification;
+    }
 
-	public String getAnneeAcademique() {
-		return anneeAcademique;
-	}
+    public int getNbCredits() {
+        return nbCredits;
+    }
 
-	public void setAnneeAcademique(String anneeAcademique) {
-		this.anneeAcademique = anneeAcademique;
-	}
+    public void setNbCredits(int nbCredits) {
+        this.nbCredits = nbCredits;
+    }
 
-	public Section getSection() {
-		return section;
-	}
+    public String getLabel() {
+        return label;
+    }
 
-	public void setSection(Section section) {
-		this.section = section;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + identification;
-		return result;
-	}
+    public String getAcademicYear() {
+        return academicYear;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UE other = (UE) obj;
-		if (identification != other.identification)
-			return false;
-		return true;
-	}
+    public void setAcademicYear(String academicYear) {
+        this.academicYear = academicYear;
+    }
 
-	@Override
-	public String toString() {
-		return "UE \nId : " + id + 
-				"\nAactivites : " + activites + 
-				"\nIdentification : " + identification + 
-				"\nNombre de Credits : " + nombreCredits + 
-				"\nIntitule : " + intitule + 
-				"\nAnnee Academique : " + anneeAcademique + 
-				"\nSection : " + section + "\n";
-	}
-	
-	
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UE ue = (UE) o;
+        return identification == ue.identification && section == ue.section;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(identification, section);
+    }
+
+    @Override
+    public String toString() {
+        return "UE{" +
+                "id=" + id +
+                ", identification=" + identification +
+                ", nbCredits=" + nbCredits +
+                ", label='" + label + '\'' +
+                ", academicYear='" + academicYear + '\'' +
+                ", section=" + section +
+                ", activities=" + activities +
+                '}';
+    }
 }

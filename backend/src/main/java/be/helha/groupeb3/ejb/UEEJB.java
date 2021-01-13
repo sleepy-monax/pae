@@ -1,36 +1,35 @@
 package be.helha.groupeb3.ejb;
 
-import java.util.List;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-
 import be.helha.groupeb3.dao.UEDAO;
 import be.helha.groupeb3.entities.UE;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.List;
+
 @Stateless
-public class UEEJB{
-	@EJB
-	public UEDAO daoUE;
+public class UEEJB {
 
-	public List<UE> findAll() {
-		return daoUE.findAll();
-	}
+    @EJB
+    private UEDAO dao;
 
-	public UE findById(int id) {
-		return daoUE.findById(id);
-	}
+    public List<UE> findAll() {
+        return dao.findAll();
+    }
 
-	public UE add(UE ue) {
-		return daoUE.add(ue);
-	}
+    public UE findById(int id) {
+        return dao.findById(id);
+    }
 
-	public void remove(UE ue) {
-		daoUE.remove(ue);
-	}
-	
-	public void update(UE ue1, UE ue2) {
-		daoUE.update(ue1,ue2);
-	}
+    public UE add(UE ue) {
+        return dao.add(ue);
+    }
 
+    public boolean update(UE oldU, UE newU) {
+        return dao.update(oldU, newU);
+    }
+
+    public boolean remove(UE ue) {
+        return dao.remove(ue);
+    }
 }
