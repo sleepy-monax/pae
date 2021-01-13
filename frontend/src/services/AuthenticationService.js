@@ -1,25 +1,22 @@
 import { GetCookie, SetCookie, RemoveCookie } from "./CookiesService";
-import apiAuthentication from "./ApiService";
+import { ApiAuthentication } from "./ApiService";
 
 let authenticationToken = undefined;
 
 export function connect(username, password, callback) {
-
-  apiAuthentication(username, password).then(value => {
-    SetCookie("authenticationToken", value.data);
-    if (value.data !== null) {
-      authenticationToken = value.data;
+  ApiAuthentication(username, password)
+    .then((token) => {
+      authenticationToken = token;
+      SetCookie("authenticationToken", token);
       callback({ success: true, message: "" });
-    }
-    else {
-      callback({ success: false, message: "identifiant incorrect"})
-    }
-  }).catch(reason => callback({success: false, message: reason}));
-
+    })
+    .catch((e) => {
+      callback({ success: false, message: e });
+    });
 }
 
 export function register(username, password, callback) {
-    callback({ success: true, message: "User registered" });
+  callback({ success: true, message: "User registered" });
 }
 
 export function disconnect() {
