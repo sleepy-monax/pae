@@ -1,110 +1,29 @@
 import xlsx from "xlsx";
+import { ImportSection, ImportStudents } from "../import/Importer";
+import SectionView from "../import/SectionView";
 
-let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+function ExtractAllStudents(workbook) {
+  let students = [];
 
-function MakeCoords(x, y) {
-  let coord = "";
+  workbook.SheetNames.forEach((section) => {
+    let sheet = workbook.Sheets[section];
 
-  if (x > 25) {
-    coord += letters[Math.floor(x / 25) - 1];
-    coord += letters[x % 26];
-  } else {
-    coord += letters[x];
-  }
+    students = [...students, ...ImportStudents(sheet, section.toLowerCase())];
+  });
 
-  coord += y + 1;
-
-  return coord;
+  return students;
 }
 
-class View {
-  constructor(sheet, x, y) {
-    this.sheet = sheet;
-    this.x = x;
-    this.y = y;
-  }
+function ExtractAllSection(workbook) {
+  let sections = [];
 
-  coords() {
-    return MakeCoords(this.x, this.y);
-  }
+  workbook.SheetNames.forEach((section) => {
+    let sheet = workbook.Sheets[section];
 
-  exist() {
-    return this.read(0, 0) !== undefined;
-  }
+    sections.push(ImportSection(sheet, section.toLowerCase()));
+  });
 
-  read(offx, offy) {
-    let coords = MakeCoords(this.x + offx, this.y + offy);
-    let cell = this.sheet[coords];
-    let value = undefined;
-
-    if (cell !== undefined) {
-      value = cell.v;
-    }
-
-    console.log(`read(${coords}) => ${value}`);
-
-    return value;
-  }
-}
-
-class SectionView extends View {
-  constructor(sheet) {
-    super(sheet, 0, 0);
-  }
-
-  *students() {
-    for (let i = 0; ; i++) {
-      let student = new StudentView(this.sheet, i);
-
-      if (!student.exist()) {
-        break;
-      }
-
-      yield student;
-    }
-  }
-}
-
-class UEView extends View {
-  constructor(sheet, x, y) {
-    super(sheet, x, y);
-  }
-
-  credits() {
-    return this.read(0, 1);
-  }
-}
-
-class AAView extends View {
-  constructor(sheet, x, y) {
-    super(sheet, x, y);
-  }
-}
-
-class StudentView extends View {
-  constructor(sheet, index) {
-    super(sheet, 0, 3 + index);
-  }
-
-  index() {
-    return this.read(0, 0);
-  }
-
-  firstname() {
-    return this.read(1, 0).split(" ")[1];
-  }
-
-  lastname() {
-    return this.read(1, 0).split(" ")[0];
-  }
-
-  id() {
-    return this.read(2, 0);
-  }
-
-  bloc() {
-    return this.read(3, 0);
-  }
+  return sections;
 }
 
 function ReadFile(file, sucessCallback, errorCallback) {
@@ -122,30 +41,6 @@ function ReadFile(file, sucessCallback, errorCallback) {
 
   if (rABS) reader.readAsBinaryString(file);
   else reader.readAsArrayBuffer(file);
-}
-
-function ExtractStudents(worksheet) {}
-
-function ExtractAA(worksheet, UE) {}
-
-function ExtractUE(worksheet, section) {}
-
-function ExtractSection(worksheet, sections) {}
-
-function ExtractSections(spreadsheet) {
-  let sections = [];
-
-  spreadsheet.SheetNames.forEach((name) => {
-    let sheet = spreadsheet.Sheets[name];
-
-    let sectionView = new SectionView(sheet);
-
-    console.log([...sectionView.students()]);
-
-    console.log(sheet);
-  });
-
-  return sections;
 }
 
 export function Import(
@@ -176,8 +71,14 @@ export function Import(
     file,
     (workbook) => {
       let data = {};
-      console.log(workbook);
-      let sections = ExtractSections(workbook);
+
+      console.log(" ------ Students ------");
+      let students = ExtractAllStudents(workbook);
+      console.log(students);
+
+      console.log(" ------ Sections ------");
+      let sections = ExtractAllSection(workbook);
+      console.log(sections);
 
       sucessCallback(data);
     },
