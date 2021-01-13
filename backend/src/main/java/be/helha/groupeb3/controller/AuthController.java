@@ -7,7 +7,6 @@ import be.helha.groupeb3.util.AuthToken;
 import be.helha.groupeb3.util.Cryptage;
 import com.google.gson.Gson;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -16,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Path("authentication")
-public class AuthenticationController {
+public class AuthController {
 
     @Context
     private UriInfo context;
@@ -24,11 +23,12 @@ public class AuthenticationController {
     @Inject
     private UserEJB ejb;
 
-    public AuthenticationController() {
+    public AuthController() {
     }
 
     @POST
     @Produces("text/json")
+    @Consumes("application/x-www-form-urlencoded")
     public String authentication(@FormParam("login") String login, @FormParam("password") String password) {
         User user = ejb.findByName(login);
         if (user == null) return "null";

@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Stateless
@@ -26,8 +25,8 @@ public class UserDAO {
 
     public User add(User user) {
         if (user == null) { return null;}
-        if (findByName(user.getLogin()) == null) { return null; }
-        String hash = BCrypt.withDefaults().hashToString(BCrypt.MAX_COST, user.getPassword().toCharArray());
+        if (findByName(user.getLogin()) != null) { return null; }
+        String hash = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, user.getPassword().toCharArray());
         user.setPassword(hash);
         manager.persist(user);
         return user;
@@ -41,7 +40,9 @@ public class UserDAO {
 
         user = newU;
         user.setId(oldU.getId());
-        manager.merge(newU);
+        String hash = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, user.getPassword().toCharArray());
+        user.setPassword(hash);
+        manager.merge(user);
         return true;
     }
 
