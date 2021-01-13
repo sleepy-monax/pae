@@ -1,10 +1,11 @@
-import { mdiBrightness4, mdiClose, mdiLogout, mdiMenu } from "@mdi/js";
+import { mdiAccount, mdiBrightness4, mdiClose, mdiLogout, mdiMenu } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { disconnect, isConnected } from "../services/AuthenticationService";
 import { toggle } from "../services/DarkModeService";
 import Button from "./Button";
+import LinkButton from "./LinkButton";
 
 const blurEffect = {
   backdropFilter: "blur(16px)",
@@ -12,6 +13,7 @@ const blurEffect = {
 
 export default function NavBar() {
   let disconnectButton;
+  let adminSettingsButton;
   const [menuVisible, setMenuVisible] = useState(false);
 
   if (isConnected()) {
@@ -24,6 +26,12 @@ export default function NavBar() {
     <Button icon={mdiBrightness4} text="Light/Dark Mode" onClick={toggle} />
   );
 
+  if (isConnected()) {
+    adminSettingsButton = (
+      <LinkButton to="/admin" icon={mdiAccount} text="Admin options" />
+    )
+  }
+  
   let popoverMenu = (
     <div className="relative ">
       <div className="absolute w-60 right-0  bg-white text-black shadow-lg p-4 flex flex-col gap-1 rounded">
@@ -32,6 +40,7 @@ export default function NavBar() {
         </button>
         {darkmodeButton}
         {disconnectButton}
+        {adminSettingsButton}
       </div>
     </div>
   );

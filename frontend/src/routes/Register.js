@@ -98,8 +98,8 @@ export default class Register extends React.Component {
 
                     <Button text="Créer un compte" onClick={this.handleSubmit}/>
 
-                    <Link to="/login" className="text-helha_blue underline font-bold">
-                        Revenir à la page de connexion
+                    <Link to="/admin" className="text-helha_blue underline font-bold">
+                        Revenir à la page de gestion d'utilisateurs
                     </Link>
 
                 </form>

@@ -14,6 +14,8 @@ import Register from "./routes/Register"
 import { update } from "./services/DarkModeService";
 import About from "./routes/About";
 import CookiesHeader from "./components/CookiesHeader";
+import Admin from "./routes/Admin";
+import List from "./routes/List";
 
 export default function App() {
   update();
@@ -35,6 +37,8 @@ export default function App() {
             <About />
           </Route>
 
+          <PrivateRoute path="/admin" component={Admin} />
+          <PrivateRoute path="/list" component={List} />
           <PrivateRoute path="/bloc/:blocId" component={Bloc} />
           <PrivateRoute path="/edit/:studentId" component={Edit} />
           <PrivateRoute path="/import" component={Importation} />
