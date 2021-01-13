@@ -1,9 +1,12 @@
 import Header from "../components/Hearder";
-import { FindById, MOCK_STUDENTS } from "../services/StudentsService";
 import { mdiEmail, mdiLaptop, mdiPrinter } from "@mdi/js";
-import { FindBlock } from "../services/BlocService";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
+import { FindStudentsByBloc } from "../services/StudentsService";
+import {
+  FindBlockById,
+  FindSectionFromBlocId,
+} from "../services/SectionService";
 
 //Charge and configure student display
 export function Student(props) {
@@ -29,18 +32,18 @@ export function Student(props) {
   );
 }
 
-export default function Bloc(blocId) {
-    // Find the bloc id
-    let bloc = FindBlock(blocId);
+export default function Bloc() {
+  // Find the bloc id
+  let { blocId } = useParams();
 
-    return (
+  let section = FindSectionFromBlocId(blocId);
+  let bloc = FindBlockById(blocId);
+  let students = FindStudentsByBloc(blocId);
+
+  return (
     <div>
       {/*  Display the header */}
-      <Header
-        icon={mdiLaptop}
-        title={bloc.blocName}
-        description={"Bloc " + bloc.blocNumber}
-      >
+      <Header icon={mdiLaptop} title={bloc.name} description={section.name}>
         <Button text="Imprimer" icon={mdiPrinter} />
         <Button text="Envoyer" icon={mdiEmail} />
       </Header>
@@ -58,12 +61,11 @@ export default function Bloc(blocId) {
             </thead>
             <tbody>
               {/*  Search all students */}
-              {MOCK_STUDENTS.map((student, index) => (
+              {students.map((student, index) => (
                 <Student key={student.id} student={student} />
               ))}
             </tbody>
           </table>
-
         </div>
       </div>
     </div>

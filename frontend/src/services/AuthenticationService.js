@@ -1,24 +1,24 @@
-import Cookies from 'js-cookie';
+import { GetCookie, SetCookie, RemoveCookie } from "./CookiesService";
 
 let authenticationToken = undefined;
 
 export function connect(usename, password, callback) {
-    authenticationToken = "q4sd65f4q6s5d4fq65sd4f";
-    Cookies.set("authenticationToken", authenticationToken);
+  authenticationToken = "q4sd65f4q6s5d4fq65sd4f";
+  SetCookie("authenticationToken", authenticationToken);
 
-    callback({ success: true, message: "" });
+  callback({ success: true, message: "" });
 }
 
 export function disconnect() {
-    authenticationToken = undefined;
-    Cookies.remove("authenticationToken");
-    document.location.reload();
+  authenticationToken = undefined;
+  RemoveCookie("authenticationToken");
+  document.location.reload();
 }
 
 export function isConnected() {
-    if (authenticationToken === undefined) {
-        authenticationToken = Cookies.get("authenticationToken");
-    }
+  if (authenticationToken === undefined) {
+    authenticationToken = GetCookie("authenticationToken");
+  }
 
-    return authenticationToken !== undefined;
+  return authenticationToken !== undefined;
 }

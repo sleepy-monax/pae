@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { Allow, Enabled } from "../services/CookiesService";
 import { OutlineBlue } from "./Styles";
 import Button from "./Button";
+import { AllowCookies, EnabledCookies } from "../services/CookiesService";
 
 export default function CookiesHeader() {
-  const [visible, setVisible] = useState(!Enabled());
+  const [visible, setVisible] = useState(!EnabledCookies());
 
   return visible ? (
     <div className="border-b-2 border-yellow-500  p-2 ">
@@ -15,7 +15,7 @@ export default function CookiesHeader() {
         <Button
           text="J'accepte"
           onClick={() => {
-            Allow();
+            AllowCookies();
             setVisible(false);
           }}
         />

@@ -5,14 +5,19 @@ import {
   mdiUnfoldLessHorizontal,
   mdiUnfoldMoreHorizontal,
 } from "@mdi/js";
+
 import { useParams } from "react-router";
 import Icon from "@mdi/react";
 
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
-import { FindById } from "../services/StudentsService";
+import { FindStudentById } from "../services/StudentsService";
 import Button from "../components/Button";
 import { useState } from "react";
+import {
+  FindSectionById,
+  FindSectionFromBlocId,
+} from "../services/SectionService";
 
 function AA(props) {
   let aa = props.aa;
@@ -61,37 +66,18 @@ function Bloc(props) {
   );
 }
 
-let TEST_AA = {
-  name: "Mathématique",
-  credits: 5,
-};
-
-let TEST_UE = {
-  name: "Mathématique appliquée et traitement de données",
-  AAs: [TEST_AA, TEST_AA],
-};
-
-let TEST_SECTION = {
-  name: "Bachelier en informatique de gestion",
-  blocs: [
-    { name: "bloc 1", UEs: [TEST_UE, TEST_UE, TEST_UE, TEST_UE, TEST_UE] },
-    { name: "bloc 2", UEs: [TEST_UE, TEST_UE, TEST_UE, TEST_UE, TEST_UE] },
-    { name: "bloc 3", UEs: [TEST_UE, TEST_UE, TEST_UE, TEST_UE, TEST_UE] },
-  ],
-};
-
 export default function Edit() {
   let { studentId } = useParams();
 
-  let student = FindById(studentId);
-  let section = TEST_SECTION;
+  let student = FindStudentById(studentId);
+  let section = FindSectionFromBlocId(student.bloc);
 
   return (
     <div className="bg-gray-100 dark:bg-helha_dark_grey">
       <Header
         icon={mdiFormatListChecks}
         title={student.firstname + " " + student.lastname}
-        description={section.name}
+        description={section.name + " · " + student.bloc.toUpperCase()}
       >
         <DetailButton text="Confirmer" detail="60 Crédits" />
 
@@ -104,8 +90,6 @@ export default function Edit() {
           <Bloc key={index} bloc={bloc} />
         ))}
       </div>
-
-      <div></div>
     </div>
   );
 }

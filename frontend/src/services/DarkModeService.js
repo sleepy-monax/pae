@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import { GetCookie, SetCookie } from "./CookiesService";
 
 let isDark = undefined;
 
@@ -12,17 +12,18 @@ export function update() {
 
 export function toggle() {
   isDark = !isEnable();
-  Cookies.set("isDark", isDark);
+
+  SetCookie("isDark", isDark);
   update();
 }
 
 export function isEnable() {
   if (isDark === undefined) {
-    isDark = Cookies.getJSON("isDark");
+    isDark = GetCookie("isDark");
 
     if (isDark === undefined) {
       isDark = false;
-      Cookies.set("isDark", isDark);
+      SetCookie("isDark", isDark);
     }
   }
 

@@ -31,7 +31,7 @@ export default function App() {
             <About />
           </Route>
 
-          <PrivateRoute path="/bloc/:blockId" component={Bloc} />
+          <PrivateRoute path="/bloc/:blocId" component={Bloc} />
           <PrivateRoute path="/edit/:studentId" component={Edit} />
           <PrivateRoute path="/import" component={Importation} />
           <PrivateRoute path="/" exact component={Home} />
