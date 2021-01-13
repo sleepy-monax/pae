@@ -1,5 +1,5 @@
 import Header from "../components/Hearder";
-import { FindById } from "../services/StudentsService";
+import { FindById, MOCK_STUDENTS } from "../services/StudentsService";
 import { mdiEmail, mdiLaptop, mdiPrinter } from "@mdi/js";
 import { FindBlock } from "../services/BlocService";
 import { Link } from "react-router-dom";
@@ -30,9 +30,10 @@ export function Student(props) {
 }
 
 export default function Bloc(blocId) {
-  let bloc = FindBlock(blocId);
+    // Find the bloc id
+    let bloc = FindBlock(blocId);
 
-  return (
+    return (
     <div>
       {/*  Display the header */}
       <Header
@@ -57,26 +58,14 @@ export default function Bloc(blocId) {
             </thead>
             <tbody>
               {/*  Search all students */}
-              {DATA.map((student, index) => (
+              {MOCK_STUDENTS.map((student, index) => (
                 <Student key={student.id} student={student} />
               ))}
             </tbody>
           </table>
+
         </div>
       </div>
     </div>
   );
 }
-
-export const DATA = [
-  {
-    id: "la1234",
-    firstname: "Ayaan",
-    lastname: "gagaga",
-  },
-  {
-    id: "la1274",
-    firstname: "dfghjk",
-    lastname: "pmlolikjh",
-  },
-];
