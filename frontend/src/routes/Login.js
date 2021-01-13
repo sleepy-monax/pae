@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import Button from "../components/Button";
 import { connect } from "../services/AuthenticationService";
 
+import { Link } from "react-router-dom";
+
 const backgroundStyle = {
   backgroundSize: "cover",
   backgroundImage: "url(assets/background.jpg)",
@@ -69,7 +71,11 @@ export default class Login extends React.Component {
           <input type="password" placeholder="Mot de passe"></input>
 
           <Button text="Connexion" />
+          <Link to="/register" className="text-helha_blue underline font-bold">
+            Créer un compte
+          </Link>
         </form>
+       
       </div>
     );
   }

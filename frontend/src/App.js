@@ -10,6 +10,7 @@ import Error from "./routes/Error";
 import Home from "./routes/Home";
 import Importation from "./routes/Importation";
 import Login from "./routes/Login";
+import Register from "./routes/Register"
 import { update } from "./services/DarkModeService";
 import About from "./routes/About";
 import CookiesHeader from "./components/CookiesHeader";
@@ -26,6 +27,9 @@ export default function App() {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route path="/about">
             <About />
