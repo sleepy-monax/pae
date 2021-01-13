@@ -4,18 +4,24 @@ export let MOCK_STUDENTS = [
     firstname: "John",
     lastname: "Smith",
     bloc: "1ig",
+
+    pae: {},
   },
   {
     id: "la124234",
     firstname: "Carrote",
     lastname: "Doe",
     bloc: "1ig",
+
+    pae: {},
   },
   {
     id: "la188015",
     firstname: "Dhaeyer",
     lastname: "Sasha",
     bloc: "1ig",
+
+    pae: {},
   },
 ];
 

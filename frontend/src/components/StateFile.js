@@ -1,9 +1,6 @@
 import Check from "./Check";
 
 export default function StateFile(props) {
-  console.log("props:");
-  console.log(props);
-
   return (
     <div className="flex">
       <Check checked={props.formatOk} text="Format du fichier" />

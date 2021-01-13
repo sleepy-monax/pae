@@ -14,10 +14,7 @@ import Header from "../components/Hearder";
 import { FindStudentById } from "../services/StudentsService";
 import Button from "../components/Button";
 import { useState } from "react";
-import {
-  FindSectionById,
-  FindSectionFromBlocId,
-} from "../services/SectionService";
+import { FindSectionFromBlocId } from "../services/SectionService";
 
 function AA(props) {
   let aa = props.aa;
@@ -54,7 +51,7 @@ function UE(props) {
 function Bloc(props) {
   let bloc = props.bloc;
   return (
-    <div>
+    <>
       <div className="text-helha_blue pt-4 pb-2 text-2xl border-b-2 border-helha_blue mb-4">
         {bloc.name.toUpperCase()}
       </div>
@@ -62,7 +59,7 @@ function Bloc(props) {
       {bloc.UEs.map((ue, index) => (
         <UE key={index} ue={ue} />
       ))}
-    </div>
+    </>
   );
 }
 
@@ -73,7 +70,7 @@ export default function Edit() {
   let section = FindSectionFromBlocId(student.bloc);
 
   return (
-    <div className="bg-gray-100 dark:bg-helha_dark_grey">
+    <div className="bg-gray-100 dark:bg-helha_dark_grey flex-1">
       <Header
         icon={mdiFormatListChecks}
         title={student.firstname + " " + student.lastname}
@@ -86,9 +83,11 @@ export default function Edit() {
       </Header>
 
       <div className="max-w-2xl mx-auto my-8 p-4 bg-white dark:bg-helha_grey rounded shadow-lg">
-        {section.blocs.map((bloc, index) => (
-          <Bloc key={index} bloc={bloc} />
-        ))}
+        {section.blocs
+          .filter((bloc) => bloc.id <= student.bloc)
+          .map((bloc, index) => (
+            <Bloc key={index} bloc={bloc} />
+          ))}
       </div>
     </div>
   );
