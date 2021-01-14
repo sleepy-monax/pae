@@ -1,5 +1,5 @@
 import { GetCookie, SetCookie, RemoveCookie } from "./CookiesService";
-import { ApiAuthentication } from "./ApiService";
+import {ApiAuthentication} from "./ApiService";
 
 let authenticationToken = undefined;
 
@@ -15,10 +15,6 @@ export function connect(username, password, callback) {
     });
 }
 
-export function register(username, password, callback) {
-  callback({ success: true, message: "User registered" });
-}
-
 export function disconnect() {
   authenticationToken = undefined;
   RemoveCookie("authenticationToken");
@@ -31,4 +27,12 @@ export function isConnected() {
   }
 
   return authenticationToken !== undefined;
+}
+
+export function getToken() {
+    if (authenticationToken === undefined) {
+        authenticationToken = GetCookie("authenticationToken");
+    }
+
+    return authenticationToken;
 }

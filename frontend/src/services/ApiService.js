@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getToken} from "./AuthenticationService";
 
 let MOCK_API = process.env.REACT_APP_MOCK_API || false;
 let API_URL = "http://localhost:8080/backend-0.0.1-SNAPSHOT/api/";
@@ -45,7 +46,7 @@ export function ApiAuthentication(login, password) {
     axios
       .post(API_URL + "authentication", params, config)
       .then((result) => {
-        if (result !== null) {
+        if (result.data !== null) {
           resolve(result.data);
         } else {
           reject("Nom d'utilisateur ou mots de passe invalide!");
@@ -54,5 +55,30 @@ export function ApiAuthentication(login, password) {
       .catch((e) => {
         reject(e);
       });
+  });
+}
+
+export function ApiRegister(login, password) {
+  return new Promise((resolve, reject) => {
+    const params = new URLSearchParams();
+
+    params.append("login", login);
+    params.append("password", password);
+
+
+    const encodeToken = encodeURIComponent(getToken());
+
+    axios
+        .post(API_URL + "users?token="+ encodeToken, params, config)
+        .then((result) => {
+          if (result.data !== null) {
+            resolve(result.data);
+          } else {
+            reject("Utilisateur non ajouté");
+          }
+        })
+        .catch((e) => {
+          reject(e);
+        });
   });
 }

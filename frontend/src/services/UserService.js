@@ -1,3 +1,5 @@
+import {ApiRegister} from "./ApiService";
+
 export let MOCK_USERS = [
     {id:1, login: "admin", password: "helha", role:"Directeur"},
     {id:2, login: "secretaire", password: "secretariat", role:"Secretaire"},
@@ -13,4 +15,16 @@ export function FindAllUsers() {
   
 export function FindUserById(id) {
     return MOCK_USERS.filter((user) => user.id === id)[0];
+}
+
+export function register(username, password, callback) {
+    ApiRegister(username, password)
+        .then((user) => {
+            if (user.login === username) {
+                callback({ success: true, message: "L'utilisateur a bien été ajouté" });
+            }
+            else {
+                callback({ success: false, message: "L'utilisateur n'a pas pu être ajouté" });
+            }
+        })
 }
