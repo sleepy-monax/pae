@@ -8,7 +8,14 @@ export function ImportResult(sheet, student) {
   for (const ue of sectionView.ues()) {
     let ueResult = {
       id: ue.id(),
-      result: ue.result(student.index()),
+      result:
+        typeof ue.result(student.index()) === "number"
+          ? ue.result(student.index())
+          : 0,
+      examen:
+        typeof ue.result(student.index()) === "string"
+          ? ue.result(student.index())
+          : "",
       validated: ue.validate(student.index()) === "O",
       aas: [],
     };
@@ -16,7 +23,14 @@ export function ImportResult(sheet, student) {
     for (const aa of ue.aas()) {
       ueResult.aas.push({
         id: aa.id(),
-        result: aa.result(student.index()),
+        result:
+          typeof aa.result(student.index()) === "number"
+            ? aa.result(student.index())
+            : 0,
+        examen:
+          typeof aa.result(student.index()) === "string"
+            ? aa.result(student.index())
+            : "",
       });
     }
 

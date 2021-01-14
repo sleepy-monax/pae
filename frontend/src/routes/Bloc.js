@@ -89,8 +89,6 @@ export default function Bloc() {
     return <Loading />;
   }
 
-  console.log(state);
-
   return (
     <div className="bg-gray-100 dark:bg-helha_dark_grey flex-1">
       {/*  Display the header */}
