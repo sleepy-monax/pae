@@ -14,12 +14,12 @@
     </servlet-mapping>
     
     <filter>
-	    <filter-name>CorsFilter</filter-name>
-	    <filter-class>be.helha.groupeb3.bug.CorsFilter</filter-class>
+	    <filter-name>CORSResponseFilter</filter-name>
+	    <filter-class>be.helha.groupeb3.util.CORSResponseFilter</filter-class>
 	</filter>
  
 	<filter-mapping>
-	    <filter-name>CorsFilter</filter-name>
+	    <filter-name>CORSResponseFilter</filter-name>
 	    <url-pattern>/api/*</url-pattern>
 	</filter-mapping>
 	
