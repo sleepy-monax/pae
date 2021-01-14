@@ -9,8 +9,7 @@ export function ImportResult(sheet, student) {
     let ueResult = {
       id: ue.id(),
       result: ue.result(student.index()),
-      validated: ue.validate(student.index()),
-
+      validated: ue.validate(student.index()) === "O",
       aas: [],
     };
 
@@ -19,8 +18,6 @@ export function ImportResult(sheet, student) {
         id: aa.id(),
         result: aa.result(student.index()),
       });
-
-      aa.result(student.index());
     }
 
     ues.push(ueResult);
@@ -29,7 +26,7 @@ export function ImportResult(sheet, student) {
   return ues;
 }
 
-export function ImportStudents(sheet, section) {
+export function ImportStudents(sheet, sectionId) {
   let sectionView = new SectionView(sheet);
 
   let students = [];
@@ -40,7 +37,7 @@ export function ImportStudents(sheet, section) {
       index: studentView.index(),
       firstname: studentView.firstname(),
       lastname: studentView.lastname(),
-      bloc: section + studentView.bloc(),
+      bloc: sectionId + studentView.bloc(),
     };
 
     student.ues = ImportResult(sheet, studentView);
@@ -51,17 +48,51 @@ export function ImportStudents(sheet, section) {
   return students;
 }
 
-export function ImportUE(view, section) {}
-
-export function ImportBloc(view, sectionId) {}
-
-export function ImportSection(sheet, sectionId) {
+export function ImportUEs(sheet, sectionId, blocNumber) {
   let sectionView = new SectionView(sheet);
 
+  let ues = [];
+
+  for (const ueView of sectionView.ues()) {
+    if (ueView.bloc() === blocNumber) {
+      let ue = {
+        id: ueView.id(),
+        credits: ueView.credits(),
+        name: ueView.name(),
+        optional: ueView.optional(),
+        aas: [],
+      };
+
+      for (const aa of ueView.aas()) {
+        ue.aas.push({
+          id: aa.id(),
+          name: aa.name(),
+          credits: aa.credits(),
+        });
+      }
+
+      ues.push(ue);
+    }
+  }
+
+  return ues;
+}
+
+export function ImportSection(sheet, sectionId) {
   let section = {
     id: sectionId,
-    ues: [],
+    blocs: [],
   };
+
+  let blocIndex = 1;
+  let ues = ImportUEs(sheet, sectionId, blocIndex);
+
+  while (ues.length > 0) {
+    section.blocs.push({ id: sectionId + blocIndex, ues });
+
+    blocIndex++;
+    ues = ImportUEs(sheet, sectionId, blocIndex);
+  }
 
   return section;
 }

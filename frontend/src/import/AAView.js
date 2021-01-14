@@ -6,7 +6,10 @@ export default class AAView extends View {
   }
 
   valid() {
-    return super.valid() && this.read(0, 1) === "AcAp";
+    return (
+      super.valid() &&
+      (this.read(0, 1) === "AcAp" || this.read(0, 1) === "EpIn")
+    );
   }
 
   id() {
@@ -19,5 +22,9 @@ export default class AAView extends View {
 
   result(studentIndex) {
     return this.read(0, 3 + studentIndex);
+  }
+
+  credits() {
+    return this.read(0, 2);
   }
 }

@@ -4,7 +4,7 @@ function MakeCoords(x, y) {
   let coord = "";
 
   if (x > 25) {
-    coord += letters[Math.floor(x / 25) - 1];
+    coord += letters[Math.floor(x / 26) - 1];
     coord += letters[x % 26];
   } else {
     coord += letters[x];

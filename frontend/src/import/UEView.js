@@ -13,15 +13,40 @@ export default class UEView extends View {
   }
 
   name() {
-    return this.read(0, 0).split(" : ")[1];
+    let name = this.read(0, 0).split(" : ")[1];
+
+    let i = 0;
+    let space = 2;
+
+    while (space !== 0) {
+      if (name[i] === " ") {
+        space--;
+      }
+
+      i++;
+    }
+
+    return name.slice(i);
   }
 
   valid() {
-    return super.valid() && this.read(0, 1).startsWith("UE");
+    return (
+      super.valid() &&
+      this.read(0, 1) !== undefined &&
+      (this.read(0, 1).startsWith("UE") || this.read(0, 1).startsWith("UP"))
+    );
+  }
+
+  optional() {
+    return this.read(0, 1).startsWith("UP");
   }
 
   credits() {
-    return this.read(0, 1);
+    return this.read(0, 2);
+  }
+
+  bloc() {
+    return parseInt(this.read(0, 1).split(" ")[1][0]);
   }
 
   aasByIndex(index) {
@@ -35,7 +60,6 @@ export default class UEView extends View {
       if (!aa.valid()) {
         break;
       }
-
 
       yield aa;
     }
@@ -56,7 +80,13 @@ export default class UEView extends View {
   }
 
   result(studentIndex) {
-    return this.read(0, 3 + studentIndex);
+    let result = this.read(0, 3 + studentIndex);
+
+    if (result === "-") {
+      result = undefined;
+    }
+
+    return result;
   }
 
   validate(studentIndex) {
