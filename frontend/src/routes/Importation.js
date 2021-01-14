@@ -71,10 +71,14 @@ export default class Importation extends React.Component {
         />
         <div className="flex-1 flex items-center justify-center">
           <div className="bg-white text-black rounded-lg overflow-hidden max-w-lg shadow-md flex flex-col w-full p-3 gap-2">
-            <InputFile
-              file={this.state.file}
-              onFileChange={this.onChangeInput}
-            />
+            {!this.state.status.formatOk ? (
+              <InputFile
+                file={this.state.file}
+                onFileChange={this.onChangeInput}
+              />
+            ) : (
+              ""
+            )}
 
             <StateFile {...status} />
 

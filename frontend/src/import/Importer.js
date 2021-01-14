@@ -78,9 +78,17 @@ export function ImportUEs(sheet, sectionId, blocNumber) {
   return ues;
 }
 
+let sectionIDsToNames = {
+  ig: "Informatique de gestion",
+  ad: "Assistant·e de direction",
+  ct: "Comptabilité",
+};
+
 export function ImportSection(sheet, sectionId) {
   let section = {
     id: sectionId,
+    name:
+      sectionIDsToNames[sectionId] ?? "Section indentifier par " + sectionId,
     blocs: [],
   };
 
@@ -88,7 +96,11 @@ export function ImportSection(sheet, sectionId) {
   let ues = ImportUEs(sheet, sectionId, blocIndex);
 
   while (ues.length > 0) {
-    section.blocs.push({ id: sectionId + blocIndex, ues });
+    section.blocs.push({
+      id: sectionId + blocIndex,
+      ues,
+      name: "Bloc " + blocIndex,
+    });
 
     blocIndex++;
     ues = ImportUEs(sheet, sectionId, blocIndex);

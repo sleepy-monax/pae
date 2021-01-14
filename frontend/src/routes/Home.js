@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import LinkButton from "../components/LinkButton";
+import Loading from "../components/Loading";
 import { OutlineBlue } from "../components/Styles";
 import { FindAllSections } from "../services/SectionService";
 
@@ -28,7 +30,25 @@ function Section(props) {
 }
 
 export default function Home() {
-  let sections = FindAllSections();
+  let [sections, setSections] = useState(false);
+
+  useEffect(() => {
+    if (!sections) {
+      FindAllSections().then((sections) => setSections(sections));
+    }
+  });
+
+  let sectionsComponents = <Loading />;
+
+  if (sections === null) {
+    sectionsComponents = (
+      <div>Aucunes données disponibles, veuillez en importer</div>
+    );
+  } else if (sections) {
+    sectionsComponents = sections.map((section, index) => (
+      <Section key={index} section={section} />
+    ));
+  }
 
   return (
     <div className="">
@@ -40,9 +60,7 @@ export default function Home() {
         />
       </div>
       <div className="max-w-xl mx-auto flex flex-col gap-2 pb-8 px-4">
-        {sections.map((section, index) => (
-          <Section key={index} section={section} />
-        ))}
+        {sectionsComponents}
 
         <div className="mt-4">Administration</div>
 

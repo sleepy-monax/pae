@@ -1,6 +1,7 @@
 import xlsx from "xlsx";
 import { ImportSection, ImportStudents } from "../import/Importer";
-import { ApiUploadSection, ApiUploadStudents } from "./ApiService";
+import { ApiUploadStudents } from "./ApiService";
+import { SendAllSections } from "./SectionService";
 
 function ExtractAllStudents(workbook) {
   let students = [];
@@ -80,7 +81,7 @@ export function Import(
       status.importOk = true;
       progressCallback(status);
 
-      Promise.all([ApiUploadStudents(students), ApiUploadSection(sections)])
+      Promise.all([ApiUploadStudents(students), SendAllSections(sections)])
         .then(() => {
           status.uploadOk = true;
           progressCallback(status);
