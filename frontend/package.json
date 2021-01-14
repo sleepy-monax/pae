@@ -20,7 +20,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
-    "web-vitals": "^0.2.4",
+    "web-vitals": "^1.1.0",
     "xlsx": "^0.16.9"
   },
   "scripts": {
