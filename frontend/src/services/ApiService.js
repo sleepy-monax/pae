@@ -36,8 +36,6 @@ function ApiMockFailure(message) {
 }
 
 export function ApiAuthentication(login, password) {
-  console.log(process.env);
-
   if (MOCK_API) {
     if ((login === "admin" || login === "user") && password === "helha") {
       return ApiMockSucess("stupid_auth_token");
@@ -69,7 +67,6 @@ export function ApiAuthentication(login, password) {
 
 export function ApiUploadStudents(students) {
   if (MOCK_API) {
-    console.log("wat");
     localStorage.setItem("students", JSON.stringify(students));
 
     return ApiMockSucess();
