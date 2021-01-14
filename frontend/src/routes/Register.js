@@ -58,6 +58,8 @@ export default class Register extends React.Component {
                         //FEEDBACK UTILISATEUR NON AJOUTÉ
                         console.log(result.message)
                     }
+                  console.log(result);
+                  this.setState({ redirectToReferrer: true });
                 }.bind(this)
             );
         } else {

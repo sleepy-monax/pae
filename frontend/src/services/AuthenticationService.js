@@ -15,6 +15,10 @@ export function connect(username, password, callback) {
     });
 }
 
+export function register(username, password, callback) {
+    callback({ success: true, message: "" });
+}
+
 export function disconnect() {
   authenticationToken = undefined;
   RemoveCookie("authenticationToken");
