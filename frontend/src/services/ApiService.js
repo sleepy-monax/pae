@@ -40,29 +40,29 @@ export function ApiAuthentication(login, password) {
     if ((login === "admin" || login === "user") && password === "helha") {
       return ApiMockSucess("stupid_auth_token");
     } else {
-      return ApiMockFailure("Un erreur imaginaire ?!");
+      return ApiMockFailure("Une erreur imaginaire ?!");
     }
   }
+  
+    return new Promise((resolve, reject) => {
+        const params = new URLSearchParams();
 
-  return new Promise((resolve, reject) => {
-    const params = new URLSearchParams();
+        params.append("login", login);
+        params.append("password", password);
 
-    params.append("login", login);
-    params.append("password", password);
-
-    axios
-      .post(API_URL + "authentication", params, config)
-      .then((result) => {
-        if (result.data !== null) {
-          resolve(result.data);
-        } else {
-          reject("Nom d'utilisateur ou mots de passe invalide!");
-        }
-      })
-      .catch((e) => {
-        reject(e);
-      });
-  });
+        axios
+            .post(API_URL + "authentication", params, config)
+            .then((result) => {
+                if (result.data !== null) {
+                    resolve(result.data);
+                } else {
+                    reject("Nom d'utilisateur ou mots de passe invalide!");
+                }
+            })
+            .catch((e) => {
+                reject(e);
+            });
+    });
 }
 
 export function ApiUploadStudents(students) {
@@ -165,4 +165,30 @@ export function ApiFindUserById(id) {
         reject(e);
       });
   });
+}
+
+export function ApiUpdateUser(login, password, id) {
+    return new Promise((resolve, reject) => {
+      const params = new URLSearchParams();
+
+      params.append("id", id);
+      params.append("login", login);
+      params.append("password", password);
+
+      const encodeToken = encodeURIComponent(getToken());
+
+      axios
+        .put(API_URL + "users?token=" + encodeToken, params, config)
+        .then((result) => {
+          if (result.data !== null) {
+            resolve(result.data)
+          }
+          else {
+            reject("Utilisateur non mis a jour")
+          }
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    })
 }

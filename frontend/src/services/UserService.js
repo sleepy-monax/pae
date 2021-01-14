@@ -1,4 +1,4 @@
-import {ApiFindUserById, ApiFindUsers, ApiRegister} from "./ApiService";
+import {ApiFindUsers, ApiRegister, ApiUpdateUser, ApiFindUserById} from "./ApiService";
 
 export function FindAllUsers(callback) {
     ApiFindUsers()
@@ -32,6 +32,18 @@ export function register(username, password, callback) {
             }
             else {
                 callback({ success: false, message: "L'utilisateur n'a pas pu être ajouté" });
+            }
+        })
+}
+
+export function update(username, password, id, callback) {
+    ApiUpdateUser(username, password, id)
+        .then((user) => {
+            if (user.login === username) {
+                callback({ success: true, message: "L'utilisateur a bien été mis à jour" });
+            }
+            else {
+                callback({ success: false, message: "L'utilisateur n'a pas pu être mis à jour" });
             }
         })
 }

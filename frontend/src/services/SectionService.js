@@ -21,7 +21,7 @@ export function FindSectionById(id) {
   return new Promise((resolve, reject) => {
     FindAllSections()
       .then((sections) =>
-        resolve(sections.filter((section) => section.id == id)[0])
+        resolve(sections.filter((section) => section.id === id)[0])
       )
       .catch(reject);
   });

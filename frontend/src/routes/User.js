@@ -1,9 +1,8 @@
 import {mdiAccountCircle, mdiAccountRemoveOutline, mdiUpdate} from "@mdi/js";
 import {useParams} from "react-router-dom";
 import Header from "../components/Hearder";
-import {FindUserById} from "../services/UserService";
+import {FindUserById, update} from "../services/UserService";
 import Button from "../components/Button";
-import LinkButton from "../components/LinkButton";
 import React from "react";
 import {useEffect, useState} from "react";
 import Loading from "../components/Loading";
@@ -21,12 +20,33 @@ export default function User() {
                 } else {
                     //A FAIRE
                 }
-            }.bind(this)
+            }
         );
     })
     if (user === undefined) {
         return <Loading/>;
     }
+
+    function updateUser(user) {
+      if (user.login !== "" && user.password !== "") {
+        update(
+          user.login,
+          user.password,
+          user.id,
+          function (result) {
+            if (result.success) {
+              //FEEDBACK UTILISATEUR Mis à jour
+              console.log(result.message);
+            } else {
+              //FEEDBACK UTILISATEUR Non mis à jour
+              console.log(result.message);
+            }
+            console.log(result);
+          }
+        );
+      }
+    }
+
     return (
         <div className="flex-grow flex flex-col items-center">
             <Header
@@ -35,21 +55,22 @@ export default function User() {
                 description="Modifiez les informations ou supprimez le compte"
             >
                 <Button text="Supprimer" icon={mdiAccountRemoveOutline}/>
+                <Button text="Mettre à jour les informations" icon={mdiUpdate} onClick={() => updateUser(user)}/>
             </Header>
             <div className="my-0 p-8 flex flex-col flex-grow items-center gap-4 max-w-2xl">
                 <h1>Nom d'utilisateur : </h1>
                 <input
                     type="text"
                     placeholder="Nom d'utilisateur"
-                    value={user.login}
-                    onChange={handlePassword}
+                    defaultValue={user.login}
+                    onChange={(e) => {user.login = e.target.value; setUser(user)}
+                    }
                 />
                 <h1>Mot de passe : </h1>
                 <input
                     type="text"
                     placeholder="Mot de passe"
-                    value=""
-                    onChange={handleLogin}
+                    onChange={(e) => {user.password = e.target.value; setUser(user)}}
                 />
                 <h1>Role</h1>
                 <label>
@@ -59,17 +80,7 @@ export default function User() {
                     />
                     Admin
                 </label>
-                <LinkButton to="/admin" text="Mettre à jour les informations" icon={mdiUpdate}/>
             </div>
         </div>
     );
-}
-
-
-function handlePassword() {
-
-}
-
-function handleLogin() {
-
 }
