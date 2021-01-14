@@ -20,10 +20,14 @@ export function User(props) {
         </Link>
       </td>
       <td>
-        <center>{user.password}</center>
+        <Link to={"/user/" + user.id}>
+          <center>{user.password}</center>
+        </Link>
       </td>
       <td>
-        <center>{user.role}</center>
+        <Link to={"/user/" + user.id}>
+          <center>{user.role}</center>
+        </Link>
       </td>
     </tr>
   );
@@ -56,6 +60,7 @@ export default class Admin extends React.Component {
         </Header>
         <div className="my-0 p-8 flex flex-col flex-grow items-center gap-4 max-w-2xl">
           <h1 className="text-xl">Bienvenue Monsieur {this.state.pseudo}</h1>
+          <h2 className="text-l">Veuillez sélectionner le compte à modifier</h2>
 
           <div>
             <div className="flex flex-col w-full p-3 gap-2">

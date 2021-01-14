@@ -23,12 +23,12 @@ export default function NavBar() {
   }
 
   let darkmodeButton = (
-    <Button icon={mdiBrightness4} text="Light/Dark Mode" onClick={toggle} />
+    <Button icon={mdiBrightness4} text="Light/Dark Mode" onClick={toggle}/>
   );
 
   if (isConnected()) {
     adminSettingsButton = (
-      <LinkButton to="/admin" icon={mdiAccount} text="Options d'admin" />
+      <LinkButton to="/admin" icon={mdiAccount} text="Options d'admin"/>
     )
   }
   
