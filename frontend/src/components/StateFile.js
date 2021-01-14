@@ -5,7 +5,7 @@ export default function StateFile(props) {
     <div className="flex">
       <Check checked={props.formatOk} text="Format du fichier" />
       <Check checked={props.importOk} text="Importation du fichier" />
-      <Check checked={props.uploadOk} text="Envoie au server" />
+      <Check checked={props.uploadOk} text="Envoi au serveur" />
     </div>
   );
 }
