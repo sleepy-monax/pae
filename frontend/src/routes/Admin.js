@@ -31,13 +31,16 @@ export function User(props) {
 export default class Admin extends React.Component {
     constructor(props) {
         super(props);
-        console.log("salut")
 
         this.state = {
             pseudo: "admin",
             users: []
         };
 
+
+    }
+
+    componentDidMount() {
         FindAllUsers(
             function (result) {
                 if (result.success) {

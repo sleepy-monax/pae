@@ -74,4 +74,16 @@ public class UserControler {
         return new Gson().toJson(deleted);
     }
 
+    @GET
+    @Produces("text/json")
+    @Path("/{id}")
+    public String findById(@QueryParam("token") String token, @PathParam("id") int id) {
+        User current = authService.checkToken(token);
+        if (current == null) { return "null"; }
+        if (current.getRole() != Role.DIRECTEUR) { return "null"; }
+        User selected = ejb.findById(id);
+        if (selected == null) { return "null"; }
+        return new Gson().toJson(selected);
+    }
+
 }
