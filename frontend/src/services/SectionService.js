@@ -35,7 +35,7 @@ export function FindSectionFromBlocId(id) {
 
 export function FindBlockById(id) {
   return new Promise((resolve, reject) => {
-    FindSectionFromBlocId()
+    FindSectionFromBlocId(id)
       .then((section) => {
         resolve(section.blocs.filter((bloc) => bloc.id === id)[0]);
       })
