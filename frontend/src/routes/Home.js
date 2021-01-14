@@ -55,7 +55,7 @@ export default function Home() {
       <div className="bg-white">
         <img
           className="max-w-xs mx-auto py-8"
-          src="assets/curriculum.svg"
+          src="/assets/curriculum.svg"
           alt=""
         />
       </div>

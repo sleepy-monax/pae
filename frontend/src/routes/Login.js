@@ -17,7 +17,12 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { username: "", password: "", redirectToReferrer: false,  showDiv: false, };
+    this.state = {
+      username: "",
+      password: "",
+      redirectToReferrer: false,
+      showDiv: false,
+    };
 
     this.invalidInfos = this.invalidInfos.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -68,7 +73,7 @@ export default class Login extends React.Component {
           style={containerStyle}
           className="my-0 p-8 bg-helha_grey bg-opacity-50 flex flex-col flex-grow items-center gap-4 max-w-2xl"
         >
-          <img src="assets/logo.png" className="m-8" alt=""/>
+          <img src="assets/logo.png" className="m-8" alt="" />
 
           <span className="text-white text-xl">Authentification</span>
 
@@ -97,7 +102,6 @@ export default class Login extends React.Component {
 
           <Button text="Connexion" />
         </form>
-       
       </div>
     );
   }
