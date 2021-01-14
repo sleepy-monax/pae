@@ -22,9 +22,11 @@ export default class Register extends React.Component {
       password: "",
       hiddenPassword: true,
       showDiv: false,
+      showDivRegister: false
     };
 
     this.verifInfos = this.verifInfos.bind(this);
+    this.showRegisterDiv = this.showRegisterDiv.bind(this);
     this.togglePassword = this.togglePassword.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -33,6 +35,10 @@ export default class Register extends React.Component {
 
   verifInfos() {
     this.setState({ showDiv: true });
+  }
+
+  showRegisterDiv() {
+    this.setState({ showRegisterDiv: true });
   }
 
   togglePassword() {
@@ -63,7 +69,8 @@ export default class Register extends React.Component {
           }
           console.log(result);
           this.setState({ redirectToReferrer: true });
-        }.bind(this)
+        }.bind(this),
+        this.showRegisterDiv()
       );
     } else {
       this.verifInfos();
@@ -94,6 +101,16 @@ export default class Register extends React.Component {
             {this.state.showDiv ? (
               <div>
                 <h1>Veuillez remplir tout les champs !</h1>
+              </div>
+            ) : null}
+          </div>
+          <div
+            id="registerDiv"
+            className="bg-green-500 rounded text-white text-l px-3 text-base"
+          >
+            {this.state.showRegisterDiv ? (
+              <div className="bg-green-500">
+                <h1>Utilisateur correctement inscrit !</h1>
               </div>
             ) : null}
           </div>

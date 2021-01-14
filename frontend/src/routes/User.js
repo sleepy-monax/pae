@@ -11,6 +11,7 @@ export default function User() {
     let {userId} = useParams();
     const [user, setUser] = useState(undefined);
     const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+    const [showModifDiv, setShowModifDiv] = useState(false);
 
     useEffect(() => {
         if (user !== undefined) return;
@@ -19,7 +20,7 @@ export default function User() {
                 if (result.success) {
                     setUser(result.user);
                 } else {
-                    //A FAIRE
+                    //
                 }
             }
         );
@@ -29,7 +30,7 @@ export default function User() {
     }
 
     function updateUser(user) {
-      if (user.login !== "" && user.password !== "") {
+      if (user.login !== "" || user.password !== "") {
         update(
           user.login,
           user.password,
@@ -45,6 +46,9 @@ export default function User() {
             console.log(result);
           }
         );
+      }
+      else {
+        setShowModifDiv(true);
       }
     }
     
@@ -75,6 +79,16 @@ export default function User() {
                 <Button text="Supprimer" icon={mdiAccountRemoveOutline} onClick={() => deleteUser(userId)}/>
             </Header>
             <div className="my-0 p-8 flex flex-col flex-grow items-center gap-4 max-w-2xl">
+            <div
+              id="registerDiv"
+              className="bg-green-500 rounded text-white text-l px-3 text-base"
+            >
+              {showModifDiv ? (
+                <div className="bg-green-500">
+                  <h1>Utilisateur correctement modifié !</h1>
+                </div>
+              ) : null}
+            </div>
                 <h1>Nom d'utilisateur : </h1>
                 <input
                     type="text"
