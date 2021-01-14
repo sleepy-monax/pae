@@ -4,8 +4,8 @@ export default function StateFile(props) {
   return (
     <div className="flex">
       <Check checked={props.formatOk} text="Format du fichier" />
-      <Check checked={props.structureOk} text="Structure du fichier" />
-      <Check checked={props.dataOk} text="Données valides" />
+      <Check checked={props.importOk} text="Importation du fichier" />
+      <Check checked={props.uploadOk} text="Envoie au server" />
     </div>
   );
 }

@@ -14,9 +14,10 @@ export default class Importation extends React.Component {
       file: null,
       status: {
         formatOk: undefined,
-        structureOk: undefined,
-        dataOk: undefined,
+        importOk: undefined,
+        uploadOk: undefined,
       },
+      result: { success: undefined, message: "" },
     };
     this.onChangeInput = this.onChangeInput.bind(this);
   }
@@ -26,16 +27,41 @@ export default class Importation extends React.Component {
       file,
       (status) => this.setState({ status: status }),
       () => {
-        alert("Importation reussie!");
+        this.setState({
+          result: { success: true, message: "Importation reussie!" },
+        });
       },
       () => {
-        alert("Impossible d'importer le fichier!");
+        this.setState({
+          result: {
+            success: false,
+            message: "Impossible d'importer le fichier!",
+          },
+        });
       }
     );
   }
 
   render() {
     let status = this.state.status;
+
+    let message;
+
+    if (this.state.result.success !== undefined) {
+      message = (
+        <div
+          className={
+            (this.state.result.success
+              ? "bg-helha_blue text-white"
+              : "bg-yellow-500 text-black") +
+            " " +
+            "p-4 rounded"
+          }
+        >
+          {this.state.result.message}
+        </div>
+      );
+    }
 
     return (
       <div className="flex flex-col flex-1">
@@ -53,11 +79,7 @@ export default class Importation extends React.Component {
 
             <StateFile {...status} />
 
-            <Button
-              className="self-end mt-8"
-              text="Importer le fichier excel"
-              onClick={Import}
-            />
+            {message}
           </div>
         </div>
       </div>

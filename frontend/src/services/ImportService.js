@@ -1,5 +1,6 @@
 import xlsx from "xlsx";
 import { ImportSection, ImportStudents } from "../import/Importer";
+import { ApiUploadSection, ApiUploadStudents } from "./ApiService";
 
 function ExtractAllStudents(workbook) {
   let students = [];
@@ -50,8 +51,8 @@ export function Import(
 ) {
   let status = {
     formatOk: undefined,
-    structureOk: undefined,
-    dataOk: undefined,
+    importOk: undefined,
+    uploadOk: undefined,
   };
 
   if (
@@ -66,20 +67,32 @@ export function Import(
     status.formatOk = true;
   }
 
+  progressCallback(status);
+
   ReadFile(
     file,
     (workbook) => {
       let data = {};
 
-      console.log(" ------ Students ------");
       let students = ExtractAllStudents(workbook);
-      console.log(students);
-
-      console.log(" ------ Sections ------");
       let sections = ExtractAllSection(workbook);
-      console.log(sections);
 
-      sucessCallback(data);
+      status.importOk = true;
+      progressCallback(status);
+
+      Promise.all([ApiUploadStudents(students), ApiUploadSection(sections)])
+        .then(() => {
+          status.uploadOk = true;
+          progressCallback(status);
+
+          sucessCallback(data);
+        })
+        .catch(() => {
+          status.uploadOk = false;
+          progressCallback(status);
+
+          faillureCallback();
+        });
     },
     () => {
       faillureCallback();
