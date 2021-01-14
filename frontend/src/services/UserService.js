@@ -1,16 +1,15 @@
-import {ApiRegister} from "./ApiService";
+import {ApiFindUsers, ApiRegister, MOCK_USERS} from "./ApiService";
 
-export let MOCK_USERS = [
-    {id:"1", login: "admin", password: "helha", role:"Directeur"},
-    {id:"2", login: "secretaire", password: "secretariat", role:"Secretaire"},
-    {id:"3", login: "nicolas", password: "nicolas", role:"Secretaire"},
-    {id:"4", login: "guillaume", password: "guillaume", role:"Secretaire"},
-    {id:"5", login: "sasha", password: "sasha", role:"Secretaire"},
-    {id:"6", login: "mathieu", password: "mathieu", role:"Secretaire"},
-];
-
-export function FindAllUsers() {
-    return MOCK_USERS;
+export function FindAllUsers(callback) {
+    ApiFindUsers()
+        .then((users) => {
+            if (users !== null) {
+                callback( {success: true, users: users});
+            }
+            else {
+                callback( {success: false});
+            }
+        })
 }
   
 export function FindUserById(id) {

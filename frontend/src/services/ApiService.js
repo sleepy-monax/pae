@@ -10,6 +10,15 @@ const config = {
   },
 };
 
+export let MOCK_USERS = [
+  {id:"1", login: "admin", password: "helha", role:"Directeur"},
+  {id:"2", login: "secretaire", password: "secretariat", role:"Secretaire"},
+  {id:"3", login: "nicolas", password: "nicolas", role:"Secretaire"},
+  {id:"4", login: "guillaume", password: "guillaume", role:"Secretaire"},
+  {id:"5", login: "sasha", password: "sasha", role:"Secretaire"},
+  {id:"6", login: "mathieu", password: "mathieu", role:"Secretaire"},
+];
+
 function ApiMockSucess(data) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -108,5 +117,30 @@ export function ApiRegister(login, password) {
       .catch((e) => {
         reject(e);
       });
+  });
+}
+
+export function ApiFindUsers() {
+
+  if (MOCK_API) {
+    return ApiMockSucess(MOCK_USERS);
+  }
+
+  return new Promise((resolve, reject) => {
+    const encodeToken = encodeURIComponent(getToken());
+
+    axios
+        .get(API_URL + "users?token=" + encodeToken)
+        .then((result) => {
+          if (result.data !== null) {
+            resolve(result.data)
+          }
+          else {
+            reject("Aucune donnée possible")
+          }
+        })
+        .catch((e) => {
+          reject(e);
+        });
   });
 }

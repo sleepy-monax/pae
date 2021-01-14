@@ -81,7 +81,7 @@ export default function Bloc() {
       </Header>
 
       {/*  Display all students */}
-      <div className="py-20 h-screen px-2 ">
+      <div className="py-20 h-screen px-2">
         <div className="flex flex-col w-full p-3 gap-2">
           <table className="border-2 shadow-2xl">
 
