@@ -14,6 +14,19 @@ import { useEffect, useState } from "react";
 
 // Charge the students' data into a table
 // Configuration of datas
+
+export function Progress(props) {
+  return (
+    <div className="h-3 relative rounded-full overflow-hidden">
+      <div className="w-full h-full bg-gray-200 absolute"></div>
+      <div
+        style={{ width: Math.floor(props.value * 100) + "%" }}
+        className="h-full bg-helha_blue relative"
+      ></div>
+    </div>
+  );
+}
+
 export function Student(props) {
   let student = props.student;
   return (
@@ -21,55 +34,31 @@ export function Student(props) {
       {/*  Student name */}
       <td>
         <Link to={"/edit/" + student.id}>
-          <center>
-            {student.firstname} {student.lastname}
-          </center>
+          {student.firstname} {student.lastname}
         </Link>
       </td>
 
       {/*  Progress bar per bloc */}
-      <td className="flex gap-2">
-        {/*  Bloc 1 */}
-        <td className="flex-1">
-          <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
-            <div className="w-full h-full bg-gray-200 absolute"></div>
-            <div
-              class="barBloc1"
-              style={{ width: "100%" }}
-              className="h-full bg-helha_blue relative"
-            ></div>
-          </div>
-        </td>
 
-        {/*  Bloc 2 */}
-        <td className="flex-1">
-          <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
-            <div className="w-full h-full bg-gray-200 absolute"></div>
-            <div
-              class="barBloc2"
-              style={{ width: "30%" }}
-              className="h-full bg-helha_blue relative"
-            ></div>
-          </div>
-        </td>
+      {/*  Bloc 1 */}
+      <td>
+        <Progress value={1} />
+      </td>
 
-        {/*  Bloc 3 */}
-        <td className="flex-1">
-          <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
-            <div className="w-full h-full bg-gray-200 absolute"></div>
-            <div
-              class="barBloc3"
-              style={{ width: "60%" }}
-              className="h-full bg-helha_blue relative"
-            ></div>
-          </div>
-        </td>
+      {/*  Bloc 2 */}
+      <td>
+        <Progress value={0.5} />
+      </td>
+
+      {/*  Bloc 3 */}
+      <td>
+        <Progress value={0.1} />
       </td>
 
       {/*  Check box, checked if the pae is done */}
       <td>
         <center>
-          <input class="paeDone" type="checkbox" />
+          <input type="checkbox" />
         </center>
       </td>
     </tr>
@@ -79,10 +68,6 @@ export function Student(props) {
 export default function Bloc() {
   // Find the bloc id
   let { blocId } = useParams();
-
-  /*let section = FindSectionFromBlocId(blocId);*/
-  /*let bloc = FindBlockById(blocId);*/
-  /*let students = FindStudentsByBloc(blocId);*/
 
   let [state, setState] = useState(undefined);
 
@@ -107,7 +92,7 @@ export default function Bloc() {
   console.log(state);
 
   return (
-    <div>
+    <div className="bg-gray-100 dark:bg-helha_dark_grey flex-1">
       {/*  Display the header */}
       <Header
         icon={mdiLaptop}
@@ -119,33 +104,27 @@ export default function Bloc() {
       </Header>
 
       {/*  Display all students */}
-      <div className="py-4 px-2">
-        <div className="flex flex-col w-full p-3 gap-2">
-          <table className="border-2 shadow-2xl">
-            <thead>
-              <tr className="border-b-2">
-                <th>Nom et prénom</th>
-                <center>
-                  <b>Progression</b>
-                </center>
-                <th className="flex">
-                  <th className="flex-1">Bloc 1</th>
-                  <th className="flex-1">Bloc 2</th>
-                  <th className="flex-1">Bloc 3</th>
-                </th>
-                <th>Fait?</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {/*  Search all students */}
+      <div className="shadow rounded p-4 my-8 bg-white dark:bg-helha_grey max-w-4xl mx-auto flex flex-col  gap-2">
+        <table>
+          <thead>
+            <tr className="border-b-2">
+              <th>Nom et prénom</th>
+              <th className="flex-1">Bloc 1</th>
+              <th className="flex-1">Bloc 2</th>
+              <th className="flex-1">Bloc 3</th>
+              <th>Fait?</th>
+            </tr>
+          </thead>
 
-              {state.students.map((student, index) => (
-                <Student key={student.id} student={student} />
-              ))}
-            </tbody>
-          </table>
-        </div>
+          <tbody>
+            {/*  Search all students */}
+
+            {state.students.map((student, index) => (
+              <Student key={student.id} student={student} />
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
