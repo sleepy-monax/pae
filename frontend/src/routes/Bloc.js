@@ -1,5 +1,5 @@
 import Header from "../components/Hearder";
-import { mdiEmail, mdiLaptop, mdiPrinter, mdiStackpath } from "@mdi/js";
+import { mdiEmail, mdiLaptop, mdiPrinter } from "@mdi/js";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { FindStudentsByBloc } from "../services/StudentsService";
@@ -72,7 +72,7 @@ export default function Bloc() {
   let [state, setState] = useState(undefined);
 
   useEffect(() => {
-    if (state != undefined) {
+    if (state !== undefined) {
       return;
     }
 
@@ -85,7 +85,7 @@ export default function Bloc() {
     );
   });
 
-  if (state == undefined) {
+  if (state === undefined) {
     return <Loading />;
   }
 

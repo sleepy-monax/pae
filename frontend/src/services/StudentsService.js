@@ -21,7 +21,7 @@ export function FindStudentById(id) {
   return new Promise((resolve, reject) => {
     FindAllStudent()
       .then((students) =>
-        resolve(students.filter((student) => student.id == id)[0])
+        resolve(students.filter((student) => student.id === id)[0])
       )
       .catch(reject);
   });
@@ -31,7 +31,7 @@ export function FindStudentsByBloc(bloc) {
   return new Promise((resolve, reject) => {
     FindAllStudent()
       .then((students) =>
-        resolve(students.filter((student) => student.bloc == bloc))
+        resolve(students.filter((student) => student.bloc === bloc))
       )
       .catch(reject);
   });
