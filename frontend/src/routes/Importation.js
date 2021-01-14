@@ -1,10 +1,11 @@
 import { Import } from "../services/ImportService";
-import { mdiTableArrowUp } from "@mdi/js";
+import { mdiHome, mdiTableArrowUp } from "@mdi/js";
 import React from "react";
 
 import Header from "../components/Hearder";
 import InputFile from "../components/InputFile";
 import StateFile from "../components/StateFile";
+import LinkButton from "../components/LinkButton";
 
 export default class Importation extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ export default class Importation extends React.Component {
         <div
           className={
             (this.state.result.success
-              ? "bg-helha_blue text-white"
+              ? "border-2 border-helha_blue text-helha_blue"
               : "bg-yellow-500 text-black") +
             " " +
             "p-4 rounded"
@@ -83,6 +84,12 @@ export default class Importation extends React.Component {
             <StateFile {...status} />
 
             {message}
+
+            {this.state.result.success ? (
+              <LinkButton to="/" text="Revenir à l'acceil" icon={mdiHome} />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

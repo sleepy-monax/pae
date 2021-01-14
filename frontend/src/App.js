@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -10,7 +10,7 @@ import Error from "./routes/Error";
 import Home from "./routes/Home";
 import Importation from "./routes/Importation";
 import Login from "./routes/Login";
-import Register from "./routes/Register"
+import Register from "./routes/Register";
 import { update } from "./services/DarkModeService";
 import About from "./routes/About";
 import CookiesHeader from "./components/CookiesHeader";
@@ -18,7 +18,6 @@ import Admin from "./routes/Admin";
 import User from "./routes/User";
 
 export default function App() {
-
   update();
 
   return (
@@ -42,7 +41,7 @@ export default function App() {
           <PrivateRoute path="/register" component={Register} />
           <PrivateRoute path="/user/:userId" component={User} />
           <PrivateRoute path="/bloc/:blocId" component={Bloc} />
-          <PrivateRoute path="/edit/:studentId" component={Edit} />
+          <PrivateRoute path="/student/:studentId" component={Edit} />
           <PrivateRoute path="/import" component={Importation} />
           <PrivateRoute path="/" exact component={Home} />
 

@@ -33,7 +33,7 @@ export function Student(props) {
     <tr>
       {/*  Student name */}
       <td>
-        <Link to={"/edit/" + student.id}>
+        <Link to={"/student/" + student.id}>
           {student.firstname} {student.lastname}
         </Link>
       </td>
