@@ -1,4 +1,4 @@
-import {ApiFindUsers, ApiRegister, ApiUpdateUser, ApiFindUserById} from "./ApiService";
+import {ApiFindUsers, ApiRegister, ApiUpdateUser, ApiFindUserById, ApiDeleter} from "./ApiService";
 
 export function FindAllUsers(callback) {
     ApiFindUsers()
@@ -44,6 +44,18 @@ export function update(username, password, id, callback) {
             }
             else {
                 callback({ success: false, message: "L'utilisateur n'a pas pu être mis à jour" });
+            }
+        });
+    }
+
+export function deleter(id, callback) {
+    ApiDeleter(id)
+        .then(user => {
+            if (user !== null) {
+                callback({ success: true, message: "L'utilisateur a bien été supprimé" });
+            }
+            else {
+                callback({ success: false, message: "L'utilisateur n'a pas été supprimé" });
             }
         })
 }

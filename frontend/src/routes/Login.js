@@ -19,13 +19,13 @@ export default class Login extends React.Component {
 
     this.state = { username: "", password: "", redirectToReferrer: false,  showDiv: false, };
 
-    this.verifInfos = this.verifInfos.bind(this);
+    this.invalidInfos = this.invalidInfos.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  verifInfos() {
+  invalidInfos() {
     this.setState({ showDiv: true });
   }
 
@@ -47,7 +47,7 @@ export default class Login extends React.Component {
         if (result.success) {
           this.setState({ redirectToReferrer: true });
         } else {
-          this.verifInfos();
+          this.invalidInfos();
         }
       }.bind(this)
     );
@@ -68,7 +68,7 @@ export default class Login extends React.Component {
           style={containerStyle}
           className="my-0 p-8 bg-helha_grey bg-opacity-50 flex flex-col flex-grow items-center gap-4 max-w-2xl"
         >
-          <img src="assets/logo.png" className="m-8" alt=""></img>
+          <img src="assets/logo.png" className="m-8" alt=""/>
 
           <span className="text-white text-xl">Authentification</span>
 

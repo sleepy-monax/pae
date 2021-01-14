@@ -192,3 +192,27 @@ export function ApiUpdateUser(login, password, id) {
         });
     })
 }
+
+export function ApiDeleter(id) {
+    if (MOCK_API) {
+        MOCK_USERS = MOCK_USERS.filter(user => user.id === id);
+        return ApiMockSucess({success: true});
+    }
+
+    return new Promise((resolve, reject) => {
+        const encodeToken = encodeURIComponent(getToken());
+
+        axios.delete(API_URL + "users/" + id + "?token=" + encodeToken)
+            .then(result => {
+                if (result.data !== null) {
+                    resolve(result.data);
+                }
+                else {
+                    reject("Suppression non accepter")
+                }
+            })
+            .catch(reason => {
+                reject(reason);
+            });
+    });
+}
