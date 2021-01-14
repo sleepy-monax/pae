@@ -33,7 +33,7 @@ export function ImportStudents(sheet, sectionId) {
 
   for (const studentView of sectionView.students()) {
     let student = {
-      id: studentView.id(),
+      id: studentView.id().toLowerCase(),
       index: studentView.index(),
       firstname: studentView.firstname(),
       lastname: studentView.lastname(),

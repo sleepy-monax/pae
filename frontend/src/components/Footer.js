@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="bg-helha_dark_grey text-white  p-8 ">
       <div className="max-w-xl flex flex-col sm:flex-row mx-auto items-center">
-        <img src="assets/logo.png" className="sm:pr-8 pb-8 sm:pb-0" alt="" />
+        <img src="/assets/logo.png" className="sm:pr-8 pb-8 sm:pb-0" alt="" />
         <div className="flex flex-col gap-4">
           <div>
             La <b>HELHa</b> (Haute École Louvain en Hainaut) propose des

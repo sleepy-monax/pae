@@ -28,7 +28,7 @@ export function FindSectionById(id) {
 }
 
 export function FindSectionFromBlocId(id) {
-  let sectionId = [id[1], id[2]].join("");
+  let sectionId = [id[0], id[1]].join("");
 
   return FindSectionById(sectionId);
 }
