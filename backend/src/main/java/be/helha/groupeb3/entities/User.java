@@ -1,11 +1,14 @@
 package be.helha.groupeb3.entities;
 
 import javax.persistence.*;
+
+import be.helha.groupeb3.storage.IEntity;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class User implements Serializable {
+public class User implements Serializable, IEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

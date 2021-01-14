@@ -1,7 +1,7 @@
 package be.helha.groupeb3.services;
 
-import be.helha.groupeb3.ejb.UserEJB;
 import be.helha.groupeb3.entities.User;
+import be.helha.groupeb3.storage.GenericEJB;
 import be.helha.groupeb3.util.AuthToken;
 import be.helha.groupeb3.util.Cryptage;
 import com.google.gson.Gson;
@@ -14,16 +14,28 @@ import java.util.Date;
 public class AuthService {
 
     @Inject
-    private UserEJB ejb;
+    private GenericEJB ejb;
 
     public User checkToken(String tokenString) {
         AuthToken token = new Gson().fromJson(Cryptage.decrypt(tokenString), AuthToken.class);
-        if (token == null) { return null; }
+        if (token == null) {
+            return null;
+        }
+
         Date date = new Date();
-        if (token.getExpiration().getTime() < date.getTime()) { return null; }
-        User user = ejb.findByName(token.getUser().getLogin());
-        if (user == null) { return null; }
-        if (!user.getPassword().equals(token.getUser().getPassword())) { return null; }
+        if (token.getExpiration().getTime() < date.getTime()) {
+            return null;
+        }
+
+        User user = ejb.findFirstByField(User.class, "login", token.getUser().getLogin());
+        if (user == null) {
+            return null;
+        }
+
+        if (!user.getPassword().equals(token.getUser().getPassword())) {
+            return null;
+        }
+
         return user;
     }
 }
