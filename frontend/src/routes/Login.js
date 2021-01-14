@@ -82,9 +82,6 @@ export default class Login extends React.Component {
           />
 
           <Button text="Connexion" />
-          <Link to="/register" className="text-helha_blue underline font-bold">
-            Créer un compte
-          </Link>
         </form>
        
       </div>

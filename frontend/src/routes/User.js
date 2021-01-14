@@ -32,13 +32,14 @@ export default function User() {
             
             value={user.password}
         />  
-        <h1>Mot de passe : </h1>
-        <input
-            type="text"
-            placeholder="Role"
-            
-            value={user.role}
-        /> 
+        <h1>Role</h1>
+        <label>
+          <input
+            type="checkbox"
+            name="checkedAdmin"
+          />
+             Admin
+        </label>
         <LinkButton to="/admin" text="Mettre à jour les informations" icon={mdiUpdate} />
       </div>
     </div>

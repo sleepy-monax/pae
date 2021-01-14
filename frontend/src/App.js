@@ -39,6 +39,7 @@ export default function App() {
           </Route>
 
           <PrivateRoute path="/admin" component={Admin} />
+          <PrivateRoute path="/register" component={Register} />
           <PrivateRoute path="/user/:userId" component={User} />
           <PrivateRoute path="/bloc/:blocId" component={Bloc} />
           <PrivateRoute path="/edit/:studentId" component={Edit} />
