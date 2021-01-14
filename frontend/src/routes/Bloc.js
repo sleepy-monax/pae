@@ -8,11 +8,13 @@ import {
   FindSectionFromBlocId,
 } from "../services/SectionService";
 
+
 //Charge and configure student display
 export function Student(props) {
   let student = props.student;
   return (
     <tr>
+      {/*  Student name */}
       <td>
         <Link to={"/edit/" + student.id}>
           <center>
@@ -20,9 +22,39 @@ export function Student(props) {
           </center>
         </Link>
       </td>
-      <td>
-        <center>AHHH</center>
+
+      {/*  Progress bar per bloc */}
+      <td className="flex gap-2">
+
+        {/*  Bloc 1 */}
+        <td className="flex-1">
+          <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
+            <div className="w-full h-full bg-gray-200 absolute"></div>
+            <div id="barBloc1" style={{ width: "100%" }}  className="h-full bg-helha_blue relative"></div>
+         </div>
+        </td>
+
+        
+        {/*  Bloc 2 */}
+        <td className="flex-1">
+          <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
+            <div className="w-full h-full bg-gray-200 absolute"></div>
+            <div id="barBloc2" style={{ width: "30%" }} className="h-full bg-helha_blue relative"></div>
+          </div>
+        </td>
+        
+
+        {/*  Bloc 3 */}
+        <td className="flex-1">
+          <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
+            <div className="w-full h-full bg-gray-200 absolute"></div>
+            <div id="barBloc3" style={{ width: "60%" }} className="h-full bg-helha_blue relative"></div>
+          </div>
+        </td>
       </td>
+
+      
+      {/*  Check box, checked if the pae is done */}
       <td>
         <center>
           <input type="checkbox" />
@@ -52,13 +84,20 @@ export default function Bloc() {
       <div className="py-20 h-screen px-2 ">
         <div className="flex flex-col w-full p-3 gap-2">
           <table className="border-2 shadow-2xl">
+
             <thead>
               <tr className="border-b-2">
                 <th>Nom et prénom</th>
-                <th>Progression</th>
+                <center>Progression</center><th className="flex">
+                  <th className="flex-1">Bloc 1</th>
+                  <th className="flex-1">Bloc 2</th>
+                  <th className="flex-1">Bloc 3</th>
+                </th>
                 <th>Fait?</th>
               </tr>
             </thead>
+
+
             <tbody>
               {/*  Search all students */}
               {students.map((student, index) => (
