@@ -9,7 +9,8 @@ import {
 } from "../services/SectionService";
 
 
-//Charge and configure student display
+// Charge the students' data into a table
+// Configuration of datas
 export function Student(props) {
   let student = props.student;
   return (
@@ -30,7 +31,7 @@ export function Student(props) {
         <td className="flex-1">
           <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
             <div className="w-full h-full bg-gray-200 absolute"></div>
-            <div id="barBloc1" style={{ width: "100%" }}  className="h-full bg-helha_blue relative"></div>
+            <div class="barBloc1" style={{ width: "100%" }}  className="h-full bg-helha_blue relative"></div>
          </div>
         </td>
 
@@ -39,7 +40,7 @@ export function Student(props) {
         <td className="flex-1">
           <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
             <div className="w-full h-full bg-gray-200 absolute"></div>
-            <div id="barBloc2" style={{ width: "30%" }} className="h-full bg-helha_blue relative"></div>
+            <div class="barBloc2" style={{ width: "30%" }} className="h-full bg-helha_blue relative"></div>
           </div>
         </td>
         
@@ -48,7 +49,7 @@ export function Student(props) {
         <td className="flex-1">
           <div className="h-3 relative max-w-xl rounded-full overflow-hidden">
             <div className="w-full h-full bg-gray-200 absolute"></div>
-            <div id="barBloc3" style={{ width: "60%" }} className="h-full bg-helha_blue relative"></div>
+            <div class="barBloc3" style={{ width: "60%" }} className="h-full bg-helha_blue relative"></div>
           </div>
         </td>
       </td>
@@ -57,7 +58,7 @@ export function Student(props) {
       {/*  Check box, checked if the pae is done */}
       <td>
         <center>
-          <input type="checkbox" />
+          <input class="paeDone" type="checkbox" />
         </center>
       </td>
     </tr>
@@ -88,7 +89,7 @@ export default function Bloc() {
             <thead>
               <tr className="border-b-2">
                 <th>Nom et prénom</th>
-                <center>Progression</center><th className="flex">
+                <center><b>Progression</b></center><th className="flex">
                   <th className="flex-1">Bloc 1</th>
                   <th className="flex-1">Bloc 2</th>
                   <th className="flex-1">Bloc 3</th>
