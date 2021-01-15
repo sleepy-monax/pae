@@ -59,7 +59,7 @@ export default function Home() {
 
     return (
         <div className="">
-            <div className="bg-white">
+            <div className="bg-white dark:bg-helha_grey">
                 <img
                     className="max-w-xs mx-auto py-8"
                     src={process.env.PUBLIC_URL + "/assets/curriculum.svg"}
