@@ -27,5 +27,7 @@ public class MainInit {
 
         manager.close();
         factory.close();
+        
+        System.out.print("OK");
     }
 }

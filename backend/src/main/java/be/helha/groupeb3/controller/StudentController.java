@@ -22,7 +22,6 @@ public class StudentController {
     @Inject
     private AuthService authService;
 
-
     @POST
     @Produces("text/json")
     @Consumes("application/x-www-form-urlencoded")
@@ -32,16 +31,16 @@ public class StudentController {
             return "null";
         }
 
-        Type studentsType = new TypeToken<ArrayList<Student>>(){}.getType();
-        List<Student> students =  new Gson().fromJson(newStudents, studentsType);
+        Type studentsType = new TypeToken<ArrayList<Student>>() {
+        }.getType();
+        List<Student> students = new Gson().fromJson(newStudents, studentsType);
 
-        for (Student student: students) {
-            ejb.add(Student.class, student);
+        for (Student student : students) {
+            ejb.addFastAndUnsafe(Student.class, student);
         }
 
         return new Gson().toJson(students);
     }
-
 
     @GET
     @Produces("text/json")

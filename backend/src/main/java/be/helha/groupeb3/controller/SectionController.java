@@ -21,7 +21,6 @@ public class SectionController {
     @Inject
     private AuthService authService;
 
-
     @POST
     @Produces("text/json")
     @Consumes("application/x-www-form-urlencoded")
@@ -30,11 +29,12 @@ public class SectionController {
             return "null";
         }
 
-        Type sectionsType= new TypeToken<ArrayList<Section>>(){}.getType();
+        Type sectionsType = new TypeToken<ArrayList<Section>>() {
+        }.getType();
         List<Section> sections = new Gson().fromJson(newSections, sectionsType);
 
-        for (Section section: sections) {
-            ejb.add(Section.class, section);
+        for (Section section : sections) {
+            ejb.addFastAndUnsafe(Section.class, section);
         }
         return new Gson().toJson(sections);
     }

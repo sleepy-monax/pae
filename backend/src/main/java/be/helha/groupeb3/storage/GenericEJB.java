@@ -37,6 +37,10 @@ public class GenericEJB {
         return dao.add(klass, entity);
     }
 
+    public <TEntity extends IEntity> TEntity addFastAndUnsafe(Class<TEntity> klass, TEntity entity) {
+        return dao.addFastAndUnsafe(klass, entity);
+    }
+
     public <TEntity extends IEntity> boolean update(Class<TEntity> klass, TEntity oldEntity, TEntity newEntity) {
         return dao.update(klass, oldEntity, newEntity);
     }

@@ -36,12 +36,22 @@ public class GenericDAO {
         if (entity == null) {
             return null;
         }
-        
+
         if (entity.getId() != null && findById(klass, entity.getId()) != null) {
             return null;
         }
 
         manager.persist(entity);
+        return entity;
+    }
+
+    public <TEntity extends IEntity> TEntity addFastAndUnsafe(Class<TEntity> klass, TEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        manager.persist(entity);
+
         return entity;
     }
 
