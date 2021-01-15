@@ -1,15 +1,15 @@
 import {
     mdiCheck,
-    mdiCheckboxBlank,
+    mdiCheckBold,
     mdiCheckboxBlankOutline,
-    mdiCheckBoxOutline,
+    mdiCheckboxMarked,
+    mdiCheckCircle,
+    mdiCheckCircleOutline,
+    mdiCheckOutline,
     mdiEmail,
     mdiFormatListChecks,
+    mdiGiftOutline,
     mdiPrinter,
-    mdiSquare,
-    mdiSquareEditOutline,
-    mdiSquareRounded,
-    mdiSquareRoundedOutline,
     mdiTrophy,
     mdiUnfoldLessHorizontal,
     mdiUnfoldMoreHorizontal,
@@ -30,30 +30,52 @@ import { StudentHasValidatedAA, StudentHasValidatedUE } from "../model/Student";
 
 function AA(props) {
     let aa = props.aa;
+    const [checkend, setChecked] = useState(aa.inPAE);
 
-    console.log("aa: ", aa);
+    let icon = (
+        <Icon
+            className="text-helha_blue"
+            path={mdiCheckboxBlankOutline}
+            size={1}
+            onClick={() => {
+                setChecked(true);
+            }}
+        />
+    );
 
     if (StudentHasValidatedAA(props.student, aa.id)) {
-        return (
-            <div className="gap-4 flex items-center">
-                <div className="flex-1 p-2">{aa.name}</div>
-                <Icon
-                    className="text-helha_grey dark:text-white"
-                    path={mdiCheck}
-                    size={1}
-                />
-            </div>
+        icon = (
+            <Icon
+                className="text-helha_grey dark:text-white"
+                path={mdiCheckCircle}
+                size={1}
+            />
+        );
+    } else if (StudentHasValidatedUE(props.student, props.ue.id)) {
+        icon = (
+            <Icon
+                className="text-helha_grey dark:text-white"
+                path={mdiCheckCircleOutline}
+                size={1}
+            />
+        );
+    } else if (checkend) {
+        icon = (
+            <Icon
+                className="text-helha_blue"
+                path={mdiCheckboxMarked}
+                size={1}
+                onClick={() => {
+                    setChecked(false);
+                }}
+            />
         );
     }
 
     return (
         <div className="gap-4 flex items-center">
             <div className="flex-1 p-2">{aa.name}</div>
-            <Icon
-                className="text-helha_blue"
-                path={mdiCheckboxBlankOutline}
-                size={1}
-            />
+            {icon}
         </div>
     );
 }
@@ -73,7 +95,7 @@ function UE(props) {
     let aas;
     if (expended) {
         aas = ue.aas.map((aa, index) => (
-            <AA key={index} aa={aa} student={props.student} />
+            <AA key={index} ue={ue} aa={aa} student={props.student} />
         ));
     }
 
