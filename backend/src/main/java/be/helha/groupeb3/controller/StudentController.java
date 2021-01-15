@@ -26,7 +26,7 @@ public class StudentController {
     @POST
     @Produces("text/json")
     @Consumes("application/x-www-form-urlencoded")
-    public String importStudent(@QueryParam("token") String token, @FormParam("students") String newStudents) {
+    public String importStudents(@QueryParam("token") String token, @FormParam("students") String newStudents) {
 
         if (authService.checkToken(token) == null) {
             return "null";
@@ -37,6 +37,23 @@ public class StudentController {
 
         for (Student student: students) {
             ejb.add(Student.class, student);
+        }
+
+        return new Gson().toJson(students);
+    }
+
+
+    @GET
+    @Produces("text/json")
+    public String sendStudents(@QueryParam("token") String token) {
+        if (authService.checkToken(token) == null) {
+            return "null";
+        }
+
+        List<Student> students = ejb.findAll(Student.class);
+
+        if (students.isEmpty()) {
+            return "null";
         }
 
         return new Gson().toJson(students);

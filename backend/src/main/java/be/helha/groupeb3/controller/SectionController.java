@@ -25,7 +25,7 @@ public class SectionController {
     @POST
     @Produces("text/json")
     @Consumes("application/x-www-form-urlencoded")
-    public String importSection(@QueryParam("token") String token, @FormParam("sections") String newSections) {
+    public String importSections(@QueryParam("token") String token, @FormParam("sections") String newSections) {
         if (authService.checkToken(token) == null) {
             return "null";
         }
@@ -36,6 +36,22 @@ public class SectionController {
         for (Section section: sections) {
             ejb.add(Section.class, section);
         }
+        return new Gson().toJson(sections);
+    }
+
+    @GET
+    @Produces("text/json")
+    public String sendSections(@QueryParam("token") String token) {
+        if (authService.checkToken(token) == null) {
+            return "null";
+        }
+
+        List<Section> sections = ejb.findAll(Section.class);
+
+        if (sections.isEmpty()) {
+            return "null";
+        }
+
         return new Gson().toJson(sections);
     }
 }

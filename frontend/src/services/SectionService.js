@@ -1,4 +1,4 @@
-import { ApiDownloadSection, ApiUploadSection } from "./ApiService";
+import { ApiDownloadSections, ApiUploadSection } from "./ApiService";
 
 let sections = undefined;
 
@@ -8,7 +8,7 @@ export function FindAllSections() {
       resolve(sections);
     }
 
-    ApiDownloadSection()
+    ApiDownloadSections()
       .then((remote_sections) => {
         sections = remote_sections;
         resolve(remote_sections);

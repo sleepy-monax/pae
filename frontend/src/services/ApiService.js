@@ -128,20 +128,53 @@ export function ApiUploadSection(sections) {
     });
 }
 
-export function ApiDownloadStudents(students) {
+export function ApiDownloadStudents() {
     if (MOCK_API) {
         return ApiMockSucess(JSON.parse(localStorage.getItem("students")));
     }
 
-    return ApiMockFailure(null);
+    return new Promise((resolve, reject) => {
+
+        const encodeToken = encodeURIComponent(getToken());
+        axios
+            .get(API_URL + "students?token="+ encodeToken)
+            .then(students => {
+                if (students.data !== null) {
+                    resolve(students.data)
+                }
+                else {
+                    reject("Students non importer")
+                }
+            })
+            .catch(reason => {
+                reject(reason);
+            })
+    });
 }
 
-export function ApiDownloadSection(sections) {
+export function ApiDownloadSections() {
     if (MOCK_API) {
         return ApiMockSucess(JSON.parse(localStorage.getItem("sections")));
     }
 
-    return ApiMockFailure(null);
+    return new Promise((resolve, reject) => {
+
+        const encodeToken = encodeURIComponent(getToken())
+        axios
+            .get(API_URL + "sections?token=" + encodeToken)
+            .then(sections => {
+                console.log(sections)
+                if (sections.data !== null) {
+                    resolve(sections.data)
+                }
+                else {
+                    reject("sections non importer")
+                }
+            })
+            .catch(reason => {
+                reject(reason)
+            })
+    });
 }
 
 export function ApiRegister(login, password) {
