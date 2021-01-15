@@ -7,7 +7,7 @@ export function ImportResult(sheet, student) {
 
   for (const ue of sectionView.ues()) {
     let ueResult = {
-      id: ue.id(),
+      ref: ue.id(),
       result:
         typeof ue.result(student.index()) === "number"
           ? ue.result(student.index())
@@ -22,7 +22,7 @@ export function ImportResult(sheet, student) {
 
     for (const aa of ue.aas()) {
       ueResult.aas.push({
-        id: aa.id(),
+        ref: aa.id(),
         result:
           typeof aa.result(student.index()) === "number"
             ? aa.result(student.index())
