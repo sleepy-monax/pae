@@ -59,8 +59,9 @@ export function Import(
         uploadOk: undefined,
     };
 
+    console.log(file);
     if (
-        file.name.endsWith(".xlsx") ||
+        !file.name.endsWith(".xlsx") &&
         file.type !==
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     ) {

@@ -80,7 +80,7 @@ export default class Importation extends React.Component {
             {message}
 
             {this.state.result.success ? (
-              <LinkButton to="/" text="Revenir à l'acceil" icon={mdiHome} />
+              <LinkButton to="/" text="Revenir à l'accueil" icon={mdiHome} />
             ) : (
               ""
             )}
