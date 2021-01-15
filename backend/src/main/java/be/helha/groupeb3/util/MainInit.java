@@ -18,7 +18,7 @@ public class MainInit {
         EntityTransaction transaction = manager.getTransaction();
 
         User u = new User("admin", "$2y$10$JCc/vfFPLtVVDnF6e88Vse/byC1VQ2SsDTVa7pgaHYenB0Ray1jny", Role.DIRECTEUR);
-        User u1 = new User("secretaire", "$2y$10$JCc/vfFPLtVVDnF6e88Vse/byC1VQ2SsDTVa7pgaHYenB0Ray1jny", Role.SECRETAIRE);
+        User u1 = new User("user", "$2y$10$JCc/vfFPLtVVDnF6e88Vse/byC1VQ2SsDTVa7pgaHYenB0Ray1jny", Role.SECRETAIRE);
 
         transaction.begin();
         manager.persist(u);
