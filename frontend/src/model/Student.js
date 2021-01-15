@@ -13,10 +13,10 @@ export function StudentHasValidatedAA(student, aaId) {
 export function StudentHasValidatedUE(student, ueId) {
     for (const ue of student.ues) {
         if (ue.ref === ueId) {
-            if (ue.bloc < student.bloc) {
-                return ue.validated || ue.examen === "-";
+            if (ue.bloc <= student.bloc) {
+                return ue.validated || ue.examen === "-" || ue.examen === "D";
             } else {
-                return ue.validated;
+                return ue.validated || ue.examen === "D";
             }
         }
     }
