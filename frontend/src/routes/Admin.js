@@ -1,4 +1,5 @@
-import {mdiAccountCircle, mdiAccountPlus} from "@mdi/js";
+import {mdiAccountCircle, mdiAccountPlus, mdiChevronRight} from "@mdi/js";
+import Icon from "@mdi/react";
 import React from "react";
 import {Link} from "react-router-dom";
 import Header from "../components/Hearder";
@@ -8,20 +9,27 @@ import {FindAllUsers} from "../services/UserService";
 export function User(props) {
     let user = props.user;
     return (
-        <tr className="text-center">
-            <td>
+        <tr className="text-center bg-white dark:text-black">
+            <td className="px-12 py-2">
                 <Link to={"/user/" + user.id}>
                     {user.id}
                 </Link>
             </td>
-            <td>
+            <td className="px-12 py-2">
                 <Link to={"/user/" + user.id}>
                     {user.login}
                 </Link>
             </td>
-            <td>
+            <td className="px-12 py-2">
                 <Link to={"/user/" + user.id}>
                     {user.role}
+                </Link>
+            </td>
+            <td className="py-2">
+                <Link to={"/user/" + user.id}>
+                    <div>
+                        <Icon path={mdiChevronRight} size={2} />
+                    </div>  
                 </Link>
             </td>
         </tr>
@@ -54,7 +62,7 @@ export default class Admin extends React.Component {
 
     render() {
         return (
-            <div className="flex-grow flex flex-col items-center">
+            <div className="flex-grow flex flex-col items-center dark:bg-helha_dark_grey">
                 <Header
                     icon={mdiAccountCircle}
                     title="Administration"
@@ -67,22 +75,20 @@ export default class Admin extends React.Component {
                         className="px-3"
                     />
                 </Header>
-                <div className="my-0 p-8 flex flex-col flex-grow items-center gap-4 max-w-2xl">
-                    <h2 className="text-l">Veuillez sélectionner le compte à modifier</h2>
+                <div className="shadow rounded p-4 my-8 bg-white dark:bg-helha_grey max-w-4xl mx-auto flex flex-col gap-2 items-center">
+                    <h2 className="text-xl">Veuillez sélectionner le compte à modifier</h2>
 
-                    <div className="py-20 h-screen px-2">
+                    <div className="py-10 h-screen px-2">
                         <div className="flex flex-col w-full p-3 gap-2">
-                            <table
-                                className="border-2 shadow-2xl"
-                            >
-                                <thead >
-                                <tr className="border-b-2 ">
+                            <table>
+                                <thead>
+                                <tr className="border-b-2">
                                     <th>Id</th>
                                     <th>Login</th>
                                     <th>Role</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="bg-gray-200">
                                 {this.state.users.map((user, index) => (
                                     <User key={user.id} user={user}/>
                                 ))}

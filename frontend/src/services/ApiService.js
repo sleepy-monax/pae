@@ -249,8 +249,9 @@ export function ApiDeleter(id) {
             .then(result => {
                 if (result.data !== null) {
                     resolve(result.data);
-                } else {
-                    reject("Suppression non accepter")
+                }
+                else {
+                    reject("Suppression non acceptée")
                 }
             })
             .catch(reason => {

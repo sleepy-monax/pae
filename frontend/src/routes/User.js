@@ -12,7 +12,7 @@ export default function User() {
   let { userId } = useParams();
   const [user, setUser] = useState(undefined);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
-  const [showModifDiv, setShowModifDiv] = useState(false);
+  const [showModifDiv, SetShowModifDiv] = useState(false);
 
   useEffect(() => {
     if (user !== undefined) return;
@@ -41,7 +41,7 @@ export default function User() {
         console.log(result);
       });
     } else {
-      setShowModifDiv(true);
+      SetShowModifDiv(true);
     }
   }
 
@@ -67,15 +67,15 @@ export default function User() {
         description="Modifiez les informations ou supprimez le compte"
       >
         <Button
-          text="Mettre à jour les informations"
-          icon={mdiUpdate}
-          onClick={() => updateUser(user)}
-        />
-        <Button
           text="Supprimer"
           icon={mdiAccountRemoveOutline}
           variante={OutlineWhite}
           onClick={() => deleteUser(userId)}
+        />
+        <Button
+          text="Mettre à jour les informations"
+          icon={mdiUpdate}
+          onClick={() => updateUser(user)}
         />
       </Header>
       <div className="my-0 p-8 flex flex-col flex-grow items-center gap-4 max-w-2xl">
@@ -108,11 +108,6 @@ export default function User() {
             setUser(user);
           }}
         />
-        <h1>Role</h1>
-        <label>
-          <input type="checkbox" name="checkedAdmin" />
-          Admin
-        </label>
       </div>
     </div>
   );

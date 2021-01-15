@@ -37,6 +37,10 @@ export default class Register extends React.Component {
     this.setState({ showDiv: true });
   }
 
+  hideRegisterDiv() {
+    this.setState({ showRegisterDiv: true });
+  }
+
   showRegisterDiv() {
     this.setState({ showRegisterDiv: true });
   }

@@ -14,6 +14,7 @@ const blurEffect = {
 export default function NavBar() {
   let disconnectButton;
   let adminSettingsButton;
+
   const [menuVisible, setMenuVisible] = useState(false);
 
   if (isConnected()) {
