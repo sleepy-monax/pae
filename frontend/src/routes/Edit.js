@@ -151,7 +151,7 @@ function Bloc(props) {
 
     if (StudentHasValidatedBloc(props.student, bloc.id)) {
         return (
-            <div className="text-helha_blue pt-4 pb-2 text-2xl border-helha_blue mb-4 flex items-center">
+            <div className="text-helha_blue pt-4 pb-2 text-2xl px-4 border-helha_blue mb-4 flex items-center">
                 <div className="flex-1">{bloc.name.toUpperCase()}</div>
                 <Icon className="text-helha_blue" path={mdiTrophy} size={1} />
             </div>
@@ -160,7 +160,7 @@ function Bloc(props) {
 
     return (
         <>
-            <div className="text-helha_blue pt-4 pb-2 text-2xl border-b-2 border-helha_blue mb-4">
+            <div className="text-helha_blue pt-4 pb-2 text-2xl  px-4 border-b-2 border-helha_blue mb-4">
                 {bloc.name.toUpperCase()}
             </div>
 
