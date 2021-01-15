@@ -1,124 +1,127 @@
 import SectionView from "./SectionView";
 
 export function ImportResult(sheet, student) {
-  let sectionView = new SectionView(sheet);
+    let sectionView = new SectionView(sheet);
 
-  let ues = [];
+    let ues = [];
 
-  for (const ue of sectionView.ues()) {
-    let ueResult = {
-      ref: ue.id(),
-      result:
-        typeof ue.result(student.index()) === "number"
-          ? ue.result(student.index())
-          : 0,
-      examen:
-        typeof ue.result(student.index()) === "string"
-          ? ue.result(student.index())
-          : "",
-      validated: ue.validate(student.index()) === "O",
-      aas: [],
-    };
+    for (const ue of sectionView.ues()) {
+        let ueResult = {
+            ref: ue.id(),
+            result:
+                typeof ue.result(student.index()) === "number"
+                    ? ue.result(student.index())
+                    : 0,
+            examen:
+                typeof ue.result(student.index()) === "string"
+                    ? ue.result(student.index())
+                    : "",
+            validated: ue.validate(student.index()) === "O",
+            inPAE: false,
+            aas: [],
+        };
 
-    for (const aa of ue.aas()) {
-      ueResult.aas.push({
-        ref: aa.id(),
-        result:
-          typeof aa.result(student.index()) === "number"
-            ? aa.result(student.index())
-            : 0,
-        examen:
-          typeof aa.result(student.index()) === "string"
-            ? aa.result(student.index())
-            : "",
-      });
+        for (const aa of ue.aas()) {
+            ueResult.aas.push({
+                ref: aa.id(),
+                result:
+                    typeof aa.result(student.index()) === "number"
+                        ? aa.result(student.index())
+                        : 0,
+                examen:
+                    typeof aa.result(student.index()) === "string"
+                        ? aa.result(student.index())
+                        : "",
+                inPAE: false,
+            });
+        }
+
+        ues.push(ueResult);
     }
 
-    ues.push(ueResult);
-  }
-
-  return ues;
+    return ues;
 }
 
 export function ImportStudents(sheet, sectionId) {
-  let sectionView = new SectionView(sheet);
+    let sectionView = new SectionView(sheet);
 
-  let students = [];
+    let students = [];
 
-  for (const studentView of sectionView.students()) {
-    let student = {
-      id: studentView.id().toLowerCase(),
-      index: studentView.index(),
-      firstname: studentView.firstname(),
-      lastname: studentView.lastname(),
-      bloc: sectionId + studentView.bloc(),
-    };
+    for (const studentView of sectionView.students()) {
+        let student = {
+            id: studentView.id().toLowerCase(),
+            index: studentView.index(),
+            firstname: studentView.firstname(),
+            lastname: studentView.lastname(),
+            bloc: sectionId + studentView.bloc(),
+        };
 
-    student.ues = ImportResult(sheet, studentView);
+        student.ues = ImportResult(sheet, studentView);
 
-    students.push(student);
-  }
+        students.push(student);
+    }
 
-  return students;
+    return students;
 }
 
 export function ImportUEs(sheet, sectionId, blocNumber) {
-  let sectionView = new SectionView(sheet);
+    let sectionView = new SectionView(sheet);
 
-  let ues = [];
+    let ues = [];
 
-  for (const ueView of sectionView.ues()) {
-    if (ueView.bloc() === blocNumber) {
-      let ue = {
-        id: ueView.id(),
-        credits: ueView.credits(),
-        name: ueView.name(),
-        optional: ueView.optional(),
-        aas: [],
-      };
+    for (const ueView of sectionView.ues()) {
+        if (ueView.bloc() === blocNumber) {
+            let ue = {
+                id: ueView.id(),
+                credits: ueView.credits(),
+                name: ueView.name(),
+                optional: ueView.optional(),
+                aas: [],
+            };
 
-      for (const aa of ueView.aas()) {
-        ue.aas.push({
-          id: aa.id(),
-          name: aa.name(),
-          credits: aa.credits(),
-        });
-      }
+            for (const aa of ueView.aas()) {
+                ue.aas.push({
+                    id: aa.id(),
+                    name: aa.name(),
+                    credits: aa.credits(),
+                });
+            }
 
-      ues.push(ue);
+            ues.push(ue);
+        }
     }
-  }
 
-  return ues;
+    return ues;
 }
 
 let sectionIDsToNames = {
-  ig: "Informatique de gestion",
-  ad: "Assistant·e de direction",
-  ct: "Comptabilité",
+    ig: "Informatique de gestion",
+    ad: "Assistant·e de direction",
+    ct: "Comptabilité",
 };
 
 export function ImportSection(sheet, sectionId) {
-  let section = {
-    id: sectionId,
-    name:
-      sectionIDsToNames[sectionId] ?? "Section indentifier par " + sectionId,
-    blocs: [],
-  };
+    let section = {
+        id: sectionId,
+        name:
+            sectionIDsToNames[sectionId] ??
+            "Section indentifier par " + sectionId,
+        blocs: [],
+    };
 
-  let blocIndex = 1;
-  let ues = ImportUEs(sheet, sectionId, blocIndex);
+    let blocIndex = 1;
+    let ues = ImportUEs(sheet, sectionId, blocIndex);
 
-  while (ues.length > 0) {
-    section.blocs.push({
-      id: sectionId + blocIndex,
-      ues,
-      name: "Bloc " + blocIndex,
-    });
+    while (ues.length > 0) {
+        section.blocs.push({
+            id: sectionId + blocIndex,
+            ues,
+            name: "Bloc " + blocIndex,
+        });
 
-    blocIndex++;
-    ues = ImportUEs(sheet, sectionId, blocIndex);
-  }
+        blocIndex++;
+        ues = ImportUEs(sheet, sectionId, blocIndex);
+    }
 
-  return section;
+    return section;
 }
