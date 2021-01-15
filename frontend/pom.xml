@@ -169,6 +169,7 @@
                             <environmentVariables>
                                 <PUBLIC_URL>http://54.246.66.228:8080/groupeB3</PUBLIC_URL>
                                 <REACT_APP_ROUTER_BASE>/groupeB3</REACT_APP_ROUTER_BASE>
+                                <REACT_APP_API_URL>http://54.246.66.228:8080/groupeB3-api</REACT_APP_API_URL>
                             </environmentVariables>
                         </configuration>
                     </plugin>

@@ -2,7 +2,8 @@ import axios from "axios";
 import { getToken } from "./AuthenticationService";
 
 let MOCK_API = process.env.REACT_APP_MOCK_API || false;
-let API_URL = "http://localhost:8080/backend/api/";
+let API_URL =
+    process.env.REACT_APP_API_URL || "http://localhost:8080/backend/";
 
 const config = {
     headers: {
