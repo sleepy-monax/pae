@@ -19,12 +19,20 @@ export default function NavBar() {
 
   if (isConnected()) {
     disconnectButton = (
-      <Button icon={mdiLogout} text="Se déconnecter" onClick={disconnect} />
+      <Button icon={mdiLogout} text="Se déconnecter" 
+      onClick={() => {
+        disconnect();
+        setMenuVisible(false);
+      }}/>
     );
   }
 
   let darkmodeButton = (
-    <Button icon={mdiBrightness4} text="Light/Dark Mode" onClick={toggle}/>
+    <Button icon={mdiBrightness4} text="Light/Dark Mode" 
+    onClick={() => {
+      toggle();
+      setMenuVisible(false);
+    }}/>
   );
 
   if (isConnected()) {
