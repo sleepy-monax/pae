@@ -1,7 +1,15 @@
 import {
+    mdiCheck,
+    mdiCheckboxBlank,
+    mdiCheckboxBlankOutline,
+    mdiCheckBoxOutline,
     mdiEmail,
     mdiFormatListChecks,
     mdiPrinter,
+    mdiSquare,
+    mdiSquareEditOutline,
+    mdiSquareRounded,
+    mdiSquareRoundedOutline,
     mdiTrophy,
     mdiUnfoldLessHorizontal,
     mdiUnfoldMoreHorizontal,
@@ -18,12 +26,36 @@ import Button from "../components/Button";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
 import Loading from "../components/Loading";
-import { StudentHasValidatedUE } from "../model/Student";
+import { StudentHasValidatedAA, StudentHasValidatedUE } from "../model/Student";
 
 function AA(props) {
     let aa = props.aa;
 
-    return <div className="pl-8">{aa.name}</div>;
+    console.log("aa: ", aa);
+
+    if (StudentHasValidatedAA(props.student, aa.id)) {
+        return (
+            <div className="gap-4 flex items-center">
+                <div className="flex-1 p-2">{aa.name}</div>
+                <Icon
+                    className="text-helha_grey dark:text-white"
+                    path={mdiCheck}
+                    size={1}
+                />
+            </div>
+        );
+    }
+
+    return (
+        <div className="gap-4 flex items-center">
+            <div className="flex-1 p-2">{aa.name}</div>
+            <Icon
+                className="text-helha_blue"
+                path={mdiCheckboxBlankOutline}
+                size={1}
+            />
+        </div>
+    );
 }
 
 function UE(props) {
@@ -31,46 +63,63 @@ function UE(props) {
 
     const [expended, setExpended] = useState(false);
 
-    if (StudentHasValidatedUE(props.student, ue.id)) {
-        return (
-            <div className="px-2 py-4 gap-4 flex">
-                <Icon className="text-helha_blue" path={mdiTrophy} size={1} />
-                <div className="flex-1">{ue.name}</div>
-            </div>
-        );
-    }
+    let expender = (
+        <Icon
+            path={expended ? mdiUnfoldLessHorizontal : mdiUnfoldMoreHorizontal}
+            size={1}
+        />
+    );
 
     let aas;
-    let metrics;
-
     if (expended) {
         aas = ue.aas.map((aa, index) => (
             <AA key={index} aa={aa} student={props.student} />
         ));
-
-        metrics = <div>TEST</div>;
     }
 
-    return (
-        <div className="px-2 py-4 flex gap-4 flex-col">
+    let icon = (
+        <Icon
+            className="text-helha_grey dark:text-white"
+            path={mdiTrophy}
+            size={1}
+        />
+    );
+
+    if (!StudentHasValidatedUE(props.student, ue.id)) {
+        icon = (
+            <Icon
+                className="text-helha_blue"
+                path={mdiCheckboxBlankOutline}
+                size={1}
+            />
+        );
+    }
+
+    let header = (
+        <div className={"flex " + (expended ? "mb-4" : "")}>
             <div
-                className="flex gap-4 select-none cursor-pointer"
+                className="flex flex-1 gap-4 select-none cursor-pointer "
                 onClick={() => {
                     setExpended(!expended);
                 }}
             >
-                <Icon
-                    path={
-                        expended
-                            ? mdiUnfoldLessHorizontal
-                            : mdiUnfoldMoreHorizontal
-                    }
-                    size={1}
-                />
-                <div className="flex-1">{ue.name}</div> <div>{ue.credits}</div>
+                {expender}
+                <div className={expended ? "font-bold" : ""}>{ue.name}</div>
             </div>
+            {icon}
+        </div>
+    );
 
-            {aas}
+    return (
+        <div
+            className={
+                "transition-all p-4 my-2 flex flex-col rounded " +
+                (expended ? "bg-white dark:bg-helha_grey shadow" : "")
+            }
+        >
+            {header}
+
+            <div className="pl-8">{aas}</div>
         </div>
     );
 }
@@ -137,7 +186,7 @@ export default function Edit() {
                 />
             </Header>
 
-            <div className="max-w-2xl mx-auto my-8 p-4 bg-white dark:bg-helha_grey rounded shadow-lg">
+            <div className="max-w-2xl mx-auto my-8">
                 {section.blocs
                     .filter((bloc) => bloc.id <= student.bloc)
                     .map((bloc, index) => (

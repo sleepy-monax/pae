@@ -33,6 +33,7 @@ export function ImportResult(sheet, student) {
                     typeof aa.result(student.index()) === "string"
                         ? aa.result(student.index())
                         : "",
+                validated: aa.validated(student.index()),
                 inPAE: false,
             });
         }

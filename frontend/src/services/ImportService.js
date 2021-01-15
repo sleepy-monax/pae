@@ -59,7 +59,6 @@ export function Import(
         uploadOk: undefined,
     };
 
-    console.log(file);
     if (
         !file.name.endsWith(".xlsx") &&
         file.type !==

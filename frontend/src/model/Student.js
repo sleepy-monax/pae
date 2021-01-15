@@ -1,8 +1,19 @@
 export function StudentHasValidatedUE(student, ueId) {
-    console.log(student);
     for (const ue of student.ues) {
         if (ue.ref === ueId) {
             return ue.validated;
+        }
+    }
+
+    return false;
+}
+
+export function StudentHasValidatedAA(student, aaId) {
+    for (const ue of student.ues) {
+        for (const aa of ue.aas) {
+            if (aa.ref === aaId) {
+                return aa.validated;
+            }
         }
     }
 
