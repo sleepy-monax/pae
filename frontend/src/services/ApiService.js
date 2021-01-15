@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getToken} from "./AuthenticationService";
+import { getToken } from "./AuthenticationService";
 
 let MOCK_API = process.env.REACT_APP_MOCK_API || false;
 let API_URL = "http://localhost:8080/backend/api/";
@@ -11,12 +11,17 @@ const config = {
 };
 
 export let MOCK_USERS = [
-    {id: "1", login: "admin", password: "helha", role: "Directeur"},
-    {id: "2", login: "secretaire", password: "secretariat", role: "Secretaire"},
-    {id: "3", login: "nicolas", password: "nicolas", role: "Secretaire"},
-    {id: "4", login: "guillaume", password: "guillaume", role: "Secretaire"},
-    {id: "5", login: "sasha", password: "sasha", role: "Secretaire"},
-    {id: "6", login: "mathieu", password: "mathieu", role: "Secretaire"},
+    { id: "1", login: "admin", password: "helha", role: "Directeur" },
+    {
+        id: "2",
+        login: "secretaire",
+        password: "secretariat",
+        role: "Secretaire",
+    },
+    { id: "3", login: "nicolas", password: "nicolas", role: "Secretaire" },
+    { id: "4", login: "guillaume", password: "guillaume", role: "Secretaire" },
+    { id: "5", login: "sasha", password: "sasha", role: "Secretaire" },
+    { id: "6", login: "mathieu", password: "mathieu", role: "Secretaire" },
 ];
 
 function ApiMockSucess(data) {
@@ -66,7 +71,7 @@ export function ApiAuthentication(login, password) {
 }
 
 export function ApiUploadStudents(students) {
-    console.log(students)
+    console.log(students);
     if (MOCK_API) {
         localStorage.setItem("students", JSON.stringify(students));
 
@@ -91,13 +96,11 @@ export function ApiUploadStudents(students) {
             .catch((e) => {
                 reject(e);
             });
-
-
     });
 }
 
 export function ApiUploadSection(sections) {
-    console.log(sections)
+    console.log(sections);
     if (MOCK_API) {
         localStorage.setItem("sections", JSON.stringify(sections));
 
@@ -142,6 +145,19 @@ export function ApiDownloadSection(sections) {
 }
 
 export function ApiRegister(login, password) {
+    if (MOCK_API) {
+        let new_user = {
+            id: MOCK_USERS.length + 1,
+            login: "mathieu",
+            password: "mathieu",
+            role: "Secretaire",
+        };
+
+        MOCK_USERS.append(new_user);
+
+        return ApiMockSucess(new_user);
+    }
+
     return new Promise((resolve, reject) => {
         const params = new URLSearchParams();
 
@@ -225,36 +241,36 @@ export function ApiUpdateUser(login, password, id) {
             .put(API_URL + "users?token=" + encodeToken, params, config)
             .then((result) => {
                 if (result.data !== null) {
-                    resolve(result.data)
+                    resolve(result.data);
                 } else {
-                    reject("Utilisateur non mis a jour")
+                    reject("Utilisateur non mis a jour");
                 }
             })
             .catch((e) => {
                 reject(e);
             });
-    })
+    });
 }
 
-export function ApiDeleter(id) {
+export function ApiDeleteUser(id) {
     if (MOCK_API) {
-        MOCK_USERS = MOCK_USERS.filter(user => user.id === id);
-        return ApiMockSucess({success: true});
+        MOCK_USERS = MOCK_USERS.filter((user) => user.id === id);
+        return ApiMockSucess({ success: true });
     }
 
     return new Promise((resolve, reject) => {
         const encodeToken = encodeURIComponent(getToken());
 
-        axios.delete(API_URL + "users/" + id + "?token=" + encodeToken)
-            .then(result => {
+        axios
+            .delete(API_URL + "users/" + id + "?token=" + encodeToken)
+            .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
-                }
-                else {
-                    reject("Suppression non acceptée")
+                } else {
+                    reject("Suppression non acceptée");
                 }
             })
-            .catch(reason => {
+            .catch((reason) => {
                 reject(reason);
             });
     });
