@@ -13,19 +13,6 @@ export function StudentHasValidatedAA(student, aaId) {
 export function StudentHasValidatedUE(student, ueId) {
     for (const ue of student.ues) {
         if (ue.ref === ueId) {
-            console.log(
-                "ue.validated: " +
-                    ue.validated +
-                    " ue.examen: '" +
-                    ue.examen +
-                    "' ue.bloc < student.bloc: " +
-                    (ue.bloc < student.bloc) +
-                    " ue: " +
-                    ue.bloc +
-                    " stud: " +
-                    student.bloc
-            );
-
             if (ue.bloc < student.bloc) {
                 return ue.validated || ue.examen === "-";
             } else {

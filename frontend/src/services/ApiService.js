@@ -71,7 +71,6 @@ export function ApiAuthentication(login, password) {
 }
 
 export function ApiUploadStudents(students) {
-    console.log(students);
     if (MOCK_API) {
         localStorage.setItem("students", JSON.stringify(students));
         return ApiMockSucess();
@@ -99,7 +98,6 @@ export function ApiUploadStudents(students) {
 }
 
 export function ApiUploadSection(sections) {
-    console.log(sections);
     if (MOCK_API) {
         localStorage.setItem("sections", JSON.stringify(sections));
 
@@ -159,7 +157,6 @@ export function ApiDownloadSections() {
         axios
             .get(API_URL + "sections?token=" + encodeToken)
             .then((sections) => {
-                console.log(sections);
                 if (sections.data !== null) {
                     resolve(sections.data);
                 } else {
