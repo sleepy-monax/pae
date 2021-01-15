@@ -1,6 +1,5 @@
 import xlsx from "xlsx";
 import { ImportSection, ImportStudents } from "../import/Importer";
-import { ApiUploadStudents } from "./ApiService";
 import { SendAllSections } from "./SectionService";
 import { SendAllStudents } from "./StudentsService";
 

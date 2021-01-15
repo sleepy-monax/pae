@@ -1,5 +1,3 @@
-import { mdiInformationOutline } from "@mdi/js";
-import Icon from "@mdi/react";
 import { useEffect, useState } from "react";
 import Information from "../components/Information";
 import LinkButton from "../components/LinkButton";
