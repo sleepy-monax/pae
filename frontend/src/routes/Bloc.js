@@ -14,21 +14,44 @@ import { useEffect, useState } from "react";
 
 // Charge the students' data into a table
 // Configuration of datas
-
 export function Progress(props) {
   return (
     <div className="h-3 relative rounded-full overflow-hidden">
       <div className="w-full h-full bg-gray-200 absolute"></div>
       <div
-        style={{ width: Math.floor(props.value * 100) + "%" }}
+        style={{ width: props.value + "%" }}
         className="h-full bg-helha_blue relative"
       ></div>
     </div>
   );
 }
 
+// Sum of the credits to diplay it proprely later
+function SumBloc(ues, blocs, numBloc) {
+  let somme = 0;
+  let ueBloc = [];
+
+  // Configure the ues to correspond with the ues' bloc
+  ues.forEach(ue => {
+    if (ue.bloc === numBloc) {
+      ueBloc.push(ue);
+    }
+  });
+
+  // Verify if the bloc is validated
+  for (let i = 0; i < ueBloc.length; i++){
+    if (ueBloc[i].validated) {
+      somme += blocs.ues[i].credits;
+    }
+  }
+  return (somme/6)*10;
+} 
+
+// Display a student in the page
 export function Student(props) {
   let student = props.student;
+  let blocs = props.blocs;
+
   return (
     <tr>
       {/*  Student name */}
@@ -42,17 +65,17 @@ export function Student(props) {
 
       {/*  Bloc 1 */}
       <td>
-        <Progress value={1} />
+        <Progress value={SumBloc(student.ues, blocs[0], 1)} />
       </td>
 
       {/*  Bloc 2 */}
       <td>
-        <Progress value={0.5} />
+        <Progress value={SumBloc(student.ues, blocs[1], 2)} />
       </td>
 
       {/*  Bloc 3 */}
       <td>
-        <Progress value={0.1} />
+        <Progress value={SumBloc(student.ues, blocs[2], 3)} />
       </td>
 
       {/*  Check box, checked if the pae is done */}
@@ -65,12 +88,14 @@ export function Student(props) {
   );
 }
 
+// Display all student in the page
 export default function Bloc() {
   // Find the bloc id
   let { blocId } = useParams();
 
   let [state, setState] = useState(undefined);
 
+  // Find the datas' in the database 
   useEffect(() => {
     if (state !== undefined) {
       return;
@@ -119,7 +144,7 @@ export default function Bloc() {
             {/*  Search all students */}
 
             {state.students.map((student, index) => (
-              <Student key={student.id} student={student} />
+              <Student key={student.id} student={student} blocs={state.section.blocs} />
             ))}
           </tbody>
         </table>
