@@ -92,7 +92,11 @@ export default class Register extends React.Component {
                     style={containerStyle}
                     className="my-0 p-8 bg-helha_grey bg-opacity-50 flex flex-col flex-grow items-center gap-4 max-w-2xl"
                 >
-                    <img src=process.env.PUBLIC_URL + "/assets/logo.png" className="m-8" alt="" />
+                    <img
+                        src={process.env.PUBLIC_URL + "/assets/logo.png"}
+                        className="m-8"
+                        alt=""
+                    />
 
                     <span className="text-white text-xl">
                         Enregistrement d'un/e secrétaire
