@@ -8,6 +8,7 @@ export function ImportResult(sheet, student) {
     for (const ue of sectionView.ues()) {
         let ueResult = {
             ref: ue.id(),
+            bloc: ue.bloc(),
             result:
                 typeof ue.result(student.index()) === "number"
                     ? ue.result(student.index())

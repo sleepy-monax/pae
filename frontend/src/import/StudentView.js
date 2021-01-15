@@ -1,27 +1,27 @@
 import View from "./View";
 
 export default class StudentView extends View {
-  constructor(sheet, index) {
-    super(sheet, 0, 3 + index);
-  }
+    constructor(sheet, index) {
+        super(sheet, 0, 3 + index);
+    }
 
-  index() {
-    return this.read(0, 0);
-  }
+    index() {
+        return this.read(0, 0) - 1;
+    }
 
-  firstname() {
-    return this.read(1, 0).split(" ")[1];
-  }
+    firstname() {
+        return this.read(1, 0).split(" ")[1];
+    }
 
-  lastname() {
-    return this.read(1, 0).split(" ")[0];
-  }
+    lastname() {
+        return this.read(1, 0).split(" ")[0];
+    }
 
-  id() {
-    return this.read(2, 0);
-  }
+    id() {
+        return this.read(2, 0);
+    }
 
-  bloc() {
-    return this.read(3, 0)[0];
-  }
+    bloc() {
+        return this.read(3, 0)[0];
+    }
 }
