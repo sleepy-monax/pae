@@ -15,7 +15,8 @@ public class UEStudent implements Serializable, IEntity<Integer> {
     private Integer id;
     private String ref,examen;
     private double result;
-    private boolean validated;
+    private boolean validated, inPAE;
+    private int bloc;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<AAStudent> aas;
@@ -24,12 +25,14 @@ public class UEStudent implements Serializable, IEntity<Integer> {
     public UEStudent() {
     }
 
-    public UEStudent(String ref, int result, String examen, boolean validated, List<AAStudent> activities) {
+    public UEStudent(String ref, String examen, double result, boolean validated, boolean inPAE, int bloc, List<AAStudent> aas) {
         this.ref = ref;
-        this.result = result;
         this.examen = examen;
+        this.result = result;
         this.validated = validated;
-        this.aas = activities;
+        this.inPAE = inPAE;
+        this.bloc = bloc;
+        this.aas = aas;
     }
 
     @Override
@@ -81,6 +84,22 @@ public class UEStudent implements Serializable, IEntity<Integer> {
         this.aas = aas;
     }
 
+    public int getBloc() {
+        return bloc;
+    }
+
+    public void setBloc(int bloc) {
+        this.bloc = bloc;
+    }
+
+    public boolean isInPAE() {
+        return inPAE;
+    }
+
+    public void setInPAE(boolean inPAE) {
+        this.inPAE = inPAE;
+    }
+
     @Override
     public String toString() {
         return "UEStudent{" +
@@ -89,6 +108,8 @@ public class UEStudent implements Serializable, IEntity<Integer> {
                 ", examen='" + examen + '\'' +
                 ", result=" + result +
                 ", validated=" + validated +
+                ", inPAE=" + inPAE +
+                ", bloc=" + bloc +
                 ", aas=" + aas +
                 '}';
     }

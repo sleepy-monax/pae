@@ -14,14 +14,16 @@ public class AAStudent implements Serializable, IEntity<Integer> {
     private Integer id;
     private String ref,examen;
     private double result;
+    private boolean inPAE;
 
     public AAStudent() {
     }
 
-    public AAStudent(String ref, String examen, int result) {
+    public AAStudent(String ref, String examen, double result, boolean inPAE) {
         this.ref = ref;
         this.examen = examen;
         this.result = result;
+        this.inPAE = inPAE;
     }
 
     @Override
@@ -58,6 +60,14 @@ public class AAStudent implements Serializable, IEntity<Integer> {
         this.result = result;
     }
 
+    public boolean isInPAE() {
+        return inPAE;
+    }
+
+    public void setInPAE(boolean inPAE) {
+        this.inPAE = inPAE;
+    }
+
     @Override
     public String toString() {
         return "AAStudent{" +
@@ -65,6 +75,7 @@ public class AAStudent implements Serializable, IEntity<Integer> {
                 ", ref='" + ref + '\'' +
                 ", examen='" + examen + '\'' +
                 ", result=" + result +
+                ", inPAE=" + inPAE +
                 '}';
     }
 
