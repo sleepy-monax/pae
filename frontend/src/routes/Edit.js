@@ -6,15 +6,17 @@ import {
   mdiUnfoldMoreHorizontal,
 } from "@mdi/js";
 
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Icon from "@mdi/react";
 
+import { FindSectionFromBlocId } from "../services/SectionService";
+import { FindStudentById } from "../services/StudentsService";
+import { OutlineWhite } from "../components/Styles";
+import Button from "../components/Button";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
-import { FindStudentById } from "../services/StudentsService";
-import Button from "../components/Button";
-import { useState } from "react";
-import { FindSectionFromBlocId } from "../services/SectionService";
+import Loading from "../components/Loading";
 
 function AA(props) {
   let aa = props.aa;
@@ -43,7 +45,7 @@ function UE(props) {
         {ue.name}
       </div>
 
-      {expended ? ue.AAs.map((aa, index) => <AA key={index} aa={aa} />) : ""}
+      {expended ? ue.aas.map((aa, index) => <AA key={index} aa={aa} />) : ""}
     </div>
   );
 }
@@ -56,7 +58,7 @@ function Bloc(props) {
         {bloc.name.toUpperCase()}
       </div>
 
-      {bloc.UEs.map((ue, index) => (
+      {bloc.ues.map((ue, index) => (
         <UE key={index} ue={ue} />
       ))}
     </>
@@ -65,9 +67,24 @@ function Bloc(props) {
 
 export default function Edit() {
   let { studentId } = useParams();
+  const [student, SetStudent] = useState(false);
+  const [section, SetSection] = useState(false);
 
-  let student = FindStudentById(studentId);
-  let section = FindSectionFromBlocId(student.bloc);
+  useEffect(() => {
+    if (!student) {
+      FindStudentById(studentId).then((fetchedStudent) => {
+        SetStudent(fetchedStudent);
+
+        FindSectionFromBlocId(fetchedStudent.bloc).then((fetchedSection) =>
+          SetSection(fetchedSection)
+        );
+      });
+    }
+  });
+
+  if (student === false || section === false) {
+    return <Loading />;
+  }
 
   return (
     <div className="bg-gray-100 dark:bg-helha_dark_grey flex-1">
@@ -78,8 +95,8 @@ export default function Edit() {
       >
         <DetailButton text="Confirmer" detail="60 Crédits" />
 
-        <Button text="Imprimer" icon={mdiPrinter} />
-        <Button text="Envoyer" icon={mdiEmail} />
+        <Button variante={OutlineWhite} text="Imprimer" icon={mdiPrinter} />
+        <Button variante={OutlineWhite} text="Envoyer" icon={mdiEmail} />
       </Header>
 
       <div className="max-w-2xl mx-auto my-8 p-4 bg-white dark:bg-helha_grey rounded shadow-lg">

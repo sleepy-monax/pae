@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className="bg-helha_dark_grey text-white  p-8 ">
+    <div className="bg-helha_dark_grey text-white  p-8 border-t-2 border-helha_blue">
       <div className="max-w-xl flex flex-col sm:flex-row mx-auto items-center">
         <img src="/assets/logo.png" className="sm:pr-8 pb-8 sm:pb-0" alt="" />
         <div className="flex flex-col gap-4">

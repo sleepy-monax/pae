@@ -20,9 +20,9 @@ export function FindAllStudent() {
 export function FindStudentById(id) {
   return new Promise((resolve, reject) => {
     FindAllStudent()
-      .then((students) =>
-        resolve(students.filter((student) => student.id === id)[0])
-      )
+      .then((students) => {
+        resolve(students.filter((student) => student.id === id)[0]);
+      })
       .catch(reject);
   });
 }

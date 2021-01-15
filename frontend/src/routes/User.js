@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import React from "react";
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
+import { OutlineWhite } from "../components/Styles";
 
 export default function User() {
   let { userId } = useParams();
@@ -73,6 +74,7 @@ export default function User() {
         <Button
           text="Supprimer"
           icon={mdiAccountRemoveOutline}
+          variante={OutlineWhite}
           onClick={() => deleteUser(userId)}
         />
       </Header>

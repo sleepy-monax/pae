@@ -1,3 +1,5 @@
+import { mdiInformationOutline } from "@mdi/js";
+import Icon from "@mdi/react";
 import { useEffect, useState } from "react";
 import LinkButton from "../components/LinkButton";
 import Loading from "../components/Loading";
@@ -42,7 +44,10 @@ export default function Home() {
 
   if (sections === null) {
     sectionsComponents = (
-      <div>Aucunes données disponibles, veuillez en importer</div>
+      <div className="flex gap-2 text-helha_blue border-2 rounded border-helha_blue p-4 mt-4">
+        <Icon path={mdiInformationOutline} size={1} /> Aucunes données
+        disponibles, veuillez en importer
+      </div>
     );
   } else if (sections) {
     sectionsComponents = sections.map((section, index) => (
