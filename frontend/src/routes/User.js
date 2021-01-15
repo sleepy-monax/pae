@@ -13,6 +13,8 @@ export default function User() {
   const [user, setUser] = useState(undefined);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const [showModifDiv, SetShowModifDiv] = useState(false);
+  const [showErrorDiv, SetShowErrorDiv] = useState(false);
+  const [showBlankDiv, SetShowBlankDiv] = useState(false);
 
   useEffect(() => {
     if (user !== undefined) return;
@@ -29,20 +31,28 @@ export default function User() {
   }
 
   function updateUser(user) {
-    if (user.login !== "" || user.password !== "") {
-      update(user.login, user.password, user.id, function (result) {
-        if (result.success) {
-          //FEEDBACK UTILISATEUR Mis à jour
-          console.log(result.message);
-        } else {
-          //FEEDBACK UTILISATEUR Non mis à jour
-          console.log(result.message);
+    if (user.login === "") {
+      SetShowErrorDiv(false);
+      SetShowModifDiv(false);
+      SetShowBlankDiv(true);
+    } else
+        if (user.login !== "" || user.password !== "") {
+          update(user.login, user.password, user.id, function (result) {
+            if (result.success) {
+              //FEEDBACK UTILISATEUR Mis à jour
+              console.log(result.message);
+              SetShowBlankDiv(false);
+              SetShowErrorDiv(false);
+              SetShowModifDiv(true);
+            } else {
+              //FEEDBACK UTILISATEUR Non mis à jour
+              console.log(result.message);
+              SetShowBlankDiv(false);
+              SetShowErrorDiv(true);
+            }
+            console.log(result);
+          });
         }
-        console.log(result);
-      });
-    } else {
-      SetShowModifDiv(true);
-    }
   }
 
   function deleteUser(id) {
@@ -50,7 +60,7 @@ export default function User() {
       if (result.success) {
         setRedirectToReferrer(true);
       } else {
-        //A FAIRE
+        
       }
     });
   }
@@ -84,8 +94,19 @@ export default function User() {
           className="bg-green-500 rounded text-white text-l px-3 text-base"
         >
           {showModifDiv ? (
-            <div className="bg-green-500">
+            <div className="bg-green-500 text-black dark:text-white">
               <h1>Utilisateur correctement modifié !</h1>
+            </div>
+          ) : null}
+          {showErrorDiv ? (
+            <div className="bg-green-500 text-black dark:text-white">
+              <h1>Une erreur est survenue !</h1>
+              <h1>Veuillez réessayer !</h1>
+            </div>
+          ) : null}
+          {showBlankDiv ? (
+            <div className="bg-green-500 text-black dark:text-white">
+              <h1>Veuillez entrer un nom d'utilisateur !</h1>
             </div>
           ) : null}
         </div>

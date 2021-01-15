@@ -15,7 +15,7 @@ export default function Error() {
       <div className=" flex flex-col items-center flex-1 bg-white">
         <img src="/assets/lost.svg" className="p-16 max-w-md" alt=""></img>
         <Link to="/">
-          <Button text="Revenire a l'accueil" />
+          <Button text="Revenir a l'accueil" />
         </Link>
       </div>
     </div>

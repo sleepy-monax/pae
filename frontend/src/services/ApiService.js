@@ -257,9 +257,9 @@ export function ApiFindUserById(id) {
 
 export function ApiUpdateUser(login, password, id) {
     if (MOCK_API) {
-        let userIndex = MOCK_USERS.findIndex((user) => user.id == id);
+        let userIndex = MOCK_USERS.findIndex((user) => user.id === id);
 
-        if (userIndex == -1) {
+        if (userIndex === -1) {
             return ApiMockFailure("Utilisateur non mis a jour");
         }
 
