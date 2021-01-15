@@ -10,7 +10,7 @@ export default function CookiesHeader() {
   return visible ? (
     <div className="border-b-2 border-yellow-500  p-2 ">
       <div className="flex max-w-4xl mx-auto items-center gap-4">
-        <img src="assets/blobcat-cookie.png" alt="" className="max-w-xxxxs" />
+        <img src=process.env.PUBLIC_URL + "/assets/blobcat-cookie.png" alt="" className="max-w-xxxxs" />
         <div className="flex-1">Cette application utilise des cookies</div>
         <Button
           text="J'accepte"

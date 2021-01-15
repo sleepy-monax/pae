@@ -7,7 +7,7 @@ export default function About() {
   return (
     <div className="flex flex-col items-center">
       <div className="flex w-full flex-col items-center p-16 bg-white">
-        <img src="/assets/logo-full.png" className="pr-8" alt="" />
+        <img src=process.env.PUBLIC_URL + "/assets/logo-full.png" className="pr-8" alt="" />
       </div>
       <Header
         icon={mdiInformationOutline}
@@ -18,24 +18,24 @@ export default function About() {
         <div className="text-xl mb-4">Application réalisé avec ❤️ par</div>
 
         <div className="flex flex-col gap-4">
-          <Hero name="Sasha Dhaeyer" linkedin="" pic="/assets/sasha.png" />
+          <Hero name="Sasha Dhaeyer" linkedin="" pic=process.env.PUBLIC_URL + "/assets/sasha.png" />
 
           <Hero
             name="Mathieu Trempont"
             linkedin="mathieu-trempont-a6b60117b"
-            pic="/assets/mathieu.png"
+            pic=process.env.PUBLIC_URL + "/assets/mathieu.png"
           />
 
           <Hero
             name="Guillaume Charlier"
             linkedin="charlier-guillaume-b750b21ab"
-            pic="/assets/guillaume.png"
+            pic=process.env.PUBLIC_URL + "/assets/guillaume.png"
           />
 
           <Hero
             name="Nicolas Van Bossuyt"
             linkedin="nicolas-van-bossuyt"
-            pic="/assets/nicolas.png"
+            pic=process.env.PUBLIC_URL + "/assets/nicolas.png"
           />
         </div>
 

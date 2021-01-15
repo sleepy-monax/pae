@@ -13,7 +13,7 @@ export default function Error() {
       ></Header>
 
       <div className=" flex flex-col items-center flex-1 bg-white">
-        <img src="/assets/lost.svg" className="p-16 max-w-md" alt=""></img>
+        <img src=process.env.PUBLIC_URL + "/assets/lost.svg" className="p-16 max-w-md" alt=""></img>
         <Link to="/">
           <Button text="Revenir a l'accueil" />
         </Link>

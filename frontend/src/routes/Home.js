@@ -62,7 +62,7 @@ export default function Home() {
             <div className="bg-white">
                 <img
                     className="max-w-xs mx-auto py-8"
-                    src="/assets/curriculum.svg"
+                    src=process.env.PUBLIC_URL + "/assets/curriculum.svg"
                     alt=""
                 />
             </div>
