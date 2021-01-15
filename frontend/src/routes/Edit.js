@@ -1,14 +1,10 @@
 import {
-    mdiCheck,
-    mdiCheckBold,
     mdiCheckboxBlankOutline,
     mdiCheckboxMarked,
     mdiCheckCircle,
     mdiCheckCircleOutline,
-    mdiCheckOutline,
     mdiEmail,
     mdiFormatListChecks,
-    mdiGiftOutline,
     mdiPrinter,
     mdiTrophy,
     mdiUnfoldLessHorizontal,
@@ -26,7 +22,11 @@ import Button from "../components/Button";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
 import Loading from "../components/Loading";
-import { StudentHasValidatedAA, StudentHasValidatedUE } from "../model/Student";
+import {
+    StudentHasValidatedAA,
+    StudentHasValidatedBloc,
+    StudentHasValidatedUE,
+} from "../model/Student";
 
 function AA(props) {
     let aa = props.aa;
@@ -148,6 +148,16 @@ function UE(props) {
 
 function Bloc(props) {
     let bloc = props.bloc;
+
+    if (StudentHasValidatedBloc(props.student, bloc.id)) {
+        return (
+            <div className="text-helha_blue pt-4 pb-2 text-2xl border-helha_blue mb-4 flex items-center">
+                <div className="flex-1">{bloc.name.toUpperCase()}</div>
+                <Icon className="text-helha_blue" path={mdiTrophy} size={1} />
+            </div>
+        );
+    }
+
     return (
         <>
             <div className="text-helha_blue pt-4 pb-2 text-2xl border-b-2 border-helha_blue mb-4">
@@ -209,11 +219,9 @@ export default function Edit() {
             </Header>
 
             <div className="max-w-2xl mx-auto my-8">
-                {section.blocs
-                    .filter((bloc) => bloc.id <= student.bloc)
-                    .map((bloc, index) => (
-                        <Bloc key={index} bloc={bloc} student={student} />
-                    ))}
+                {section.blocs.map((bloc, index) => (
+                    <Bloc key={index} bloc={bloc} student={student} />
+                ))}
             </div>
         </div>
     );
