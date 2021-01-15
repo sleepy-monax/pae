@@ -81,7 +81,7 @@ export function Import(
       status.importOk = true;
       progressCallback(status);
 
-      Promise.all([ApiUploadStudents(students), SendAllSections(sections)])
+      Promise.all([SendAllSections(sections), ApiUploadStudents(students)])
         .then(() => {
           status.uploadOk = true;
           progressCallback(status);

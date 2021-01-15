@@ -1,45 +1,39 @@
 package be.helha.groupeb3.entities;
 
+import be.helha.groupeb3.storage.IEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Student implements Serializable {
+public class Student implements Serializable, IEntity<String> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String lastname, firstname, matricule;
-
-    @Column(name = "academic_year")
-    private String academicYear;
-
-    @Enumerated(EnumType.STRING)
-    private Section section;
+    private String id;
+    private String lastname, firstname, bloc;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<UE> ues;
+    private List<UEStudent> ues;
+
 
     public Student() {
     }
 
-    public Student(String lastname, String firstname, String matricule, String academicYear, Section section) {
+    public Student(String id, String lastname, String firstname, String bloc, List<UEStudent> ues) {
+        this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
-        this.matricule = matricule;
-        this.academicYear = academicYear;
-        this.section = section;
-        this.ues = new ArrayList<>();
+        this.bloc = bloc;
+        this.ues = ues;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -59,28 +53,31 @@ public class Student implements Serializable {
         this.firstname = firstname;
     }
 
-    public String getMatricule() {
-        return matricule;
+    public String getBloc() {
+        return bloc;
     }
 
-    public void setMatricule(String matricule) {
-        this.matricule = matricule;
+    public void setBloc(String bloc) {
+        this.bloc = bloc;
     }
 
-    public String getAcademicYear() {
-        return academicYear;
+    public List<UEStudent> getUes() {
+        return ues;
     }
 
-    public void setAcademicYear(String academicYear) {
-        this.academicYear = academicYear;
+    public void setUes(List<UEStudent> ues) {
+        this.ues = ues;
     }
 
-    public Section getSection() {
-        return section;
-    }
-
-    public void setSection(Section section) {
-        this.section = section;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + id + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", bloc='" + bloc + '\'' +
+                ", ues=" + ues +
+                '}';
     }
 
     @Override
@@ -88,32 +85,11 @@ public class Student implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(matricule, student.matricule);
+        return Objects.equals(id, student.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matricule);
-    }
-
-    public List<UE> getUes() {
-        return ues;
-    }
-
-    public void setUes(List<UE> ues) {
-        this.ues = ues;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", lastname='" + lastname + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", matricule='" + matricule + '\'' +
-                ", academicYear='" + academicYear + '\'' +
-                ", section=" + section +
-                ", ues=" + ues +
-                '}';
+        return Objects.hash(id);
     }
 }
