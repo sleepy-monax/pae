@@ -9,7 +9,7 @@ import {FindAllUsers} from "../services/UserService";
 export function User(props) {
     let user = props.user;
     return (
-        <tr className="text-center bg-white dark:text-black">
+        <tr className="text-center">
             <td className="px-12 py-2">
                 <Link to={"/user/" + user.id}>
                     {user.id}
@@ -78,17 +78,17 @@ export default class Admin extends React.Component {
                 <div className="shadow rounded p-4 my-8 bg-white dark:bg-helha_grey max-w-4xl mx-auto flex flex-col gap-2 items-center">
                     <h2 className="text-xl">Veuillez sélectionner le compte à modifier</h2>
 
-                    <div className="py-10 h-screen px-2">
+                    <div className="py-10 px-2">
                         <div className="flex flex-col w-full p-3 gap-2">
                             <table>
-                                <thead>
-                                <tr className="border-b-2">
+                                <thead className="border-b-2">
+                                <tr>
                                     <th>Id</th>
                                     <th>Login</th>
                                     <th>Role</th>
                                 </tr>
                                 </thead>
-                                <tbody className="bg-gray-200">
+                                <tbody>
                                 {this.state.users.map((user, index) => (
                                     <User key={user.id} user={user}/>
                                 ))}
