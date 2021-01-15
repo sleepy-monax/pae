@@ -1,6 +1,6 @@
 import SectionView from "./SectionView";
 
-export function ImportResult(sheet, student) {
+export function ImportResult(sheet, student, sectionId) {
     let sectionView = new SectionView(sheet);
 
     let ues = [];
@@ -8,7 +8,7 @@ export function ImportResult(sheet, student) {
     for (const ue of sectionView.ues()) {
         let ueResult = {
             ref: ue.id(),
-            bloc: ue.bloc(),
+            bloc: sectionId + ue.bloc(),
             result:
                 typeof ue.result(student.index()) === "number"
                     ? ue.result(student.index())
@@ -58,7 +58,7 @@ export function ImportStudents(sheet, sectionId) {
             bloc: sectionId + studentView.bloc(),
         };
 
-        student.ues = ImportResult(sheet, studentView);
+        student.ues = ImportResult(sheet, studentView, sectionId);
 
         students.push(student);
     }

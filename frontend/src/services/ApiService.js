@@ -74,7 +74,6 @@ export function ApiUploadStudents(students) {
     console.log(students);
     if (MOCK_API) {
         localStorage.setItem("students", JSON.stringify(students));
-
         return ApiMockSucess();
     }
 
@@ -134,21 +133,19 @@ export function ApiDownloadStudents() {
     }
 
     return new Promise((resolve, reject) => {
-
         const encodeToken = encodeURIComponent(getToken());
         axios
-            .get(API_URL + "students?token="+ encodeToken)
-            .then(students => {
+            .get(API_URL + "students?token=" + encodeToken)
+            .then((students) => {
                 if (students.data !== null) {
-                    resolve(students.data)
-                }
-                else {
-                    reject("Students non importer")
+                    resolve(students.data);
+                } else {
+                    reject("Students non importer");
                 }
             })
-            .catch(reason => {
+            .catch((reason) => {
                 reject(reason);
-            })
+            });
     });
 }
 
@@ -158,22 +155,20 @@ export function ApiDownloadSections() {
     }
 
     return new Promise((resolve, reject) => {
-
-        const encodeToken = encodeURIComponent(getToken())
+        const encodeToken = encodeURIComponent(getToken());
         axios
             .get(API_URL + "sections?token=" + encodeToken)
-            .then(sections => {
-                console.log(sections)
+            .then((sections) => {
+                console.log(sections);
                 if (sections.data !== null) {
-                    resolve(sections.data)
-                }
-                else {
-                    reject("sections non importer")
+                    resolve(sections.data);
+                } else {
+                    reject("sections non importer");
                 }
             })
-            .catch(reason => {
-                reject(reason)
-            })
+            .catch((reason) => {
+                reject(reason);
+            });
     });
 }
 

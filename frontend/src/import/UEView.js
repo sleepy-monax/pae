@@ -81,13 +81,7 @@ export default class UEView extends View {
     }
 
     result(studentIndex) {
-        let result = this.read(0, 3 + studentIndex);
-
-        if (result === "-") {
-            result = undefined;
-        }
-
-        return result;
+        return this.read(0, 3 + studentIndex);
     }
 
     validate(studentIndex) {
