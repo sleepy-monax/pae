@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import Button from "../components/Button";
+import Warning from "../components/Warning";
 import { connect } from "../services/AuthenticationService";
 
 const backgroundStyle = {
@@ -77,17 +78,6 @@ export default class Login extends React.Component {
 
           <span className="text-white text-xl">Authentification</span>
 
-          <div
-            id="errorDiv"
-            className="bg-red-500 rounded text-white text-l px-3 text-base"
-          >
-            {this.state.showDiv ? (
-              <div>
-                <h1>Informations invalides !</h1>
-              </div>
-            ) : null}
-          </div>
-
           <input
             type="text"
             placeholder="Nom d'utilisateur"
@@ -99,6 +89,12 @@ export default class Login extends React.Component {
             placeholder="Mot de passe"
             onChange={this.handlePasswordChange}
           />
+
+          {this.state.showDiv ? (
+            <Warning text="Informations invalides !" />
+          ) : (
+            ""
+          )}
 
           <Button text="Connexion" />
         </form>

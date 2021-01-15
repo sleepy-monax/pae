@@ -21,13 +21,24 @@ import Loading from "../components/Loading";
 function AA(props) {
   let aa = props.aa;
 
-  return <div>{aa.name}</div>;
+  return <div className="pl-8">{aa.name}</div>;
 }
 
 function UE(props) {
   let ue = props.ue;
 
   const [expended, setExpended] = useState(false);
+
+  let aas;
+  let metrics;
+
+  if (expended) {
+    aas = ue.aas.map((aa, index) => (
+      <AA key={index} aa={aa} student={props.student} />
+    ));
+
+    metrics = <div>TEST</div>;
+  }
 
   return (
     <div className="px-2 py-4 flex gap-4 flex-col">
@@ -42,10 +53,11 @@ function UE(props) {
           path={expended ? mdiUnfoldLessHorizontal : mdiUnfoldMoreHorizontal}
           size={1}
         />
-        {ue.name}
+        <div className="flex-1">{ue.name}</div> <div>{ue.credits}</div>
       </div>
 
-      {expended ? ue.aas.map((aa, index) => <AA key={index} aa={aa} />) : ""}
+      {metrics}
+      {aas}
     </div>
   );
 }
@@ -59,7 +71,7 @@ function Bloc(props) {
       </div>
 
       {bloc.ues.map((ue, index) => (
-        <UE key={index} ue={ue} />
+        <UE key={index} ue={ue} student={props.student} />
       ))}
     </>
   );
@@ -103,7 +115,7 @@ export default function Edit() {
         {section.blocs
           .filter((bloc) => bloc.id <= student.bloc)
           .map((bloc, index) => (
-            <Bloc key={index} bloc={bloc} />
+            <Bloc key={index} bloc={bloc} student={student} />
           ))}
       </div>
     </div>

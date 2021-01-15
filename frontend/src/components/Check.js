@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Check(props) {
   let icon = mdiDotsHorizontal;
-  let color = "text-gray-400";
+  let color = "text-gray-400 animate-bounce";
 
   if (props.checked === true) {
     icon = mdiCheck;
@@ -15,7 +15,7 @@ export default function Check(props) {
   }
 
   return (
-    <div className="flex-1  text-center">
+    <div className="flex-1  text-center ">
       <Icon path={icon} size={2} className={"mx-auto " + color} />
       {props.text}
     </div>

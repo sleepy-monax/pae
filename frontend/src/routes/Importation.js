@@ -6,6 +6,8 @@ import Header from "../components/Hearder";
 import InputFile from "../components/InputFile";
 import StateFile from "../components/StateFile";
 import LinkButton from "../components/LinkButton";
+import Warning from "../components/Warning";
+import Information from "../components/Information";
 
 export default class Importation extends React.Component {
   constructor(props) {
@@ -23,6 +25,8 @@ export default class Importation extends React.Component {
   }
 
   onChangeInput(file) {
+    this.setState({ file });
+
     Import(
       file,
       (status) => this.setState({ status: status }),
@@ -47,20 +51,10 @@ export default class Importation extends React.Component {
 
     let message;
 
-    if (this.state.result.success !== undefined) {
-      message = (
-        <div
-          className={
-            (this.state.result.success
-              ? "border-2 border-helha_blue text-helha_blue"
-              : "bg-yellow-500 text-black") +
-            " " +
-            "p-4 rounded"
-          }
-        >
-          {this.state.result.message}
-        </div>
-      );
+    if (this.state.result.success === true) {
+      message = <Information text={this.state.result.message} />;
+    } else if (this.state.result.success === false) {
+      message = <Warning text={this.state.result.message} />;
     }
 
     return (
@@ -81,7 +75,7 @@ export default class Importation extends React.Component {
               ""
             )}
 
-            <StateFile {...status} />
+            {this.state.file !== null ? <StateFile {...status} /> : ""}
 
             {message}
 
