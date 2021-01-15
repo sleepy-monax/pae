@@ -13,10 +13,9 @@ public class UEStudent implements Serializable, IEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String ref,examen;
+    private String ref,examen, bloc;
     private double result;
     private boolean validated, inPAE;
-    private int bloc;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<AAStudent> aas;
@@ -25,13 +24,13 @@ public class UEStudent implements Serializable, IEntity<Integer> {
     public UEStudent() {
     }
 
-    public UEStudent(String ref, String examen, double result, boolean validated, boolean inPAE, int bloc, List<AAStudent> aas) {
+    public UEStudent(String ref, String examen, String bloc, double result, boolean validated, boolean inPAE, List<AAStudent> aas) {
         this.ref = ref;
         this.examen = examen;
+        this.bloc = bloc;
         this.result = result;
         this.validated = validated;
         this.inPAE = inPAE;
-        this.bloc = bloc;
         this.aas = aas;
     }
 
@@ -84,11 +83,11 @@ public class UEStudent implements Serializable, IEntity<Integer> {
         this.aas = aas;
     }
 
-    public int getBloc() {
+    public String getBloc() {
         return bloc;
     }
 
-    public void setBloc(int bloc) {
+    public void setBloc(String bloc) {
         this.bloc = bloc;
     }
 
@@ -106,10 +105,10 @@ public class UEStudent implements Serializable, IEntity<Integer> {
                 "id=" + id +
                 ", ref='" + ref + '\'' +
                 ", examen='" + examen + '\'' +
+                ", bloc='" + bloc + '\'' +
                 ", result=" + result +
                 ", validated=" + validated +
                 ", inPAE=" + inPAE +
-                ", bloc=" + bloc +
                 ", aas=" + aas +
                 '}';
     }
