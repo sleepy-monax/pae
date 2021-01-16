@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "./AuthenticationService";
+import {getEncodeToken, getToken} from "./AuthenticationService";
 
 let MOCK_API = process.env.REACT_APP_MOCK_API || false;
 let API_URL =
@@ -79,12 +79,11 @@ export function ApiUploadStudents(students) {
 
     return new Promise((resolve, reject) => {
         const params = new URLSearchParams();
-        const encodeToken = encodeURIComponent(getToken());
 
         params.append("students", JSON.stringify(students));
 
         axios
-            .post(API_URL + "students?token=" + encodeToken, params, config)
+            .post(API_URL + "students?token=" + getEncodeToken(), params, config)
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -107,12 +106,11 @@ export function ApiUploadSection(sections) {
 
     return new Promise((resolve, reject) => {
         let params = new URLSearchParams();
-        const encodeToken = encodeURIComponent(getToken());
 
         params.append("sections", JSON.stringify(sections));
 
         axios
-            .post(API_URL + "sections?token=" + encodeToken, params, config)
+            .post(API_URL + "sections?token=" + getEncodeToken(), params, config)
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -132,9 +130,8 @@ export function ApiDownloadStudents() {
     }
 
     return new Promise((resolve, reject) => {
-        const encodeToken = encodeURIComponent(getToken());
         axios
-            .get(API_URL + "students?token=" + encodeToken)
+            .get(API_URL + "students?token=" + getEncodeToken())
             .then((students) => {
                 if (students.data !== null) {
                     resolve(students.data);
@@ -154,9 +151,8 @@ export function ApiDownloadSections() {
     }
 
     return new Promise((resolve, reject) => {
-        const encodeToken = encodeURIComponent(getToken());
         axios
-            .get(API_URL + "sections?token=" + encodeToken)
+            .get(API_URL + "sections?token=" + getEncodeToken())
             .then((sections) => {
                 if (sections.data !== null) {
                     resolve(sections.data);
@@ -190,10 +186,9 @@ export function ApiRegister(login, password) {
         params.append("login", login);
         params.append("password", password);
 
-        const encodeToken = encodeURIComponent(getToken());
 
         axios
-            .post(API_URL + "users?token=" + encodeToken, params, config)
+            .post(API_URL + "users?token=" + getEncodeToken(), params, config)
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -213,10 +208,9 @@ export function ApiFindUsers() {
     }
 
     return new Promise((resolve, reject) => {
-        const encodeToken = encodeURIComponent(getToken());
 
         axios
-            .get(API_URL + "users?token=" + encodeToken)
+            .get(API_URL + "users?token=" + getEncodeToken())
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -236,10 +230,9 @@ export function ApiFindUserById(id) {
     }
 
     return new Promise((resolve, reject) => {
-        const encodeToken = encodeURIComponent(getToken());
 
         axios
-            .get(API_URL + "users/" + id + "?token=" + encodeToken)
+            .get(API_URL + "users/" + id + "?token=" + getEncodeToken())
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -278,10 +271,9 @@ export function ApiUpdateUser(login, password, id) {
         params.append("login", login);
         params.append("password", password);
 
-        const encodeToken = encodeURIComponent(getToken());
 
         axios
-            .put(API_URL + "users?token=" + encodeToken, params, config)
+            .put(API_URL + "users?token=" + getEncodeToken(), params, config)
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -302,10 +294,9 @@ export function ApiDeleteUser(id) {
     }
 
     return new Promise((resolve, reject) => {
-        const encodeToken = encodeURIComponent(getToken());
 
         axios
-            .delete(API_URL + "users/" + id + "?token=" + encodeToken)
+            .delete(API_URL + "users/" + id + "?token=" + getEncodeToken())
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);

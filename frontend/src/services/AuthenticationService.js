@@ -40,3 +40,11 @@ export function getToken() {
 
     return authenticationToken;
 }
+
+export function getEncodeToken() {
+    if (authenticationToken === undefined) {
+        authenticationToken = GetCookie("authenticationToken");
+    }
+
+    return encodeURIComponent(authenticationToken);
+}

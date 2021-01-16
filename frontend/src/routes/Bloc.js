@@ -1,8 +1,8 @@
 import Header from "../components/Hearder";
-import { mdiEmail, mdiLaptop, mdiPrinter } from "@mdi/js";
-import { Link, useParams } from "react-router-dom";
+import {mdiEmail, mdiLaptop, mdiPrinter} from "@mdi/js";
+import {Link, useParams} from "react-router-dom";
 import Button from "../components/Button";
-import { FindStudentsByBloc } from "../services/StudentsService";
+import {FindStudentsByBloc} from "../services/StudentsService";
 import {
     FindBlockById,
     FindSectionFromBlocId,
@@ -10,19 +10,19 @@ import {
 
 import Loading from "../components/Loading";
 
-import { useEffect, useState } from "react";
-import { StudentHasValidatedUE } from "../model/Student";
+import {useEffect, useState} from "react";
+import {StudentHasValidatedUE} from "../model/Student";
 
 // Charge the students' data into a table
 // Configuration of datas
 export function Progress(props) {
     return (
         <div className="h-3 relative rounded-full overflow-hidden">
-            <div className="w-full h-full bg-gray-200 absolute"></div>
+            <div className="w-full h-full bg-gray-200 absolute"/>
             <div
-                style={{ width: props.value + "%" }}
+                style={{width: props.value + "%"}}
                 className="h-full bg-helha_blue relative"
-            ></div>
+            />
         </div>
     );
 }
@@ -53,8 +53,7 @@ export function Student(props) {
     let student = props.student;
     let blocs = props.blocs;
 
-  console.log(student);
-  
+
     return (
         <tr>
             {/*  Student name */}
@@ -90,7 +89,7 @@ export function Student(props) {
             {/*  Check box, checked if the pae is done */}
             <td>
                 <center>
-                    <input type="checkbox" />
+                    <input type="checkbox"/>
                 </center>
             </td>
         </tr>
@@ -100,7 +99,7 @@ export function Student(props) {
 // Display all student in the page
 export default function Bloc() {
     // Find the bloc id
-    let { blocId } = useParams();
+    let {blocId} = useParams();
 
     let [state, setState] = useState(undefined);
 
@@ -115,12 +114,12 @@ export default function Bloc() {
             FindSectionFromBlocId(blocId),
             FindStudentsByBloc(blocId),
         ]).then((data) =>
-            setState({ bloc: data[0], section: data[1], students: data[2] })
+            setState({bloc: data[0], section: data[1], students: data[2]})
         );
     });
 
     if (state === undefined) {
-        return <Loading />;
+        return <Loading/>;
     }
 
     return (
@@ -131,8 +130,8 @@ export default function Bloc() {
                 title={state.bloc.name}
                 description={state.section.name}
             >
-                <Button text="Imprimer" icon={mdiPrinter} />
-                <Button text="Envoyer" icon={mdiEmail} />
+                <Button text="Imprimer" icon={mdiPrinter}/>
+                <Button text="Envoyer" icon={mdiEmail}/>
             </Header>
 
             {/*  Display all students */}
@@ -140,25 +139,25 @@ export default function Bloc() {
             <div className="shadow rounded p-4 my-8 bg-white dark:bg-helha_grey max-w-4xl mx-auto flex flex-col  gap-2">
                 <table>
                     <thead>
-                        <tr className="border-b-2">
-                            <th>Nom et prénom</th>
-                            <th className="flex-1">Bloc 1</th>
-                            <th className="flex-1">Bloc 2</th>
-                            <th className="flex-1">Bloc 3</th>
-                            <th>Fait?</th>
-                        </tr>
+                    <tr className="border-b-2">
+                        <th>Nom et prénom</th>
+                        <th className="flex-1">Bloc 1</th>
+                        <th className="flex-1">Bloc 2</th>
+                        <th className="flex-1">Bloc 3</th>
+                        <th>Fait?</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        {/*  Search all students */}
+                    {/*  Search all students */}
 
-                        {state.students.map((student, index) => (
-                            <Student
-                                key={student.id}
-                                student={student}
-                                blocs={state.section.blocs}
-                            />
-                        ))}
+                    {state.students.map((student, index) => (
+                        <Student
+                            key={student.id}
+                            student={student}
+                            blocs={state.section.blocs}
+                        />
+                    ))}
                     </tbody>
                 </table>
             </div>
