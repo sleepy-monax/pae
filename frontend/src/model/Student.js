@@ -4,7 +4,11 @@ export function StudentHasValidatedAA(student, aaId) {
     for (const ue of student.ues) {
         for (const aa of ue.aas) {
             if (aa.ref === aaId) {
-                return aa.validated;
+                if (ue.bloc <= student.bloc) {
+                    return aa.validated || aa.examen === "-";
+                } else {
+                    return aa.validated;
+                }
             }
         }
     }

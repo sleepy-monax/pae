@@ -215,18 +215,13 @@ function Bloc(props) {
     const [ues, setUES] = useState(props.student.ues);
 
     if (StudentHasValidatedBloc(props.student, bloc.id)) {
-        return (
-            <div className="text-helha_blue pt-4 pb-2 text-2xl px-4 border-helha_blue mb-4 flex items-center">
-                <div className="flex-1">{bloc.name.toUpperCase()}</div>
-                <Icon className="text-helha_blue" path={mdiTrophy} size={1} />
-            </div>
-        );
+        return "";
     }
 
     return (
         <>
-            <div className="text-helha_blue pb-2 text-3xl pt-2 px-4 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey ">
-                <div className="max-w-2xl mx-auto flex gap-4 items-end">
+            <div className="text-helha_blue pb-2 text-3xl pt-2 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey ">
+                <div className="max-w-2xl mx-auto px-4 flex gap-4 items-end">
                     {bloc.name.toUpperCase()}{" "}
                     <div className="flex flex-col">
                         <div className="text-base font-bold text-black dark:text-white">
@@ -315,7 +310,7 @@ export default function Edit() {
                     variante={OutlineWhite}
                     text="Imprimer"
                     icon={mdiPrinter}
-                    to={"/feedbackpae/"+ student.id}
+                    to={"/feedbackpae/" + student.id}
                 />
                 <Button
                     variante={OutlineWhite}

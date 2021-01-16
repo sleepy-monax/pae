@@ -1,4 +1,8 @@
 import {
+    StudentHasValidatedBloc,
+    StudentValidatedCreditsBloc,
+} from "../model/Student";
+import {
     ApiDownloadStudents,
     ApiUpdateStudent,
     ApiUploadStudents,
@@ -31,11 +35,43 @@ export function FindStudentById(id) {
     });
 }
 
+function ExtractSection(bloc) {
+    return bloc[0] + bloc[1];
+}
+
+function ExtractBlockNumber(bloc) {
+    return parseInt(bloc[2]);
+}
+
 export function FindStudentsByBloc(bloc) {
     return new Promise((resolve, reject) => {
         FindAllStudent()
             .then((students) =>
-                resolve(students.filter((student) => student.bloc === bloc))
+                resolve(
+                    students.filter((student) => {
+                        if (
+                            ExtractSection(student.bloc) !==
+                            ExtractSection(bloc)
+                        ) {
+                            return false;
+                        }
+
+                        if (
+                            ExtractBlockNumber(student.bloc) ===
+                            ExtractBlockNumber(bloc) - 1
+                        ) {
+                            return StudentHasValidatedBloc(
+                                student,
+                                student.bloc
+                            );
+                        }
+
+                        return (
+                            student.bloc === bloc &&
+                            !StudentHasValidatedBloc(student, student.bloc)
+                        );
+                    })
+                )
             )
             .catch(reject);
     });
