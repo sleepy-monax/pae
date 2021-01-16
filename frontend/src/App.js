@@ -18,37 +18,42 @@ import Admin from "./routes/Admin";
 import User from "./routes/User";
 
 export default function App() {
-  update();
+    update();
 
-  return (
-    <Router basename={process.env.REACT_APP_ROUTER_BASE || ""}>
-      <div className="flex flex-col min-h-screen">
-        <NavBar />
-        <CookiesHeader />
+    return (
+        <Router basename={process.env.REACT_APP_ROUTER_BASE || ""}>
+            <div className="flex flex-col h-screen">
+                <NavBar />
+                <CookiesHeader />
 
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
+                <div className="flex flex-1 flex-col overflow-y-scroll">
+                    <Switch>
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                        <Route path="/register">
+                            <Register />
+                        </Route>
+                        <Route path="/about">
+                            <About />
+                        </Route>
 
-          <PrivateRoute path="/admin" component={Admin} />
-          <PrivateRoute path="/register" component={Register} />
-          <PrivateRoute path="/user/:userId" component={User} />
-          <PrivateRoute path="/bloc/:blocId" component={Bloc} />
-          <PrivateRoute path="/student/:studentId" component={Edit} />
-          <PrivateRoute path="/import" component={Importation} />
-          <PrivateRoute path="/" exact component={Home} />
+                        <PrivateRoute path="/admin" component={Admin} />
+                        <PrivateRoute path="/register" component={Register} />
+                        <PrivateRoute path="/user/:userId" component={User} />
+                        <PrivateRoute path="/bloc/:blocId" component={Bloc} />
+                        <PrivateRoute
+                            path="/student/:studentId"
+                            component={Edit}
+                        />
+                        <PrivateRoute path="/import" component={Importation} />
+                        <PrivateRoute path="/" exact component={Home} />
 
-          <PrivateRoute component={Error} />
-        </Switch>
-      </div>
-      <Footer />
-    </Router>
-  );
+                        <PrivateRoute component={Error} />
+                    </Switch>
+                    <Footer />
+                </div>
+            </div>
+        </Router>
+    );
 }

@@ -125,7 +125,10 @@ function UE(props) {
                     copyUE.aas = aasCopy;
                     setAAS(aasCopy);
 
-                    copyUE.inPAE = aas.reduce((x, aa) => x && aa.inPAE, true);
+                    copyUE.inPAE = aas.reduce(
+                        (x, aa) => x && (aa.inPAE || aa.validated),
+                        true
+                    );
 
                     props.onChange(copyUE);
                 }}
@@ -163,20 +166,27 @@ function UE(props) {
     }
 
     let header = (
-        <div className={"flex " + (expended ? "mb-4" : "")}>
+        <div className={"flex items-center gap-4 " + (expended ? "mb-4" : "")}>
             <div
-                className="flex flex-1 gap-4 select-none cursor-pointer "
+                className="flex flex-1 gap-4 select-none cursor-pointer items-center "
                 onClick={() => {
                     setExpended(!expended);
                 }}
             >
                 {expender}
 
-                <div className={expended ? "font-bold" : ""}>
-                    {ueInfos.name}
+                <div className="flex-1">{ueInfos.name}</div>
+
+                <div
+                    className={
+                        props.ue.inPAE ? "text-helha_blue" : "text-gray-400"
+                    }
+                >
+                    {ueInfos.credits +
+                        " " +
+                        (ueInfos.credits > 1 ? "Crédits" : "Crédit")}
                 </div>
             </div>
-
             {icon}
         </div>
     );
@@ -211,35 +221,39 @@ function Bloc(props) {
 
     return (
         <>
-            <div className="text-helha_blue pt-4 pb-2 text-2xl  px-4 border-b-2 border-helha_blue mb-4">
-                {bloc.name.toUpperCase()}
+            <div className="text-helha_blue pt-4 pb-2 text-2xl px-4 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey">
+                <div className="max-w-2xl mx-auto">
+                    {bloc.name.toUpperCase()}
+                </div>
             </div>
 
-            {ues
-                .filter((ue) => ue.bloc === bloc.id)
-                .map((ue, index) => (
-                    <UE
-                        key={index}
-                        ue={ue}
-                        section={props.section}
-                        student={props.student}
-                        onChange={(ue) => {
-                            let uesCopy = [...ues];
+            <div className="max-w-2xl mx-auto">
+                {ues
+                    .filter((ue) => ue.bloc === bloc.id)
+                    .map((ue, index) => (
+                        <UE
+                            key={index}
+                            ue={ue}
+                            section={props.section}
+                            student={props.student}
+                            onChange={(ue) => {
+                                let uesCopy = [...ues];
 
-                            for (let i = 0; i < uesCopy.length; i++) {
-                                if (uesCopy[i].ref === ue.ref) {
-                                    uesCopy[i] = ue;
+                                for (let i = 0; i < uesCopy.length; i++) {
+                                    if (uesCopy[i].ref === ue.ref) {
+                                        uesCopy[i] = ue;
+                                    }
                                 }
-                            }
 
-                            let copyStudent = props.student;
-                            copyStudent.ues = uesCopy;
-                            setUES(uesCopy);
+                                let copyStudent = props.student;
+                                copyStudent.ues = uesCopy;
+                                setUES(uesCopy);
 
-                            props.onChange(copyStudent);
-                        }}
-                    />
-                ))}
+                                props.onChange(copyStudent);
+                            }}
+                        />
+                    ))}
+            </div>
         </>
     );
 }
@@ -266,7 +280,7 @@ export default function Edit() {
     }
 
     return (
-        <div className="bg-gray-100 dark:bg-helha_dark_grey flex-1">
+        <div className="dark:bg-helha_dark_grey flex-1">
             <Header
                 icon={mdiFormatListChecks}
                 title={student.firstname + " " + student.lastname}
@@ -277,8 +291,6 @@ export default function Edit() {
                     student.bloc.toUpperCase()
                 }
             >
-                <DetailButton text="Confirmer" detail="60 Crédits" />
-
                 <Button
                     variante={OutlineWhite}
                     text="Imprimer"
@@ -291,7 +303,7 @@ export default function Edit() {
                 />
             </Header>
 
-            <div className="max-w-2xl mx-auto my-8">
+            <div className="relative">
                 {section.blocs.map((bloc, index) => (
                     <Bloc
                         key={index}
@@ -304,6 +316,11 @@ export default function Edit() {
                         }}
                     />
                 ))}
+                <div className="sticky p-4 bottom-0 z-50 w-full  ">
+                    <div className="max-w-2xl mx-auto flex-row-reverse flex">
+                        <DetailButton text="Confirmer" detail="60 Crédits" />
+                    </div>
+                </div>
             </div>
         </div>
     );
