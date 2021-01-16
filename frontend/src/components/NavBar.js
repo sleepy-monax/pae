@@ -1,70 +1,75 @@
-import { mdiAccount, mdiBrightness4, mdiClose, mdiLogout, mdiMenu } from "@mdi/js";
+import {mdiAccount, mdiBrightness4, mdiClose, mdiLogout, mdiMenu} from "@mdi/js";
 import Icon from "@mdi/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { disconnect, isConnected } from "../services/AuthenticationService";
-import { toggle } from "../services/DarkModeService";
+import {useState} from "react";
+import {Link} from "react-router-dom";
+import {disconnect, isAdmin, isConnected} from "../services/AuthenticationService";
+import {toggle} from "../services/DarkModeService";
 import Button from "./Button";
 import LinkButton from "./LinkButton";
 
 const blurEffect = {
-  backdropFilter: "blur(16px)",
+    backdropFilter: "blur(16px)",
 };
 
 export default function NavBar() {
-  let disconnectButton;
-  let adminSettingsButton;
+    let disconnectButton;
+    let adminSettingsButton;
 
-  const [menuVisible, setMenuVisible] = useState(false);
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [admin, setAdmin] = useState(false);
 
-  if (isConnected()) {
-    disconnectButton = (
-      <Button icon={mdiLogout} text="Se déconnecter" 
-      onClick={() => {
-        disconnect();
-        setMenuVisible(false);
-      }}/>
+    isAdmin(function (result) {
+        setAdmin(result.success);
+    })
+
+    if (isConnected()) {
+        disconnectButton = (
+            <Button icon={mdiLogout} text="Se déconnecter"
+                    onClick={() => {
+                        disconnect();
+                        setMenuVisible(false);
+                    }}/>
+        );
+    }
+
+    let darkmodeButton = (
+        <Button icon={mdiBrightness4} text="Light/Dark Mode"
+                onClick={() => {
+                    toggle();
+                    setMenuVisible(false);
+                }}/>
     );
-  }
 
-  let darkmodeButton = (
-    <Button icon={mdiBrightness4} text="Light/Dark Mode" 
-    onClick={() => {
-      toggle();
-      setMenuVisible(false);
-    }}/>
-  );
+    if (admin) {
+        adminSettingsButton = (
+            <LinkButton to="/admin" icon={mdiAccount} text="Options d'admin"/>
+        )
+    }
 
-  if (isConnected()) {
-    adminSettingsButton = (
-      <LinkButton to="/admin" icon={mdiAccount} text="Options d'admin"/>
-    )
-  }
-  
-  let popoverMenu = (
-    <div className="relative ">
-      <div className="absolute w-60 right-0  bg-white text-black shadow-lg p-4 flex flex-col gap-1 rounded">
-        <button className="flex mb-2" onClick={() => setMenuVisible(false)}>
-          <Icon className="mr-1" path={mdiClose} size={1} /> Fermer
-        </button>
-        {darkmodeButton}
-        {adminSettingsButton}
-        {disconnectButton}
-      </div>
-    </div>
-  );
+    let popoverMenu = (
+        <div className="relative ">
+            <div className="absolute w-60 right-0  bg-white text-black shadow-lg p-4 flex flex-col gap-1 rounded">
+                <button className="flex mb-2" onClick={() => setMenuVisible(false)}>
+                    <Icon className="mr-1" path={mdiClose} size={1}/> Fermer
+                </button>
+                {darkmodeButton}
+                {adminSettingsButton}
+                {disconnectButton}
+            </div>
+        </div>
+    );
 
-  return (
-    <div
-      style={blurEffect}
-      className="z-50 sticky top-0 p-4 items-center dark:bg-helha_dark_grey bg-white bg-opacity-70 flex border-b-2 border-helha_blue"
-    >
-      <div className="flex-grow text-lg">
-        <Link to="/">PAE Étudiants</Link>
-      </div>
+    return (
+        <div
+            style={blurEffect}
+            className="z-50 sticky top-0 p-4 items-center dark:bg-helha_dark_grey bg-white bg-opacity-70 flex border-b-2 border-helha_blue"
+        >
+            <div className="flex-grow text-lg">
+                <Link to="/">PAE Étudiants</Link>
+            </div>
 
-      <Button icon={mdiMenu} onClick={() => setMenuVisible(true)} />
-      {menuVisible ? popoverMenu : ""}
-    </div>
-  );
+            <Button icon={mdiMenu} onClick={() => setMenuVisible(true)}/>
+            {menuVisible ? popoverMenu : ""}
+        </div>
+    );
 }

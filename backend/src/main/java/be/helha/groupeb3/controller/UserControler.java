@@ -154,4 +154,18 @@ public class UserControler {
         return new Gson().toJson(selected);
     }
 
+    @GET
+    @Produces("text/json")
+    @Path("/isadmin")
+    public String isAdmin(@QueryParam("token") String token) {
+        User current = authService.checkToken(token);
+        if (current == null) {
+            return "null";
+        }
+        if (current.getRole() == Role.DIRECTEUR) {
+            return "true";
+        }
+        return "false";
+    }
+
 }

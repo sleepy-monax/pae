@@ -309,3 +309,22 @@ export function ApiDeleteUser(id) {
             });
     });
 }
+
+export function ApiIsAdmin() {
+    return new Promise((resolve, reject) => {
+
+        axios
+            .get(API_URL + "users/isadmin?token=" + getEncodeToken())
+            .then(result => {
+                if (result.data !== null) {
+                    resolve(result.data);
+                }
+                else {
+                    reject("User non accepté");
+                }
+            })
+            .catch(reason => {
+                reject(reason);
+            })
+    });
+}
