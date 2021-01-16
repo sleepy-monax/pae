@@ -50,9 +50,11 @@ export function getEncodeToken() {
 }
 
 export function isAdmin(callback) {
-    ApiIsAdmin()
-        .then(result => {
-            // console.log(result)
-            callback({success: result})
-        })
+    if (isConnected()) {
+        ApiIsAdmin()
+            .then(result => {
+                // console.log(result)
+                callback({success: result})
+            })
+    }
 }
