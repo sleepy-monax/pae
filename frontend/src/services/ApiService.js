@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getEncodeToken, getToken} from "./AuthenticationService";
+import {getEncodeToken} from "./AuthenticationService";
 
 let MOCK_API = process.env.REACT_APP_MOCK_API || false;
 let API_URL =
