@@ -1,6 +1,6 @@
 import {mdiAccount, mdiBrightness4, mdiClose, mdiLogout, mdiMenu} from "@mdi/js";
 import Icon from "@mdi/react";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {disconnect, isAdmin, isConnected} from "../services/AuthenticationService";
 import {toggle} from "../services/DarkModeService";
@@ -18,9 +18,11 @@ export default function NavBar() {
     const [menuVisible, setMenuVisible] = useState(false);
     const [admin, setAdmin] = useState(false);
 
-    isAdmin(function (result) {
-        setAdmin(result.success);
-    })
+    useEffect(() => {
+        isAdmin(function (result) {
+            setAdmin(result.success);
+        })
+    });
 
     if (isConnected()) {
         disconnectButton = (

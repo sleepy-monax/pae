@@ -2,6 +2,7 @@ import {GetCookie, SetCookie, RemoveCookie} from "./CookiesService";
 import {ApiAuthentication, ApiIsAdmin} from "./ApiService";
 
 let authenticationToken = undefined;
+let admin = undefined;
 
 export function connect(username, password, callback) {
     ApiAuthentication(username, password)
@@ -21,6 +22,7 @@ export function register(username, password, callback) {
 
 export function disconnect() {
     authenticationToken = undefined;
+    admin = undefined;
     RemoveCookie("authenticationToken");
     document.location.reload();
 }
@@ -50,11 +52,17 @@ export function getEncodeToken() {
 }
 
 export function isAdmin(callback) {
-    if (isConnected()) {
-        ApiIsAdmin()
-            .then(result => {
-                // console.log(result)
-                callback({success: result})
-            })
+    if (admin === undefined) {
+        if (isConnected()) {
+            ApiIsAdmin()
+                .then(result => {
+                    admin = result;
+                    callback({success: result});
+                })
+        }
     }
+    else {
+        callback({success: admin});
+    }
+
 }
