@@ -14,7 +14,7 @@ public class Student implements Serializable, IEntity<String> {
     private String id;
     private String lastname, firstname, bloc;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UEStudent> ues;
 
 

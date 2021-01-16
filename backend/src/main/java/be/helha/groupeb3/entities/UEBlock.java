@@ -2,10 +2,7 @@ package be.helha.groupeb3.entities;
 
 import be.helha.groupeb3.storage.IEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +16,7 @@ public class UEBlock implements Serializable, IEntity<String> {
     private int credits;
     private boolean optional;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AABlock> aas;
 
 

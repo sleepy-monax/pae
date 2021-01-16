@@ -45,6 +45,10 @@ public class GenericEJB {
         return dao.update(klass, oldEntity, newEntity);
     }
 
+    public <TEntity extends IEntity> boolean update(Class<TEntity> klass, TEntity entity) {
+        return dao.update(klass, entity);
+    }
+
     public <TEntity extends IEntity> boolean remove(Class<TEntity> klass, TEntity entity) {
         return dao.remove(klass, entity);
     }

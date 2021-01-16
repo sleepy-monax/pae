@@ -1,7 +1,6 @@
 package be.helha.groupeb3.controller;
 
 import be.helha.groupeb3.entities.Student;
-import be.helha.groupeb3.entities.User;
 import be.helha.groupeb3.services.AuthService;
 import be.helha.groupeb3.storage.GenericEJB;
 import com.google.gson.Gson;
@@ -56,5 +55,19 @@ public class StudentController {
         }
 
         return new Gson().toJson(students);
+    }
+
+    @PUT
+    @Produces("text/json")
+    @Consumes("application/x-www-form-urlencoded")
+    public String update(@QueryParam("token") String token, @FormParam("student") String upStudent) {
+        if (authService.checkToken(token) == null) {
+            return "null";
+        }
+
+        Student student = new Gson().fromJson(upStudent, Student.class);
+        ejb.update(Student.class, student);
+
+        return "true";
     }
 }

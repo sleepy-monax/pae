@@ -71,6 +71,24 @@ public class GenericDAO {
         entity.setId(oldEntity.getId());
         manager.merge(entity);
 
+
+        return true;
+    }
+
+    public <TEntity extends IEntity> Boolean update(Class<TEntity> klass, TEntity entity) {
+        if (entity == null) {
+            return false;
+        }
+
+        TEntity ent= findById(klass, entity.getId());
+        manager.clear();
+
+        if (ent == null) {
+            return false;
+        }
+
+        update(klass, ent, entity);
+
         return true;
     }
 

@@ -108,6 +108,23 @@ export function ApiUpdateStudent(student) {
 
         return ApiUploadStudents(students);
     }
+    console.log(student)
+    return new Promise((resolve, reject) => {
+        let params = new URLSearchParams();
+        params.append("student", JSON.stringify(student));
+
+        axios
+            .put(API_URL + "students?token=" + getEncodeToken(), params, config)
+            .then((result) => {
+                if (result.data !== null) {
+                    resolve(result.data);
+                }
+                else {
+                    reject("Update non effectué");
+                }
+            })
+            .catch(reason => reject(reason));
+    });
 }
 
 export function ApiUploadSection(sections) {

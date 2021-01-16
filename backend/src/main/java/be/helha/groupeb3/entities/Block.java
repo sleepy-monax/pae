@@ -2,10 +2,7 @@ package be.helha.groupeb3.entities;
 
 import be.helha.groupeb3.storage.IEntity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +15,7 @@ public class Block implements Serializable, IEntity<String> {
 
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UEBlock> ues;
 
     public Block() {

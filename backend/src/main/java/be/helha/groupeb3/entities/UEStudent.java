@@ -17,7 +17,7 @@ public class UEStudent implements Serializable, IEntity<Integer> {
     private double result;
     private boolean validated, inPAE;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AAStudent> aas;
 
 
