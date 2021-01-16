@@ -12,7 +12,7 @@ public class GenericDAO {
 
     @PersistenceContext(unitName = "groupeB3JTA")
     private EntityManager manager;
-
+    
     public <TEntity> List<TEntity> findAll(Class<TEntity> klass) {
         var queryString = "select entity from " + klass.getName() + " entity";
 
@@ -76,20 +76,11 @@ public class GenericDAO {
     }
 
     public <TEntity extends IEntity> Boolean update(Class<TEntity> klass, TEntity entity) {
-        if (entity == null) {
-            return false;
-        }
 
         TEntity ent= findById(klass, entity.getId());
         manager.clear();
 
-        if (ent == null) {
-            return false;
-        }
-
-        update(klass, ent, entity);
-
-        return true;
+        return update(klass, ent, entity);
     }
 
     public <TEntity extends IEntity> boolean remove(Class<TEntity> klass, TEntity entity) {
