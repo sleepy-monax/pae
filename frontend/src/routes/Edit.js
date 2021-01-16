@@ -3,7 +3,6 @@ import {
     mdiCheckboxMarked,
     mdiCheckCircle,
     mdiCheckCircleOutline,
-    mdiCircleOutline,
     mdiEmail,
     mdiFormatListChecks,
     mdiPrinter,
@@ -67,10 +66,14 @@ function AA(props) {
         );
     } else {
         icon = (
-            <Icon
-                className="text-helha_grey dark:text-white"
-                path={mdiCircleOutline}
-                size={1}
+            <Checkbox
+                checked={props.aa.inPAE}
+                onChange={(value) => {
+                    let aaCopy = props.aa;
+                    aaCopy.inPAE = value;
+
+                    props.onChange(aaCopy);
+                }}
             />
         );
     }
@@ -88,6 +91,7 @@ function UE(props) {
     let ueInfos = SectionFindUE(props.section, ue.ref);
 
     const [expended, setExpended] = useState(false);
+    const [aas, setAAS] = useState(props.ue.aas);
 
     let expender = (
         <Icon
@@ -108,6 +112,23 @@ function UE(props) {
                 ueId={ue.ref}
                 aaId={aa.ref}
                 aaName={aa.name}
+                onChange={(aa) => {
+                    let aasCopy = [...aas];
+
+                    for (let i = 0; i < aasCopy.length; i++) {
+                        if (aasCopy[i].ref === ue.ref) {
+                            aasCopy[i] = ue;
+                        }
+                    }
+
+                    let copyUE = props.ue;
+                    copyUE.aas = aasCopy;
+                    setAAS(aasCopy);
+
+                    copyUE.inPAE = aas.reduce((x, aa) => x && aa.inPAE, true);
+
+                    props.onChange(copyUE);
+                }}
             />
         ));
     }
@@ -129,6 +150,11 @@ function UE(props) {
                 onChange={(value) => {
                     let ueCopy = props.ue;
                     ueCopy.inPAE = value;
+
+                    for (let i = 0; i < ueCopy.aas.length; i++) {
+                        ueCopy.aas[i].inPAE = value;
+                        setAAS(ueCopy.aas);
+                    }
 
                     props.onChange(ueCopy);
                 }}
