@@ -1,0 +1,29 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>90</x><y>110</y><w>300</w><h>90</h></coordinates><panel_attributes>AuthController
+--
+-context: UriInfo
+-ejb: GenericEHB
+--
++AuthController()
++authentification(login: String, password:String): String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>110</y><w>320</w><h>90</h></coordinates><panel_attributes>SectionController
+--
+-ejb: GenericEJB
+-authService: AuthService
+--
++importSections(token:String, newSections: String): String
++sendSections(token: String): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>280</y><w>330</w><h>90</h></coordinates><panel_attributes>StudentController
+--
+-ejb: GenericEJB
+-authService: AuthService
+--
++importStudents(token: String, newStudents: String): String
++sendStudents(token: String): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>470</x><y>280</y><w>370</w><h>140</h></coordinates><panel_attributes>UserController
+--
+-context: UriContext
+-ejb: GenericEJB
+-authService: AuthService
+--
++showAll(token: String):String
++create(token: String, login: String, password: String): String
++update(token: String, id: int, login: String, password: String): String
++delete(token: String, id: int): String</panel_attributes><additional_attributes></additional_attributes></element></diagram>

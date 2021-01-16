@@ -1,0 +1,102 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>160</x><y>680</y><w>250</w><h>150</h></coordinates><panel_attributes>AABlock
+--
+-id: String
+-name: String
+-credits: int
+--
++AABlock()
++AABlock(id: String, name: String, credits: int)
++toString(): String
++equals(o: Object): boolean
++hashCode(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>550</y><w>390</w><h>180</h></coordinates><panel_attributes>AAStudent
+--
+-id: Integer
+-ref: String
+-examen: String
+-result: double
+-inPAE: boolean
+--
++AAStudent()
++AAStudent(ref: String, examen: String, result: double, inPAE: boolean)
++toString(): String
++equals(o: Object): boolean
++hashCode():int
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>240</y><w>290</w><h>150</h></coordinates><panel_attributes>Block
+--
+-id: String
+-name: String
+-ues: List&lt;UEBlock&gt;
+--
++Block()
++Block(id: String, name: String, ues: List&lt;UEBlock&gt;)
++toString(): String
++equals(o: Object): boolean
++hashCode():int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1260</x><y>810</y><w>100</w><h>70</h></coordinates><panel_attributes>&lt;Enumeration&gt;
+Role
+--
+DIRECTEUR
+SECRETAIRE</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>40</y><w>290</w><h>150</h></coordinates><panel_attributes>Section
+--
+-id: String
+-name: String
+-blocks: List&lt;Block&gt;
+--
+-Section()
+-Section(id: String, name: String, blocks: List&lt;Block&gt;)
++toString(): String
++equals(o: Object): boolean
++hashCode():int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>740</x><y>20</y><w>290</w><h>150</h></coordinates><panel_attributes>Student
+--
+-id: String
+-lastname: String
+-firstname: String
+-bloc: String
+-ues: List&lt;UEStudent&gt;
+--
+-Student()
+-Student(id: String, lastname: String, firstname: String, bloc: String, ues: List&lt;UEStudent&gt;)
++toString(): String
++equals(o: Object): boolean
++hashCode():int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>440</y><w>460</w><h>180</h></coordinates><panel_attributes>UEBlock
+--
+-id: String
+-name: String
+-credits: int
+-optional: boolean
+-aas: List&lt;AABlock&gt;
+--
++UEBlock()
++UEBlock(id: String, name: String, credits: int, optional: boolean, aas: List&lt;AABlock&gt;)
++toString(): String
++equals(o: Object): boolean
++hashCode():int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>544</x><y>218</y><w>690</w><h>230</h></coordinates><panel_attributes>UEStudent
+--
+-id: Integer
+-ref: String
+-examen: String
+-bloc: String
+-result: double
+-validated: boolean
+-inPAE: boolean
+-aas: List&lt;AAStudent&gt;
+--
++UEStudent()
++UEStudent(ref: String, examen: String, bloc: String, result: double, validated: boolean, inPAE: boolean, aas: List&lt;AAStudent&gt;)
++toString(): String
++equals(o: Object): boolean
++hashCode():int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1174</x><y>534</y><w>270</w><h>200</h></coordinates><panel_attributes>User
+--
+-id: Integer
+-login: String
+-password: String
+-role: Role
+--
++User()
++User(login: String, password: String, role: Role)
++User(login: String, password: String)
++User(id: Integer, login: String, password: String)
++toString(): String
++equals(o: Object): boolean
++hashCode():int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1300</x><y>730</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>180</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>610</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>880</x><y>160</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>890</x><y>440</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>380</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element></diagram>

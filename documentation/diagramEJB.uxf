@@ -1,0 +1,12 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>130</x><y>90</y><w>580</w><h>180</h></coordinates><panel_attributes>GenericEJB
+--
+-dao:GenericDAO
+--
++findAll(klass: Class&lt;TEntity&gt;): &lt;TEntity&gt; TEntity
++findById(klass: Class&lt;TEntity&gt;, id: Object): &lt;TEntity&gt; TEntity
++findAllByField(klass: Class&lt;TEntity&gt;, field: String, value: Object): &lt;TEntity&gt;List&lt;TEntity&gt;
++findFirstById(klass: Class&lt;TEntity&gt;, field: String, value: Object: &lt;TEntity&gt; TEntity
++add(klass: Class&lt;TEntity&gt;, entity: TEntity): &lt;TEntity extends IEntity&gt; TEntity
++addFastAndUnsafe(klass: Class&lt;TEntity&gt;, entity: TEntity): &lt;TEntity extends IEntity&gt; TEntity
++update(klass: Class&lt;TEntity&gt;, oldEntity: TEntity, newEntity: TEntity):  &lt;TEntity extends IEntity&gt; boolean
++remove(klass: Class&lt;TEntity&gt;, entity: TEntity)  &lt;TEntity extends IEntity&gt; boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>40</y><w>100</w><h>70</h></coordinates><panel_attributes>SimpleClass</panel_attributes><additional_attributes></additional_attributes></element></diagram>
