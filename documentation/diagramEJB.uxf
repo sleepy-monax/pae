@@ -9,4 +9,5 @@
 +add(klass: Class&lt;TEntity&gt;, entity: TEntity): &lt;TEntity extends IEntity&gt; TEntity
 +addFastAndUnsafe(klass: Class&lt;TEntity&gt;, entity: TEntity): &lt;TEntity extends IEntity&gt; TEntity
 +update(klass: Class&lt;TEntity&gt;, oldEntity: TEntity, newEntity: TEntity):  &lt;TEntity extends IEntity&gt; boolean
++update(klass: Class&lt;TEntity&gt;, entity: TEntity): &lt;TEntity extends IEntity&gt; boolean
 +remove(klass: Class&lt;TEntity&gt;, entity: TEntity)  &lt;TEntity extends IEntity&gt; boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>40</y><w>100</w><h>70</h></coordinates><panel_attributes>SimpleClass</panel_attributes><additional_attributes></additional_attributes></element></diagram>
