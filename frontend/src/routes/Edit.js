@@ -28,6 +28,9 @@ import {
     StudentHasValidatedAA,
     StudentHasValidatedBloc,
     StudentHasValidatedUE,
+    StudentPAECredits,
+    StudentPAECreditsBloc,
+    StudentValidatedCreditsBloc,
 } from "../model/Student";
 import { SectionFindAA, SectionFindUE } from "../model/Section";
 
@@ -222,9 +225,19 @@ function Bloc(props) {
 
     return (
         <>
-            <div className="text-helha_blue pt-4 pb-2 text-2xl px-4 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey">
-                <div className="max-w-2xl mx-auto">
-                    {bloc.name.toUpperCase()}
+            <div className="text-helha_blue pb-2 text-3xl pt-2 px-4 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey ">
+                <div className="max-w-2xl mx-auto flex gap-4 items-end">
+                    {bloc.name.toUpperCase()}{" "}
+                    <div className="flex flex-col">
+                        <div className="text-base font-bold text-black dark:text-white">
+                            {StudentPAECreditsBloc(props.student, bloc) +
+                                " Crédits"}
+                        </div>
+                        <div className="text-xs">
+                            {StudentValidatedCreditsBloc(props.student, bloc) +
+                                " Crédits · Validée"}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -263,15 +276,21 @@ export default function Edit() {
     let { studentId } = useParams();
     const [student, SetStudent] = useState(false);
     const [section, SetSection] = useState(false);
+    const [total, SetTotal] = useState(0);
 
     useEffect(() => {
         if (!student) {
             FindStudentById(studentId).then((fetchedStudent) => {
                 SetStudent(fetchedStudent);
 
-                FindSectionFromBlocId(
-                    fetchedStudent.bloc
-                ).then((fetchedSection) => SetSection(fetchedSection));
+                FindSectionFromBlocId(fetchedStudent.bloc).then(
+                    (fetchedSection) => {
+                        SetTotal(
+                            StudentPAECredits(fetchedStudent, fetchedSection)
+                        );
+                        SetSection(fetchedSection);
+                    }
+                );
             });
         }
     });
@@ -315,12 +334,16 @@ export default function Edit() {
                         onChange={(student) => {
                             SetStudent(student);
                             UpdateStudent(student);
+                            SetTotal(StudentPAECredits(student, section));
                         }}
                     />
                 ))}
                 <div className="sticky p-4 bottom-0 z-50 w-full  ">
                     <div className="max-w-2xl mx-auto flex-row-reverse flex">
-                        <DetailButton text="Confirmer" detail="60 Crédits" />
+                        <DetailButton
+                            text="Confirmer"
+                            detail={total + " Crédits"}
+                        />
                     </div>
                 </div>
             </div>
