@@ -3,7 +3,6 @@ import {
     mdiCheckboxMarked,
     mdiCheckCircle,
     mdiCheckCircleOutline,
-    mdiCircle,
     mdiCircleOutline,
     mdiEmail,
     mdiFormatListChecks,
@@ -191,7 +190,7 @@ function Bloc(props) {
             </div>
 
             {ues
-                .filter((ue) => ue.bloc == bloc.id)
+                .filter((ue) => ue.bloc === bloc.id)
                 .map((ue, index) => (
                     <UE
                         key={index}
@@ -202,7 +201,7 @@ function Bloc(props) {
                             let uesCopy = [...ues];
 
                             for (let i = 0; i < uesCopy.length; i++) {
-                                if (uesCopy[i].ref == ue.ref) {
+                                if (uesCopy[i].ref === ue.ref) {
                                     uesCopy[i] = ue;
                                 }
                             }

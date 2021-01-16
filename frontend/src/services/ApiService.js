@@ -103,7 +103,7 @@ export function ApiUploadStudents(students) {
 export function ApiUpdateStudent(student) {
     if (MOCK_API) {
         let students = JSON.parse(localStorage.getItem("students"));
-        let index = students.findIndex((s) => s.id == student.id);
+        let index = students.findIndex((s) => s.id === student.id);
         students[index] = student;
 
         return ApiUploadStudents(students);
@@ -323,6 +323,10 @@ export function ApiDeleteUser(id) {
 }
 
 export function ApiIsAdmin() {
+    if (MOCK_API) {
+        return ApiMockSucess(true);
+    }
+
     return new Promise((resolve, reject) => {
         axios
             .get(API_URL + "users/isadmin?token=" + getEncodeToken())

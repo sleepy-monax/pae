@@ -47,7 +47,7 @@ export function SendAllStudents(s) {
 }
 
 export function UpdateStudent(s) {
-    let index = students.findIndex((student) => student.id == s.id);
+    let index = students.findIndex((student) => student.id === s.id);
     console.log(index);
     students[index] = s;
     ApiUpdateStudent(s);
