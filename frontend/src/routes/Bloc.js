@@ -53,7 +53,6 @@ export function Student(props) {
     let student = props.student;
     let blocs = props.blocs;
 
-
     return (
         <tr>
             {/*  Student name */}

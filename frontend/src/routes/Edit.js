@@ -19,6 +19,7 @@ import { FindSectionFromBlocId } from "../services/SectionService";
 import { FindStudentById, UpdateStudent } from "../services/StudentsService";
 import { OutlineWhite } from "../components/Styles";
 import Button from "../components/Button";
+import LinkButton from "../components/LinkButton";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
 import Loading from "../components/Loading";
@@ -291,10 +292,11 @@ export default function Edit() {
                     student.bloc.toUpperCase()
                 }
             >
-                <Button
+                <LinkButton
                     variante={OutlineWhite}
                     text="Imprimer"
                     icon={mdiPrinter}
+                    to={"/feedbackpae/"+ student.id}
                 />
                 <Button
                     variante={OutlineWhite}

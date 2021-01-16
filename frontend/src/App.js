@@ -16,6 +16,7 @@ import About from "./routes/About";
 import CookiesHeader from "./components/CookiesHeader";
 import Admin from "./routes/Admin";
 import User from "./routes/User";
+import FeedBackPae from "./routes/FeedBackPae";
 
 export default function App() {
     update();
@@ -38,16 +39,14 @@ export default function App() {
                             <About />
                         </Route>
 
-                        <PrivateRoute path="/admin" component={Admin} />
-                        <PrivateRoute path="/register" component={Register} />
-                        <PrivateRoute path="/user/:userId" component={User} />
-                        <PrivateRoute path="/bloc/:blocId" component={Bloc} />
-                        <PrivateRoute
-                            path="/student/:studentId"
-                            component={Edit}
-                        />
-                        <PrivateRoute path="/import" component={Importation} />
-                        <PrivateRoute path="/" exact component={Home} />
+          <PrivateRoute path="/admin" component={Admin} />
+          <PrivateRoute path="/register" component={Register} />
+          <PrivateRoute path="/user/:userId" component={User} />
+          <PrivateRoute path="/bloc/:blocId" component={Bloc} />
+          <PrivateRoute path="/student/:studentId" component={Edit} />
+          <PrivateRoute path="/import" component={Importation} />
+          <PrivateRoute path="/feedbackpae/:studentId" component={FeedBackPae} />
+          <PrivateRoute path="/" exact component={Home} />
 
                         <PrivateRoute component={Error} />
                     </Switch>
