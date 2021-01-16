@@ -10,6 +10,18 @@ export function StudentHasValidatedAA(student, aaId) {
     return false;
 }
 
+export function StudentHasAAInPAE(student, aaId) {
+    for (const ue of student.ues) {
+        for (const aa of ue.aas) {
+            if (aa.ref === aaId) {
+                return aa.inPAE;
+            }
+        }
+    }
+
+    return false;
+}
+
 export function StudentHasValidatedUE(student, ueId) {
     for (const ue of student.ues) {
         if (ue.ref === ueId) {

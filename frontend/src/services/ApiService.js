@@ -1,9 +1,8 @@
 import axios from "axios";
-import {getEncodeToken} from "./AuthenticationService";
+import { getEncodeToken } from "./AuthenticationService";
 
 let MOCK_API = process.env.REACT_APP_MOCK_API || false;
-let API_URL =
-    process.env.REACT_APP_API_URL || "http://localhost:8080/backend/";
+let API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/backend/";
 
 const config = {
     headers: {
@@ -83,7 +82,11 @@ export function ApiUploadStudents(students) {
         params.append("students", JSON.stringify(students));
 
         axios
-            .post(API_URL + "students?token=" + getEncodeToken(), params, config)
+            .post(
+                API_URL + "students?token=" + getEncodeToken(),
+                params,
+                config
+            )
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -95,6 +98,16 @@ export function ApiUploadStudents(students) {
                 reject(e);
             });
     });
+}
+
+export function ApiUpdateStudent(student) {
+    if (MOCK_API) {
+        let students = JSON.parse(localStorage.getItem("students"));
+        let index = students.findIndex((s) => s.id == student.id);
+        students[index] = student;
+
+        return ApiUploadStudents(students);
+    }
 }
 
 export function ApiUploadSection(sections) {
@@ -110,7 +123,11 @@ export function ApiUploadSection(sections) {
         params.append("sections", JSON.stringify(sections));
 
         axios
-            .post(API_URL + "sections?token=" + getEncodeToken(), params, config)
+            .post(
+                API_URL + "sections?token=" + getEncodeToken(),
+                params,
+                config
+            )
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
@@ -186,7 +203,6 @@ export function ApiRegister(login, password) {
         params.append("login", login);
         params.append("password", password);
 
-
         axios
             .post(API_URL + "users?token=" + getEncodeToken(), params, config)
             .then((result) => {
@@ -208,7 +224,6 @@ export function ApiFindUsers() {
     }
 
     return new Promise((resolve, reject) => {
-
         axios
             .get(API_URL + "users?token=" + getEncodeToken())
             .then((result) => {
@@ -230,7 +245,6 @@ export function ApiFindUserById(id) {
     }
 
     return new Promise((resolve, reject) => {
-
         axios
             .get(API_URL + "users/" + id + "?token=" + getEncodeToken())
             .then((result) => {
@@ -271,7 +285,6 @@ export function ApiUpdateUser(login, password, id) {
         params.append("login", login);
         params.append("password", password);
 
-
         axios
             .put(API_URL + "users?token=" + getEncodeToken(), params, config)
             .then((result) => {
@@ -294,7 +307,6 @@ export function ApiDeleteUser(id) {
     }
 
     return new Promise((resolve, reject) => {
-
         axios
             .delete(API_URL + "users/" + id + "?token=" + getEncodeToken())
             .then((result) => {
@@ -312,19 +324,17 @@ export function ApiDeleteUser(id) {
 
 export function ApiIsAdmin() {
     return new Promise((resolve, reject) => {
-
         axios
             .get(API_URL + "users/isadmin?token=" + getEncodeToken())
-            .then(result => {
+            .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
-                }
-                else {
+                } else {
                     reject("User non accepté");
                 }
             })
-            .catch(reason => {
+            .catch((reason) => {
                 reject(reason);
-            })
+            });
     });
 }

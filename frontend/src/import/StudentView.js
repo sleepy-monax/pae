@@ -22,6 +22,6 @@ export default class StudentView extends View {
     }
 
     bloc() {
-        return this.read(3, 0)[0];
+        return parseInt(this.read(3, 0)[0]);
     }
 }

@@ -1,4 +1,8 @@
-import { ApiDownloadStudents, ApiUploadStudents } from "./ApiService";
+import {
+    ApiDownloadStudents,
+    ApiUpdateStudent,
+    ApiUploadStudents,
+} from "./ApiService";
 
 let students = undefined;
 
@@ -42,6 +46,9 @@ export function SendAllStudents(s) {
     return ApiUploadStudents(s);
 }
 
-export function UpdateStudent(student) {
-    console.log("FIXME: UpdateStudent()");
+export function UpdateStudent(s) {
+    let index = students.findIndex((student) => student.id == s.id);
+    console.log(index);
+    students[index] = s;
+    ApiUpdateStudent(s);
 }
