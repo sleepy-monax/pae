@@ -75,7 +75,8 @@ export default class FeedBackPae extends React.Component{
                                 </div>
                             );
                         }
-                    } 
+                    }
+                    aaHtml = [];
                 });
             });
         });

@@ -35,7 +35,7 @@ public class StudentController {
         List<Student> students = new Gson().fromJson(newStudents, studentsType);
 
         for (Student student : students) {
-            ejb.addFastAndUnsafe(Student.class, student);
+            ejb.add(Student.class, student);
         }
 
         return new Gson().toJson(students);

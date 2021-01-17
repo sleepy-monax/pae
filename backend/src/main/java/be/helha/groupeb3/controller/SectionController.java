@@ -34,7 +34,7 @@ public class SectionController {
         List<Section> sections = new Gson().fromJson(newSections, sectionsType);
 
         for (Section section : sections) {
-            ejb.addFastAndUnsafe(Section.class, section);
+            ejb.add(Section.class, section);
         }
         return new Gson().toJson(sections);
     }
