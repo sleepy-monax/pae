@@ -1,7 +1,4 @@
-import {
-    StudentHasValidatedBloc,
-    StudentValidatedCreditsBloc,
-} from "../model/Student";
+import { StudentHasValidatedBloc } from "../model/Student";
 import {
     ApiDownloadStudents,
     ApiUpdateStudent,
@@ -63,7 +60,6 @@ export function GetBlocForStudent(student) {
 
     if (StudentHasValidatedBloc(student, student.bloc)) {
         if (blocNumber + 1 > 3) {
-            console.log("wat");
             return sectionId + "-fini";
         } else {
             return sectionId + (blocNumber + 1);

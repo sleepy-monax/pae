@@ -18,10 +18,7 @@ import {
 import Loading from "../components/Loading";
 
 import { useEffect, useState } from "react";
-import {
-    StudentHasValidatedUE,
-    StudentValidatedCreditsBloc,
-} from "../model/Student";
+import { StudentValidatedCreditsBloc } from "../model/Student";
 import Icon from "@mdi/react";
 
 // Charge the students' data into a table

@@ -64,14 +64,6 @@ export default class Register extends React.Component {
                 this.state.username,
                 this.state.password,
                 function (result) {
-                    if (result.success) {
-                        //FEEDBACK UTILISATEUR AJOUTÉ
-                        console.log(result.message);
-                    } else {
-                        //FEEDBACK UTILISATEUR NON AJOUTÉ
-                        console.log(result.message);
-                    }
-                    console.log(result);
                     this.setState({ redirectToReferrer: true });
                 }.bind(this),
                 this.showRegisterDiv()

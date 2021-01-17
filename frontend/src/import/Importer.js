@@ -1,4 +1,3 @@
-import { GetBlocForStudent } from "../services/StudentsService";
 import SectionView from "./SectionView";
 
 export function ImportResult(sheet, student, sectionId) {

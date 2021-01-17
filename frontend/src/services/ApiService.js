@@ -108,7 +108,7 @@ export function ApiUpdateStudent(student) {
 
         return ApiUploadStudents(students);
     }
-    console.log(student)
+
     return new Promise((resolve, reject) => {
         let params = new URLSearchParams();
         params.append("student", JSON.stringify(student));
@@ -118,12 +118,11 @@ export function ApiUpdateStudent(student) {
             .then((result) => {
                 if (result.data !== null) {
                     resolve(result.data);
-                }
-                else {
+                } else {
                     reject("Update non effectué");
                 }
             })
-            .catch(reason => reject(reason));
+            .catch((reason) => reject(reason));
     });
 }
 

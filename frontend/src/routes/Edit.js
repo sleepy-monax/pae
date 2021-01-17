@@ -22,7 +22,7 @@ import {
     GetBlocForStudent,
     UpdateStudent,
 } from "../services/StudentsService";
-import { OutlineBlue, OutlineWhite } from "../components/Styles";
+import { OutlineWhite } from "../components/Styles";
 import LinkButton from "../components/LinkButton";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
@@ -37,7 +37,6 @@ import {
     StudentValidatedCreditsBloc,
 } from "../model/Student";
 import { SectionFindAA, SectionFindUE } from "../model/Section";
-import Button from "../components/Button";
 
 function Checkbox(props) {
     return (
@@ -249,22 +248,28 @@ function Bloc(props) {
                             let paeState = ues.reduce(
                                 (x, ue) =>
                                     x &&
-                                    (ue.bloc != bloc.id ||
+                                    (ue.bloc !== bloc.id ||
                                         ue.inPAE ||
                                         ue.validated),
                                 true
                             );
 
                             for (let i = 0; i < uesCopy.length; i++) {
-                                if (uesCopy[i].bloc == bloc.id) {
-                                    uesCopy[i].inPAE = !paeState;
+                                if (uesCopy[i].bloc === bloc.id) {
+                                    if (!uesCopy[i].validated) {
+                                        uesCopy[i].inPAE = !paeState;
 
-                                    for (
-                                        let j = 0;
-                                        j < uesCopy[i].aas.length;
-                                        j++
-                                    ) {
-                                        uesCopy[i].aas[j].inPAE = !paeState;
+                                        for (
+                                            let j = 0;
+                                            j < uesCopy[i].aas.length;
+                                            j++
+                                        ) {
+                                            if (!uesCopy[i].aas[j].validated) {
+                                                uesCopy[i].aas[
+                                                    j
+                                                ].inPAE = !paeState;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -380,8 +385,6 @@ export default function Edit() {
                         section={section}
                         onChange={(student) => {
                             SetStudent(student);
-                            console.log(student);
-                            console.log(StudentPAECredits(student, section));
                             SetTotal(StudentPAECredits(student, section));
                         }}
                     />
