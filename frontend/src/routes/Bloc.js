@@ -165,7 +165,7 @@ export default function Bloc() {
             <div className="relative max-w-2xl mx-auto flex flex-col gap-2 mb-4">
                 {state.students.map((student, index) => (
                     <Student
-                        key={student.id}
+                        key={student.id + " " + student.paeDone}
                         student={student}
                         blocs={state.section.blocs}
                     />

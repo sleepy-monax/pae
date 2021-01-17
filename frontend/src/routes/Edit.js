@@ -1,4 +1,5 @@
 import {
+    mdiCheckAll,
     mdiCheckboxBlankOutline,
     mdiCheckboxMarked,
     mdiCheckCircle,
@@ -12,13 +13,12 @@ import {
 } from "@mdi/js";
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Redirect, useParams } from "react-router";
 import Icon from "@mdi/react";
 
 import { FindSectionFromBlocId } from "../services/SectionService";
 import { FindStudentById, UpdateStudent } from "../services/StudentsService";
-import { OutlineWhite } from "../components/Styles";
-import Button from "../components/Button";
+import { OutlineBlue, OutlineWhite } from "../components/Styles";
 import LinkButton from "../components/LinkButton";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
@@ -33,6 +33,7 @@ import {
     StudentValidatedCreditsBloc,
 } from "../model/Student";
 import { SectionFindAA, SectionFindUE } from "../model/Section";
+import Button from "../components/Button";
 
 function Checkbox(props) {
     return (
@@ -233,6 +234,45 @@ function Bloc(props) {
                                 " Crédits · Validée"}
                         </div>
                     </div>
+                    <div className="flex-1" />
+                    <Icon
+                        path={mdiCheckAll}
+                        size={1.2}
+                        className="text-helha_blue select-none cursor-pointer"
+                        onClick={() => {
+                            let uesCopy = [...ues];
+
+                            let paeState = ues.reduce(
+                                (x, ue) =>
+                                    x &&
+                                    (ue.bloc != bloc.id ||
+                                        ue.inPAE ||
+                                        ue.validated),
+                                true
+                            );
+
+                            for (let i = 0; i < uesCopy.length; i++) {
+                                if (uesCopy[i].bloc == bloc.id) {
+                                    uesCopy[i].inPAE = !paeState;
+
+                                    for (
+                                        let j = 0;
+                                        j < uesCopy[i].aas.length;
+                                        j++
+                                    ) {
+                                        uesCopy[i].aas[j].inPAE = !paeState;
+                                    }
+                                }
+                            }
+
+                            setUES(uesCopy);
+
+                            let copyStudent = props.student;
+                            copyStudent.ues = uesCopy;
+
+                            props.onChange(copyStudent);
+                        }}
+                    />
                 </div>
             </div>
 
@@ -272,6 +312,7 @@ export default function Edit() {
     const [student, SetStudent] = useState(false);
     const [section, SetSection] = useState(false);
     const [total, SetTotal] = useState(0);
+    const [redirect, SetRedirect] = useState(false);
 
     useEffect(() => {
         if (!student) {
@@ -294,6 +335,10 @@ export default function Edit() {
         return <Loading />;
     }
 
+    if (redirect) {
+        return <Redirect to={"/bloc/" + student.bloc} />;
+    }
+
     return (
         <div className="dark:bg-helha_dark_grey flex-1">
             <Header
@@ -312,10 +357,13 @@ export default function Edit() {
                     icon={mdiPrinter}
                     to={"/feedbackpae/" + student.id}
                 />
-                <Button
+
+                <LinkButton
                     variante={OutlineWhite}
                     text="Envoyer"
                     icon={mdiEmail}
+                    public
+                    to={`mailto:${studentId}@students.helha.be?subject=Ton programme personnalisé (PAE) pour cette nouvelle année académique&body=Bonjour ${student.firstname},\n Tu trouveras ci-joint ton programme personnalisé (PAE) créé par le jury d'admission pour cette nouvelle année académique.`}
                 />
             </Header>
 
@@ -328,6 +376,8 @@ export default function Edit() {
                         section={section}
                         onChange={(student) => {
                             SetStudent(student);
+                            console.log(student);
+                            console.log(StudentPAECredits(student, section));
                             SetTotal(StudentPAECredits(student, section));
                         }}
                     />
@@ -340,9 +390,10 @@ export default function Edit() {
                             onClick={() => {
                                 let copy = student;
                                 copy.paeDone = true;
-                                SetStudent(copy);
 
                                 UpdateStudent(student);
+                                SetRedirect(true);
+                                SetStudent(copy);
                             }}
                         />
                     </div>

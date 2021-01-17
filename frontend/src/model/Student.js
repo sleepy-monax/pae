@@ -86,7 +86,7 @@ export function StudentPAECreditsBloc(student, bloc) {
     let total = 0;
 
     for (const ue of student.ues) {
-        if (ue.bloc === bloc.id) {
+        if (ue.bloc === bloc.id && !StudentHasValidatedUE(student, ue.ref)) {
             total += StudentPAECreditsUE(bloc, ue);
         }
     }

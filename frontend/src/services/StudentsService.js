@@ -49,32 +49,27 @@ export function FindStudentsByBloc(bloc) {
             .then((students) =>
                 resolve(
                     students.filter((student) => {
-                        if (
-                            ExtractSection(student.bloc) !==
-                            ExtractSection(bloc)
-                        ) {
-                            return false;
-                        }
-
-                        if (
-                            ExtractBlockNumber(student.bloc) ===
-                            ExtractBlockNumber(bloc) - 1
-                        ) {
-                            return StudentHasValidatedBloc(
-                                student,
-                                student.bloc
-                            );
-                        }
-
-                        return (
-                            student.bloc === bloc &&
-                            !StudentHasValidatedBloc(student, student.bloc)
-                        );
+                        return student.bloc === bloc;
                     })
                 )
             )
             .catch(reject);
     });
+}
+
+export function GetBlocForStudent(student) {
+    let blocNumber = ExtractBlockNumber(student.bloc);
+    let sectionId = ExtractSection(student.bloc);
+
+    if (blocNumber + 1 > 3) {
+        return sectionId + "-fini";
+    }
+
+    if (StudentHasValidatedBloc(student, student.bloc)) {
+        return sectionId + (blocNumber + 1);
+    } else {
+        return student.bloc;
+    }
 }
 
 export function SendAllStudents(s) {

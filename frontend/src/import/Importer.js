@@ -1,3 +1,4 @@
+import { GetBlocForStudent } from "../services/StudentsService";
 import SectionView from "./SectionView";
 
 export function ImportResult(sheet, student, sectionId) {
@@ -60,6 +61,9 @@ export function ImportStudents(sheet, sectionId) {
         };
 
         student.ues = ImportResult(sheet, studentView, sectionId);
+
+        student.bloc = GetBlocForStudent(student);
+        console.log(student);
 
         students.push(student);
     }
