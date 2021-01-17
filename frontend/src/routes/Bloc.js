@@ -20,6 +20,7 @@ import Loading from "../components/Loading";
 import { useEffect, useState } from "react";
 import { StudentValidatedCreditsBloc } from "../model/Student";
 import Icon from "@mdi/react";
+import { GenerateAllPAE } from "../services/GeneratePaePdfService";
 
 // Charge the students' data into a table
 // Configuration of datas
@@ -129,7 +130,11 @@ export default function Bloc() {
                 title={state.bloc.name}
                 description={state.section.name}
             >
-                <Button text="Imprimer" icon={mdiPrinter} />
+                <Button
+                    text="Télécharger tous les PAE"
+                    icon={mdiPrinter}
+                    onClick={() => GenerateAllPAE(state.students, state.section, state.section.blocs)} 
+                />
                 <Button text="Envoyer" icon={mdiEmail} />
             </Header>
 

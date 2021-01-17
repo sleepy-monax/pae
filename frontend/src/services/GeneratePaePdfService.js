@@ -1,6 +1,17 @@
 import jsPDF from 'jspdf';
 
 /**
+ * Generate all PAE of all students
+ */
+export function GenerateAllPAE(students, section, bloc) {
+    students.forEach(student => {
+        if (student.paeDone) {
+            GeneratePAE(student, section); 
+        } 
+    });
+}
+
+/**
  * Generate PDF pae document
  */
 export function GeneratePAE(student, section) {
