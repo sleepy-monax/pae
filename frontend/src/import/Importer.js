@@ -56,6 +56,7 @@ export function ImportStudents(sheet, sectionId) {
             firstname: studentView.firstname(),
             lastname: studentView.lastname(),
             bloc: sectionId + studentView.bloc(),
+            paeDone: false,
         };
 
         student.ues = ImportResult(sheet, studentView, sectionId);
