@@ -61,10 +61,6 @@ export function ImportStudents(sheet, sectionId) {
         };
 
         student.ues = ImportResult(sheet, studentView, sectionId);
-
-        student.bloc = GetBlocForStudent(student);
-        console.log(student);
-
         students.push(student);
     }
 

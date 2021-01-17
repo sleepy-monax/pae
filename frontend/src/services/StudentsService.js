@@ -49,7 +49,7 @@ export function FindStudentsByBloc(bloc) {
             .then((students) =>
                 resolve(
                     students.filter((student) => {
-                        return student.bloc === bloc;
+                        return GetBlocForStudent(student) === bloc;
                     })
                 )
             )
@@ -61,12 +61,13 @@ export function GetBlocForStudent(student) {
     let blocNumber = ExtractBlockNumber(student.bloc);
     let sectionId = ExtractSection(student.bloc);
 
-    if (blocNumber + 1 > 3) {
-        return sectionId + "-fini";
-    }
-
     if (StudentHasValidatedBloc(student, student.bloc)) {
-        return sectionId + (blocNumber + 1);
+        if (blocNumber + 1 > 3) {
+            console.log("wat");
+            return sectionId + "-fini";
+        } else {
+            return sectionId + (blocNumber + 1);
+        }
     } else {
         return student.bloc;
     }

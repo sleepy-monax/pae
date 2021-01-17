@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Loading from '../components/Loading';
 import { OutlineWhite } from "../components/Styles";
 import { FindSectionById } from '../services/SectionService';
-import { FindStudentById } from '../services/StudentsService';
+import { FindStudentById, GetBlocForStudent } from '../services/StudentsService';
 import { GeneratePAE, PAEDisplay } from '../services/GeneratePaePdfService';
 
 export default class FeedBackPae extends React.Component{
@@ -47,7 +47,7 @@ export default class FeedBackPae extends React.Component{
                         "Bachelier en " +
                         this.state.section.name.toLowerCase() +
                         " · " +
-                        this.state.student.bloc.toUpperCase()
+                        GetBlocForStudent(this.state.student).toUpperCase()
                     }
                 >
                     <Button

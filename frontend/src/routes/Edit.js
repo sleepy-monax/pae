@@ -17,7 +17,11 @@ import { Redirect, useParams } from "react-router";
 import Icon from "@mdi/react";
 
 import { FindSectionFromBlocId } from "../services/SectionService";
-import { FindStudentById, UpdateStudent } from "../services/StudentsService";
+import {
+    FindStudentById,
+    GetBlocForStudent,
+    UpdateStudent,
+} from "../services/StudentsService";
 import { OutlineBlue, OutlineWhite } from "../components/Styles";
 import LinkButton from "../components/LinkButton";
 import DetailButton from "../components/DetailButton";
@@ -336,7 +340,7 @@ export default function Edit() {
     }
 
     if (redirect) {
-        return <Redirect to={"/bloc/" + student.bloc} />;
+        return <Redirect to={"/bloc/" + GetBlocForStudent(student)} />;
     }
 
     return (
@@ -348,7 +352,7 @@ export default function Edit() {
                     "Bachelier en " +
                     section.name.toLowerCase() +
                     " · " +
-                    student.bloc.toUpperCase()
+                    GetBlocForStudent(student).toUpperCase()
                 }
             >
                 <LinkButton
