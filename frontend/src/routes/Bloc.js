@@ -2,7 +2,6 @@ import Header from "../components/Hearder";
 import {
     mdiAccount,
     mdiCheckCircle,
-    mdiCircle,
     mdiCircleOutline,
     mdiEmail,
     mdiLaptop,
