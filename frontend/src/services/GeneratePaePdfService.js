@@ -181,5 +181,5 @@ export function PAEDisplay(props) {
         });
     });
 
-    return <div className="py-4">{ueHtml}</div>;
+    return <div className="p-4">{ueHtml}</div>;
 }
