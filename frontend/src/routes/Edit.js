@@ -367,13 +367,6 @@ export default function Edit() {
                     to={"/feedbackpae/" + student.id}
                 />
 
-                <LinkButton
-                    variante={OutlineWhite}
-                    text="Envoyer"
-                    icon={mdiEmail}
-                    public
-                    to={`mailto:${studentId}@students.helha.be?subject=Ton programme personnalisé (PAE) pour cette nouvelle année académique&body=Bonjour ${student.firstname},\n Tu trouveras ci-joint ton programme personnalisé (PAE) créé par le jury d'admission pour cette nouvelle année académique.`}
-                />
             </Header>
 
             <div className="relative">

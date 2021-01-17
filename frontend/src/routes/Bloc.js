@@ -135,7 +135,6 @@ export default function Bloc() {
                     icon={mdiPrinter}
                     onClick={() => GenerateAllPAE(state.students, state.section, state.section.blocs)} 
                 />
-                <Button text="Envoyer" icon={mdiEmail} />
             </Header>
 
             <div className="text-helha_blue pb-2 text-2xl pt-2 z-50 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey shadow-lg">

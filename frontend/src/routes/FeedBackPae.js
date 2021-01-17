@@ -1,48 +1,55 @@
-import { mdiEmail, mdiFormatListChecks, mdiPrinter } from '@mdi/js';
-import React from 'react';
-import Header from '../components/Hearder';
+import { mdiEmail, mdiFormatListChecks, mdiPrinter } from "@mdi/js";
+import React from "react";
+import Header from "../components/Hearder";
 import Button from "../components/Button";
-import Loading from '../components/Loading';
+import Loading from "../components/Loading";
 import { OutlineWhite } from "../components/Styles";
-import { FindSectionById } from '../services/SectionService';
-import { FindStudentById, GetBlocForStudent } from '../services/StudentsService';
-import { GeneratePAE, PAEDisplay } from '../services/GeneratePaePdfService';
+import { FindSectionById } from "../services/SectionService";
+import {
+    FindStudentById,
+    GetBlocForStudent,
+} from "../services/StudentsService";
+import { GeneratePAE, PAEDisplay } from "../services/GeneratePaePdfService";
 
-export default class FeedBackPae extends React.Component{
-
+export default class FeedBackPae extends React.Component {
     constructor(props) {
-        super(props);   
+        super(props);
         this.state = {
             student: undefined,
-            section: undefined
-        }
+            section: undefined,
+        };
     }
 
     componentDidMount() {
         const id = this.props.match.params.studentId;
-        FindStudentById(id)
-            .then(student => {
-                this.setState({
-                    student: student
-                });
-                FindSectionById(student.bloc.substr(0, 2))
-                    .then(section => {
-                        this.setState({
-                            section: section
-                        })
-                    });
+        FindStudentById(id).then((student) => {
+            this.setState({
+                student: student,
             });
+            FindSectionById(student.bloc.substr(0, 2)).then((section) => {
+                this.setState({
+                    section: section,
+                });
+            });
+        });
     }
-    
+
     render() {
-        if (this.state.student === undefined || this.state.section===undefined) {
-            return <Loading/>
+        if (
+            this.state.student === undefined ||
+            this.state.section === undefined
+        ) {
+            return <Loading />;
         }
         return (
             <div className="flex-1">
                 <Header
                     icon={mdiFormatListChecks}
-                    title={this.state.student.firstname + " " + this.state.student.lastname}
+                    title={
+                        this.state.student.firstname +
+                        " " +
+                        this.state.student.lastname
+                    }
                     description={
                         "Bachelier en " +
                         this.state.section.name.toLowerCase() +
@@ -54,12 +61,9 @@ export default class FeedBackPae extends React.Component{
                         variante={OutlineWhite}
                         text="Télécharger"
                         icon={mdiPrinter}
-                        onClick={() => GeneratePAE(this.state.student, this.state.section)}
-                    />
-                    <Button
-                        variante={OutlineWhite}
-                        text="Envoyer"
-                        icon={mdiEmail}
+                        onClick={() =>
+                            GeneratePAE(this.state.student, this.state.section)
+                        }
                     />
                 </Header>
 
