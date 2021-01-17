@@ -16,17 +16,18 @@ export function GeneratePAE(student, section) {
         />
     );
 
-   // document.getElementById('id').onclick 
+    // var element = document.getElementsByTagName(string)[0];
+    // let pdf = html2PDF().from(element).toPdf().save(filename);
 
     // Apply and save to pdf format
-    // let pdf = new jsPDF("p", "px", "a4");
-    // pdf.html(
-    //     string, {
-    //     callback: function (pdf) {
-    //               pdf.save(filename);
-    //             }
-    //     }
-    // );
+    let pdf = new jsPDF("p", "px", "a4");
+    pdf.html(
+        string, {
+        callback: function (pdf) {
+                  pdf.save(filename);
+                }
+        }
+    );
 }
 
 /**
@@ -87,63 +88,3 @@ export function PAEDisplay(props) {
     
     return paeStudent;
 }
-
-//Test
-// function PaeHtml(props) {
-//     let student = props.student;
-//     let section = props.section;
-
-//     let paeStudent = [];
-//     let ueHtml = [];
-//     let aaHtml = [];
-
-//     // Search for all blocs in section
-//     section.blocs.forEach(bloc => {
-
-//         // Search all ues in blocs
-//         bloc.ues.forEach(ueSection => {
-
-//             // Search all ues from the student ues
-//             student.ues.forEach(ueStudent => {
-
-//                 // Validate if the student has this ue in his PAE
-//                 if (ueStudent.inPAE) {
-
-//                     // Compare the current student's ue with the ue in the section
-//                     if (ueStudent.ref === ueSection.id) {
-
-//                         // Loop for all aas
-//                         ueSection.aas.forEach(aa => {
-
-//                             // Display aas in html
-//                             aaHtml.push(
-//                                 <h3 key={aa.id}>
-//                                     {aa.id} - {aa.name} [{aa.credits}]
-//                                 </h3>
-//                             );
-//                         });
-
-//                         // Display all ues and aas that the student has
-//                         ueHtml.push(
-//                             <h2 key={ueSection.id}>
-//                                 UE - {ueSection.id} :  {ueSection.name} credits: {ueSection.credits} {aaHtml}
-//                             </h2>
-//                         );
-//                     }
-//                 }
-//                 aaHtml = [];
-//             });
-//         });
-//     });
-
-//     paeStudent.push(
-//         <html><body id="id">
-//             <h1>
-//                 <center><b>{student.id} {student.lastname} {student.firstname}</b></center>
-//             </h1>
-//                 {ueHtml}
-//         </body></html>
-//     );
-    
-//     return paeStudent;
-// }
