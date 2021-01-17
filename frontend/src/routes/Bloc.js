@@ -148,7 +148,32 @@ export default function Bloc() {
                 <Button text="Envoyer" icon={mdiEmail} />
             </Header>
 
-            <div className="relative max-w-2xl mx-auto flex flex-col  gap-2">
+            <div className="text-helha_blue pb-2 text-2xl pt-2 z-50 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey ">
+                <div className="max-w-2xl mx-auto px-4 flex gap-4 items-start">
+                    <div className="flex-1 ">
+                        <div>Étudiants</div>
+                        <div className="text-sm text-helha_grey dark:text-white">
+                            {state.section.name}
+                        </div>
+                    </div>
+                    <div className="flex-1 flex flex-col">
+                        Progression
+                        <div className="flex flex-row flex-1">
+                            <div className="flex-1 text-sm text-helha_grey  dark:text-white">
+                                Bloc 1
+                            </div>
+                            <div className="flex-1 text-sm text-helha_grey  dark:text-white">
+                                Bloc 2
+                            </div>
+                            <div className="flex-1 text-sm text-helha_grey  dark:text-white">
+                                Bloc 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="relative max-w-2xl mx-auto flex flex-col gap-2 mb-4">
                 {state.students.map((student, index) => (
                     <Student
                         key={student.id}
