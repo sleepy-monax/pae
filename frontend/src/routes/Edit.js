@@ -328,7 +328,6 @@ export default function Edit() {
                         section={section}
                         onChange={(student) => {
                             SetStudent(student);
-                            UpdateStudent(student);
                             SetTotal(StudentPAECredits(student, section));
                         }}
                     />
@@ -338,6 +337,13 @@ export default function Edit() {
                         <DetailButton
                             text="Confirmer"
                             detail={total + " Crédits"}
+                            onClick={() => {
+                                let copy = student;
+                                copy.paeDone = true;
+                                SetStudent(copy);
+
+                                UpdateStudent(student);
+                            }}
                         />
                     </div>
                 </div>

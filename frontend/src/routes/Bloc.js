@@ -1,5 +1,13 @@
 import Header from "../components/Hearder";
-import { mdiAccount, mdiEmail, mdiLaptop, mdiPrinter } from "@mdi/js";
+import {
+    mdiAccount,
+    mdiCheckCircle,
+    mdiCircle,
+    mdiCircleOutline,
+    mdiEmail,
+    mdiLaptop,
+    mdiPrinter,
+} from "@mdi/js";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { FindStudentsByBloc } from "../services/StudentsService";
@@ -32,32 +40,8 @@ export function Progress(props) {
                 style={{ width: props.value + "%" }}
                 className="h-full bg-helha_blue absolute"
             />
-            <div className="text-xs pl-2 absolute left-0 w-full text-center text-black">
-                {props.text}
-            </div>
         </div>
     );
-}
-
-// Sum of the credits to diplay it proprely later
-function SumBloc(student, ues, blocs, numBloc) {
-    let somme = 0;
-    let ueBloc = [];
-
-    // Configure the ues to correspond with the ues' bloc
-    ues.forEach((ue) => {
-        if (ue.bloc === numBloc) {
-            ueBloc.push(ue);
-        }
-    });
-
-    // Verify if the bloc is validated
-    for (let i = 0; i < ueBloc.length; i++) {
-        if (StudentHasValidatedUE(student, ueBloc[i].ref)) {
-            somme += blocs.ues[i].credits;
-        }
-    }
-    return (somme / 6) * 10;
 }
 
 // Display a student in the page
@@ -77,7 +61,6 @@ export function Student(props) {
                 </div>
                 <div className="flex flex-1 max-w-sm gap-2 items-center">
                     <Progress
-                        text="1"
                         className="flex-1"
                         value={
                             (StudentValidatedCreditsBloc(student, blocs[0]) /
@@ -86,7 +69,6 @@ export function Student(props) {
                         }
                     />
                     <Progress
-                        text="2"
                         className="flex-1"
                         value={
                             (StudentValidatedCreditsBloc(student, blocs[1]) /
@@ -95,7 +77,6 @@ export function Student(props) {
                         }
                     />
                     <Progress
-                        text="3"
                         className="flex-1"
                         value={
                             (StudentValidatedCreditsBloc(student, blocs[2]) /
@@ -105,7 +86,15 @@ export function Student(props) {
                     />
                 </div>
             </Link>
-            <input type="checkbox" />
+            {student.paeDone ? (
+                <Icon
+                    className="text-helha_blue ml-2"
+                    path={mdiCheckCircle}
+                    size={1}
+                />
+            ) : (
+                <Icon className="ml-2" path={mdiCircleOutline} size={1} />
+            )}
         </div>
     );
 }
