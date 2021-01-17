@@ -3,9 +3,8 @@ import {
     mdiAccount,
     mdiCheckCircle,
     mdiCircleOutline,
-    mdiEmail,
+    mdiFileDocumentMultiple,
     mdiLaptop,
-    mdiPrinter,
 } from "@mdi/js";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
@@ -132,8 +131,14 @@ export default function Bloc() {
             >
                 <Button
                     text="Télécharger tous les PAE"
-                    icon={mdiPrinter}
-                    onClick={() => GenerateAllPAE(state.students, state.section, state.section.blocs)} 
+                    icon={mdiFileDocumentMultiple}
+                    onClick={() =>
+                        GenerateAllPAE(
+                            state.students,
+                            state.section,
+                            state.section.blocs
+                        )
+                    }
                 />
             </Header>
 

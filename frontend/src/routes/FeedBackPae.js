@@ -1,9 +1,9 @@
-import { mdiEmail, mdiFormatListChecks, mdiPrinter } from "@mdi/js";
+import { mdiFileDocument, mdiFormatListChecks } from "@mdi/js";
 import React from "react";
 import Header from "../components/Hearder";
 import Button from "../components/Button";
 import Loading from "../components/Loading";
-import { OutlineWhite } from "../components/Styles";
+import { Filled } from "../components/Styles";
 import { FindSectionById } from "../services/SectionService";
 import {
     FindStudentById,
@@ -58,9 +58,9 @@ export default class FeedBackPae extends React.Component {
                     }
                 >
                     <Button
-                        variante={OutlineWhite}
+                        variante={Filled}
                         text="Télécharger"
-                        icon={mdiPrinter}
+                        icon={mdiFileDocument}
                         onClick={() =>
                             GeneratePAE(this.state.student, this.state.section)
                         }

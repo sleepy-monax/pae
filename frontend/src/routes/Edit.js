@@ -4,9 +4,9 @@ import {
     mdiCheckboxMarked,
     mdiCheckCircle,
     mdiCheckCircleOutline,
-    mdiEmail,
+    mdiEye,
+    mdiFileDocument,
     mdiFormatListChecks,
-    mdiPrinter,
     mdiTrophy,
     mdiUnfoldLessHorizontal,
     mdiUnfoldMoreHorizontal,
@@ -17,13 +17,14 @@ import { Redirect, useParams } from "react-router";
 import Icon from "@mdi/react";
 
 import { FindSectionFromBlocId } from "../services/SectionService";
+
 import {
     FindStudentById,
     GetBlocForStudent,
     UpdateStudent,
 } from "../services/StudentsService";
-import { OutlineWhite } from "../components/Styles";
-import LinkButton from "../components/LinkButton";
+
+import { Filled, OutlineWhite } from "../components/Styles";
 import DetailButton from "../components/DetailButton";
 import Header from "../components/Hearder";
 import Loading from "../components/Loading";
@@ -36,7 +37,10 @@ import {
     StudentPAECreditsBloc,
     StudentValidatedCreditsBloc,
 } from "../model/Student";
+
 import { SectionFindAA, SectionFindUE } from "../model/Section";
+import Button from "../components/Button";
+import { GeneratePAE } from "../services/GeneratePaePdfService";
 
 function Checkbox(props) {
     return (
@@ -345,7 +349,7 @@ export default function Edit() {
     }
 
     if (redirect) {
-        return <Redirect to={"/bloc/" + GetBlocForStudent(student)} />;
+        return <Redirect push to={redirect} />;
     }
 
     return (
@@ -360,13 +364,21 @@ export default function Edit() {
                     GetBlocForStudent(student).toUpperCase()
                 }
             >
-                <LinkButton
-                    variante={OutlineWhite}
-                    text="Imprimer"
-                    icon={mdiPrinter}
-                    to={"/feedbackpae/" + student.id}
+                <Button
+                    variante={Filled}
+                    text="Télécharger"
+                    icon={mdiFileDocument}
+                    onClick={() => GeneratePAE(student, section)}
                 />
-
+                <Button
+                    variante={OutlineWhite}
+                    text="Prévisualiser"
+                    icon={mdiEye}
+                    onClick={() => {
+                        UpdateStudent(student);
+                        SetRedirect("/feedbackpae/" + student.id);
+                    }}
+                />
             </Header>
 
             <div className="relative">
@@ -392,7 +404,9 @@ export default function Edit() {
                                 copy.paeDone = true;
 
                                 UpdateStudent(student);
-                                SetRedirect(true);
+                                SetRedirect(
+                                    "/bloc/" + GetBlocForStudent(student)
+                                );
                                 SetStudent(copy);
                             }}
                         />
