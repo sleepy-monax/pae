@@ -53,10 +53,11 @@ SECRETAIRE</panel_attributes><additional_attributes></additional_attributes></el
 -lastname: String
 -firstname: String
 -bloc: String
+-paeDone: boolean
 -ues: List&lt;UEStudent&gt;
 --
 -Student()
--Student(id: String, lastname: String, firstname: String, bloc: String, ues: List&lt;UEStudent&gt;)
+-Student(id: String, lastname: String, firstname: String, bloc: String, paeDone: boolean, ues: List&lt;UEStudent&gt;)
 +toString(): String
 +equals(o: Object): boolean
 +hashCode():int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>440</y><w>460</w><h>180</h></coordinates><panel_attributes>UEBlock
@@ -107,6 +108,6 @@ m2=*</panel_attributes><additional_attributes>10;10;10;70</additional_attributes
 m1=*
 m2=*</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>880</x><y>440</y><w>40</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
-m2=*</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>370</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-m1=*
+m2=*</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>370</y><w>40</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
 m2=*</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>
