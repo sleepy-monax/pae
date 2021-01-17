@@ -13,6 +13,7 @@ public class Student implements Serializable, IEntity<String> {
     @Id
     private String id;
     private String lastname, firstname, bloc;
+    private boolean paeDone;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UEStudent> ues;
@@ -21,11 +22,12 @@ public class Student implements Serializable, IEntity<String> {
     public Student() {
     }
 
-    public Student(String id, String lastname, String firstname, String bloc, List<UEStudent> ues) {
+    public Student(String id, String lastname, String firstname, String bloc, boolean paeDone, List<UEStudent> ues) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
         this.bloc = bloc;
+        this.paeDone = paeDone;
         this.ues = ues;
     }
 
@@ -69,6 +71,14 @@ public class Student implements Serializable, IEntity<String> {
         this.ues = ues;
     }
 
+    public boolean isPaeDone() {
+        return paeDone;
+    }
+
+    public void setPaeDone(boolean paeDone) {
+        this.paeDone = paeDone;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -76,6 +86,7 @@ public class Student implements Serializable, IEntity<String> {
                 ", lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", bloc='" + bloc + '\'' +
+                ", paeDone=" + paeDone +
                 ", ues=" + ues +
                 '}';
     }
