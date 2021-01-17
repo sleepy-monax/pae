@@ -6,8 +6,7 @@ import Loading from '../components/Loading';
 import { OutlineWhite } from "../components/Styles";
 import { FindSectionById } from '../services/SectionService';
 import { FindStudentById } from '../services/StudentsService';
-import { GeneratePAE } from '../services/GeneratePaePdfService';
-
+import { GeneratePAE, PAEDisplay } from '../services/GeneratePaePdfService';
 
 export default class FeedBackPae extends React.Component{
 
@@ -34,61 +33,13 @@ export default class FeedBackPae extends React.Component{
                     });
             });
     }
-
-    /**
-     * Display all ues that the student has in his pae
-     */
-    displayUEInPae() {
-        let ueHtml = [];
-        let aaHtml = [];
-
-        // Search for all blocs in section
-        this.state.section.blocs.forEach(bloc => {
-
-            // Search all ues in blocs
-            bloc.ues.forEach(ueSection => {
-
-                // Search all ues from the student ues
-                this.state.student.ues.forEach(ueStudent => {
-
-                    // Validate if the student has this ue in his PAE
-                    if (ueStudent.inPAE) {
-
-                        // Compare the current student's ue with the ue in the section
-                        if (ueStudent.ref === ueSection.id) {
-
-                            // Loop for all aas
-                            ueSection.aas.forEach(aa => {
-
-                                // Display aas in html
-                                aaHtml.push(
-                                    <div key={aa.id}>
-                                        {aa.name}
-                                    </div>
-                                );
-                            });
-
-                            // Display all ues and aas that the student has
-                            ueHtml.push(
-                                <div className="flex-1" key={ueSection.id}>
-                                    {ueSection.name} {aaHtml}
-                                </div>
-                            );
-                        }
-                    }
-                    aaHtml = [];
-                });
-            });
-        });
-        return ueHtml;
-    }
     
     render() {
         if (this.state.student === undefined || this.state.section===undefined) {
             return <Loading/>
         }
         return (
-            <div>
+            <div className="flex-1">
                 <Header
                     icon={mdiFormatListChecks}
                     title={this.state.student.firstname + " " + this.state.student.lastname}
@@ -101,7 +52,7 @@ export default class FeedBackPae extends React.Component{
                 >
                     <Button
                         variante={OutlineWhite}
-                        text="Imprimer"
+                        text="Télécharger"
                         icon={mdiPrinter}
                         onClick={() => GeneratePAE(this.state.student, this.state.section)}
                     />
@@ -113,7 +64,12 @@ export default class FeedBackPae extends React.Component{
                 </Header>
 
                 {/* Display all ues et aas */}
-                <div className="pl-10 flex gap-2 flex-col">{this.displayUEInPae()}</div>
+                <div className="relative max-w-2xl mx-auto flex flex-col  gap-2">
+                    <PAEDisplay
+                        student={this.state.student}
+                        section={this.state.section}
+                    />
+                </div>
             </div>
         );
     }
