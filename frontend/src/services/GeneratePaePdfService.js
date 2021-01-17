@@ -1,5 +1,4 @@
 import jsPDF from 'jspdf';
-import html2PDF from 'jspdf-html2canvas';
 import { renderToString } from "react-dom/server";
 
 /**
@@ -8,26 +7,36 @@ import { renderToString } from "react-dom/server";
 export function GeneratePAE(student, section) {
     let filename = student.lastname + "_" + student.firstname + ".pdf";
 
-    // Convert html into string
-    let string = renderToString(
-        <PAEDisplay
-            student={student}
-            section={section}
-        />
-    );
-
-    // var element = document.getElementsByTagName(string)[0];
-    // let pdf = html2PDF().from(element).toPdf().save(filename);
-
     // Apply and save to pdf format
     let pdf = new jsPDF("p", "px", "a4");
-    pdf.html(
-        string, {
-        callback: function (pdf) {
-                  pdf.save(filename);
+    let yPos = 50;
+    let xPos = 10;
+    let text = student.id +" "+ student.lastname +" "+ student.firstname;
+    let xOffset = (pdf.internal.pageSize.width / 2) - (pdf.getStringUnitWidth(text) * pdf.internal.getFontSize() / 2);
+
+
+    pdf.text("PAE de l'étudiant", xOffset, 20);
+    pdf.text(text, xOffset, 30);
+
+    section.blocs.forEach(bloc => {
+        bloc.ues.forEach(ueSection => {
+            student.ues.forEach(ueStudent => {
+                if (ueStudent.inPAE) {
+                    if (ueStudent.ref === ueSection.id) {
+                        pdf.text("UE - "+ ueSection.id+" : " + ueSection.name + " credits: "+ ueSection.credits, xOffset, yPos);
+                        yPos += 10;
+                        ueSection.aas.forEach(aa => {
+                            pdf.text(aa.id + " - " + aa.name + " " + "[" + aa.credits + "]", xOffset + xPos, yPos);
+                            yPos += 10;
+                        });
+                        yPos += 10;
+                    }
                 }
-        }
-    );
+            });
+        });
+    });
+
+    pdf.save(filename);
 }
 
 /**
@@ -69,7 +78,7 @@ export function PAEDisplay(props) {
 
                         // Display all ues and aas that the student has
                         ueHtml.push(
-                            <div classname="flex flex-1 max-w-sm gap-2 items-center" key={ueSection.id}>
+                            <div className="flex-1 max-w-sm gap-2 items-center" key={ueSection.id}>
                                 UE - {ueSection.id} :  {ueSection.name} credits: {ueSection.credits} {aaHtml}
                             </div>
                         );
