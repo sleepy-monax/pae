@@ -12,11 +12,11 @@ Clic droit => Export => WAR File
 
 ## Frontend
 
-Il faut aller dans le dossier "frontend" et faire la commande dans un terminal
+Il faut aller dans le dossier "frontend" et faire la commande dans un terminal pour génerer le WAR
 
 ```bash
 npm install
-mvn package
+mvn package -P prod
 ```
 
 On peut ensuite récupérer le fichier WAR, qui pourra etre déployé sur le serveur Payara
