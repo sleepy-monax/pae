@@ -148,7 +148,7 @@ export default function Bloc() {
                 <Button text="Envoyer" icon={mdiEmail} />
             </Header>
 
-            <div className="text-helha_blue pb-2 text-2xl pt-2 z-50 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey ">
+            <div className="text-helha_blue pb-2 text-2xl pt-2 z-50 border-b-2 border-helha_blue mb-4 sticky top-0 bg-white dark:bg-helha_grey shadow-lg">
                 <div className="max-w-2xl mx-auto px-4 flex gap-4 items-start">
                     <div className="flex-1 ">
                         <div>Étudiants</div>
