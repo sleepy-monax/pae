@@ -1,5 +1,4 @@
 import jsPDF from 'jspdf';
-import { renderToString } from "react-dom/server";
 
 /**
  * Generate PDF pae document
@@ -18,6 +17,7 @@ export function GeneratePAE(student, section) {
     pdf.text("PAE de l'étudiant", xOffset, 20);
     pdf.text(text, xOffset, 30);
 
+    //Print in PDF student's PAE
     section.blocs.forEach(bloc => {
         bloc.ues.forEach(ueSection => {
             student.ues.forEach(ueStudent => {
