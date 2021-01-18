@@ -254,13 +254,21 @@ function Bloc(props) {
                                     x &&
                                     (ue.bloc !== bloc.id ||
                                         ue.inPAE ||
-                                        ue.validated),
+                                        StudentHasValidatedUE(
+                                            props.student,
+                                            ue.ref
+                                        )),
                                 true
                             );
 
                             for (let i = 0; i < uesCopy.length; i++) {
                                 if (uesCopy[i].bloc === bloc.id) {
-                                    if (!uesCopy[i].validated) {
+                                    if (
+                                        !StudentHasValidatedUE(
+                                            props.student,
+                                            uesCopy[i].ref
+                                        )
+                                    ) {
                                         uesCopy[i].inPAE = !paeState;
 
                                         for (
