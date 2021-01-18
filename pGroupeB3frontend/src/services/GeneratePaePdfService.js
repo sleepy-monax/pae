@@ -1,6 +1,10 @@
 import jsPDF from "jspdf";
 import { BlocFindAA, BlocFindUE } from "../model/Bloc";
-import { StudentHasValidatedAA, StudentPAECredits } from "../model/Student";
+import {
+    StudentHasValidatedAA,
+    StudentHasValidatedUE,
+    StudentPAECredits,
+} from "../model/Student";
 
 /**
  * Generate all PAE of all students
@@ -65,7 +69,10 @@ export function GeneratePAE(student, section) {
                 return;
             }
 
-            if (ueStudent.inPAE && !ueStudent.validated) {
+            if (
+                ueStudent.inPAE &&
+                !StudentHasValidatedUE(student, ueStudent.ref)
+            ) {
                 pdf.setFontSize(12);
 
                 pdf.text("UE" + ue.id, xPos, yPos);
@@ -83,7 +90,10 @@ export function GeneratePAE(student, section) {
                 goDown(12);
 
                 ueStudent.aas.forEach((aaStudent) => {
-                    if (aaStudent.validated || !aaStudent.inPAE) {
+                    if (
+                        StudentHasValidatedAA(student, aaStudent.ref) ||
+                        !aaStudent.inPAE
+                    ) {
                         return;
                     }
 

@@ -138,7 +138,10 @@ function UE(props) {
                     setAAS(aasCopy);
 
                     copyUE.inPAE = aas.reduce(
-                        (x, aa) => x && (aa.inPAE || aa.validated),
+                        (x, aa) =>
+                            x &&
+                            (aa.inPAE ||
+                                StudentHasValidatedAA(props.student, aa.ref)),
                         true
                     );
 
@@ -276,7 +279,12 @@ function Bloc(props) {
                                             j < uesCopy[i].aas.length;
                                             j++
                                         ) {
-                                            if (!uesCopy[i].aas[j].validated) {
+                                            if (
+                                                !StudentHasValidatedAA(
+                                                    props.student,
+                                                    uesCopy[i].aas[j].ref
+                                                )
+                                            ) {
                                                 uesCopy[i].aas[
                                                     j
                                                 ].inPAE = !paeState;
